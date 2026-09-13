@@ -36,6 +36,11 @@ import {
   Sources,
   SourcesContent,
   SourcesTrigger,
+  Task,
+  TaskContent,
+  TaskItem,
+  TaskItemFile,
+  TaskTrigger,
   Tool,
   ToolContent,
   ToolHeader,
@@ -54,6 +59,7 @@ import PromptAttachments from './prompt-attachments';
 import QuestionExample from './question';
 import { QueueChatExample } from './queue';
 import ShimmerExample from './shimmer';
+import { ObjectTasks } from './task-object';
 
 export default function Page() {
   return (
@@ -70,6 +76,21 @@ export default function Page() {
       <ConfirmationChat />
       <QuestionExample />
       <ContextExample />
+      <Task
+        data-testid="packaged-task"
+        defaultOpened={false}
+        styles={{ body: { borderInlineStartWidth: 3 } }}
+      >
+        <TaskTrigger title="Packaged task" />
+        <TaskContent>
+          <TaskItem>
+            Read <TaskItemFile component="span">package.json</TaskItemFile>
+          </TaskItem>
+        </TaskContent>
+      </Task>
+      <section data-testid="packaged-task-object">
+        <ObjectTasks />
+      </section>
       <section data-testid="packaged-queue-chat">
         <QueueChatExample />
       </section>

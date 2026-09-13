@@ -71,6 +71,7 @@ Do not import both variants. Unlayered application CSS can override the layered 
 | `Conversation` | Message log with scroll following, history navigation, empty state, and Markdown export |
 | `InlineCitation` | Inline references with a Mantine popover and source carousel |
 | `Context` | Context capacity, AI SDK token breakdown, and estimated cost |
+| `Task` | Collapsible task details and file references with structured streaming examples |
 | `Queue` | Queued messages, todos, attachments, and independent collapsible sections |
 | `Checkpoint` | Conversation checkpoints with application-owned restore actions |
 | `OpenIn` | Encoded links to external chat services through a Mantine menu |
@@ -124,7 +125,7 @@ The theme keys for the input and submit button are `PromptInputTextarea` and `Pr
 
 ## Documentation
 
-Guides cover [getting started](.storybook/content/getting-started.md), [PromptInput](.storybook/content/prompt-input.md), [Conversation](.storybook/content/conversation.md), [CodeBlock](.storybook/content/code-block.md), [Message](.storybook/content/message.md), [Shimmer](.storybook/content/shimmer.md), [Suggestions](.storybook/content/suggestion.md), [Attachments](.storybook/content/attachments.md), [Image](.storybook/content/image.md), [ModelSelector](.storybook/content/model-selector.md), [Reasoning](.storybook/content/reasoning.md), [Tool](.storybook/content/tool.md), [Confirmation](.storybook/content/confirmation.md), [Question](.storybook/content/question.md), [Sources](.storybook/content/sources.md), [Context](.storybook/content/context.md), [OpenIn](.storybook/content/open-in.md), [Checkpoint](.storybook/content/checkpoint.md), [Queue](.storybook/content/queue.md), [InlineCitation](.storybook/content/inline-citation.md), and [Mantine customization](.storybook/content/customization.md).
+Guides cover [getting started](.storybook/content/getting-started.md), [PromptInput](.storybook/content/prompt-input.md), [Conversation](.storybook/content/conversation.md), [CodeBlock](.storybook/content/code-block.md), [Message](.storybook/content/message.md), [Shimmer](.storybook/content/shimmer.md), [Suggestions](.storybook/content/suggestion.md), [Attachments](.storybook/content/attachments.md), [Image](.storybook/content/image.md), [ModelSelector](.storybook/content/model-selector.md), [Reasoning](.storybook/content/reasoning.md), [Tool](.storybook/content/tool.md), [Confirmation](.storybook/content/confirmation.md), [Question](.storybook/content/question.md), [Sources](.storybook/content/sources.md), [Context](.storybook/content/context.md), [OpenIn](.storybook/content/open-in.md), [Checkpoint](.storybook/content/checkpoint.md), [Queue](.storybook/content/queue.md), [Task](.storybook/content/task.md), [InlineCitation](.storybook/content/inline-citation.md), and [Mantine customization](.storybook/content/customization.md).
 
 The GitHub Pages workflow publishes these guides with live examples to [the documentation site](https://gtnao.github.io/mantine-ai-elements/). It also provides [llms.txt](https://gtnao.github.io/mantine-ai-elements/llms.txt), individual Markdown pages, and a combined `llms-full.txt` from the same source.
 

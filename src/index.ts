@@ -497,6 +497,25 @@ export type {
 } from './Suggestion/Suggestion';
 export { Suggestion, Suggestions } from './Suggestion/Suggestion';
 export type {
+  TaskContentFactory,
+  TaskContentProps,
+  TaskFactory,
+  TaskItemFactory,
+  TaskItemFileFactory,
+  TaskItemFileProps,
+  TaskItemProps,
+  TaskProps,
+  TaskTriggerFactory,
+  TaskTriggerProps,
+} from './Task/Task';
+export {
+  Task,
+  TaskContent,
+  TaskItem,
+  TaskItemFile,
+  TaskTrigger,
+} from './Task/Task';
+export type {
   ToolContentFactory,
   ToolContentProps,
   ToolFactory,

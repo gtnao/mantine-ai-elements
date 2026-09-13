@@ -35,6 +35,18 @@ await writeFile(
       "from 'mantine-ai-elements'",
     ),
 );
+await cp(
+  join(root, 'src/stories/task-stream.ts'),
+  join(directory, 'app/task-stream.ts'),
+);
+await writeFile(
+  join(directory, 'app/task-object.tsx'),
+  "'use client';\n" +
+    (await readFile(join(root, 'src/stories/task-object.tsx'), 'utf8')).replace(
+      "from '../index'",
+      "from 'mantine-ai-elements'",
+    ),
+);
 run(['pack', '--out', join(directory, 'mantine-ai-elements.tgz')], root);
 run(['install', '--ignore-scripts'], directory);
 
@@ -335,6 +347,37 @@ try {
   await images.getByRole('button', { name: 'Replace image source' }).click();
   await expect(fallbackImage).not.toHaveAttribute('data-fallback');
   await expect(fallbackImage).toHaveAttribute('src', '/image-preview.svg');
+
+  const task = page.getByTestId('packaged-task');
+  const taskTrigger = task.getByRole('button', { name: 'Packaged task' });
+  await taskTrigger.focus();
+  await taskTrigger.press('Enter');
+  const taskRegion = task.getByRole('region', { name: 'Packaged task' });
+  await expect(taskRegion).toBeVisible();
+  await expect(taskRegion.locator('.mantine-Task-body')).toHaveCSS(
+    'border-inline-start-width',
+    '3px',
+  );
+  await expect(task.getByText('package.json', { exact: true })).toHaveCSS(
+    'display',
+    'inline-flex',
+  );
+  const taskObject = page.getByTestId('packaged-task-object');
+  await taskObject
+    .getByRole('button', { name: 'Generate tasks', exact: true })
+    .click();
+  await expect(taskObject.getByRole('status')).toHaveText('Report complete.', {
+    timeout: 15000,
+  });
+  await expect(
+    taskObject.getByText('src/Task/Task.test.tsx', { exact: true }),
+  ).toBeVisible();
+  await taskObject.getByRole('button', { name: 'Invalid report' }).click();
+  await expect(taskObject.getByRole('status')).toHaveText(
+    'Report validation failed.',
+  );
+  await expect(taskObject.getByRole('alert')).toBeVisible();
+  await taskObject.getByRole('button', { name: 'Clear', exact: true }).click();
 
   const queue = page.getByTestId('packaged-queue-chat');
   const queueDraft = queue.getByRole('textbox', { name: 'Queue draft' });

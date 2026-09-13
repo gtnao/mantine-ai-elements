@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add Task with Mantine customization, native keyboard triggers, file references, and streamed structured-data examples using AI SDK useObject.
+
 - Add Queue with collapsible message/task lists, attachments, Mantine customization, and an AI SDK example that retains failed or stopped drafts.
 
 - Add Checkpoint with Mantine styling, focus tooltips, and an AI SDK chat history restoration example.
