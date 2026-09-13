@@ -6,13 +6,13 @@ These docs track the repository's main branch. Check the package version and rel
 
 ## Installation
 
-The first npm release is being prepared. Once published, install from npm:
+Install from npm:
 
 ```sh
 pnpm add mantine-ai-elements @mantine/core@^9.6.1 @mantine/hooks@^9.6.1 react@^19.3.0 react-dom@^19.3.0 ai@^7.0.99 @ai-sdk/react@^4.0.102
 ```
 
-To test a local checkout before publication, follow the [contributor instructions](https://github.com/gtnao/mantine-ai-elements/blob/main/CONTRIBUTING.md#testing-a-local-package).
+To test changes from a local checkout, follow the [contributor instructions](https://github.com/gtnao/mantine-ai-elements/blob/main/CONTRIBUTING.md#testing-a-local-package).
 
 The supported baseline is React/React DOM 19.3, Mantine Core/Hooks 9.6.1, `ai` 7.0.99, and `@ai-sdk/react` 4.0.102. Keep Mantine Core and Hooks on the same version.
 

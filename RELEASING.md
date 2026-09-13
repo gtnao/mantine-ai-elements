@@ -5,7 +5,7 @@ Stable releases are staged for approval by `.github/workflows/publish.yml` when 
 ## One-time setup
 
 1. Enable GitHub Pages in repository **Settings → Pages → Build and deployment → Source: GitHub Actions**. `pages.yml` publishes the Storybook documentation from `main`.
-2. Complete the first npm publication with the maintainer account, following the bootstrap steps below.
+2. The initial `0.1.0` publication is complete. The bootstrap steps below are retained for reference; do not republish that version.
 3. In the npm package settings, configure a GitHub Actions Trusted Publisher with:
 
 | Field | Value |
@@ -18,9 +18,9 @@ Stable releases are staged for approval by `.github/workflows/publish.yml` when 
 
 The workflow uses GitHub-hosted runners, Node.js 24, npm 11.15.0 (staged publishing requires 11.15.0 or later), npm's OIDC support, and `id-token: write`. No npm token is stored in GitHub. See [npm trusted publishing](https://docs.npmjs.com/trusted-publishers/).
 
-Once CI has run, make `Checks (Node 22)`, `Checks (Node 24)`, and `Package consumer` required checks for `main` in a GitHub ruleset. Maintain release permissions on the repository accordingly.
+The `main` ruleset requires a pull request and successful `Checks (Node 22)`, `Checks (Node 24)`, and `Package consumer` checks. No additional reviewer approval is required, so a sole maintainer can merge after CI passes. Force pushes and branch deletion are blocked.
 
-## First publication
+## First publication (completed)
 
 Prepare the release commit, including its version, changelog, and installation documentation, and push it to GitHub. Wait for CI to pass. Use the same commit to generate and verify the tarball:
 
@@ -37,7 +37,7 @@ npm publish ./mantine-ai-elements-0.1.0.tgz --access public --registry=https://r
 
 The publish command requires an authenticated npm account and may request browser-based 2FA. It makes version 0.1.0 publicly available. Publish the verified tarball, not an unverified directory build.
 
-Configure the trusted publisher after the package exists, then create the corresponding GitHub Release from the same commit. If that exact tarball is already on npm, the workflow skips publication; if the contents differ, it fails instead of claiming a successful release. Rebuilds with different tool versions may differ, so subsequent releases should use CI for their initial publication.
+The `v0.1.0` GitHub Release records the already published package from commit `e0a0eb6`. The release workflow was temporarily disabled while creating that historical release to avoid uploading it again, then re-enabled. Subsequent releases use staging and maintainer approval as described below.
 
 ## Subsequent releases
 

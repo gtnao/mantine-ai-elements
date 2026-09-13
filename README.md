@@ -6,13 +6,13 @@ Build chat inputs with Mantine components, theme overrides, and AI SDK hooks. `P
 
 ## Installation
 
-The first npm release is being prepared. Once published, install the package and its peer dependencies:
+Install the package and its peer dependencies:
 
 ```sh
 pnpm add mantine-ai-elements @mantine/core@^9.6.1 @mantine/hooks@^9.6.1 react@^19.3.0 react-dom@^19.3.0 ai@^7.0.99 @ai-sdk/react@^4.0.102
 ```
 
-For testing a local checkout before publication, see [Contributing](https://github.com/gtnao/mantine-ai-elements/blob/main/CONTRIBUTING.md#testing-a-local-package).
+For testing changes from a local checkout, see [Contributing](https://github.com/gtnao/mantine-ai-elements/blob/main/CONTRIBUTING.md#testing-a-local-package).
 
 Keep Mantine Core and Hooks on the same version. `@ai-sdk/react` is used by your application to provide `useChat`; the library itself only references AI SDK types. The package provides ESM, TypeScript declarations, and prebuilt CSS.
 
