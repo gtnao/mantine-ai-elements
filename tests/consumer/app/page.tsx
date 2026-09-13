@@ -55,6 +55,11 @@ import {
   Reasoning,
   ReasoningContent,
   ReasoningTrigger,
+  Snippet,
+  SnippetAddon,
+  SnippetCopyButton,
+  SnippetInput,
+  SnippetText,
   Source,
   Sources,
   SourcesContent,
@@ -102,6 +107,21 @@ export default function Page() {
       <ConfirmationChat />
       <QuestionExample />
       <ContextExample />
+      <Snippet
+        code="pnpm add mantine-ai-elements"
+        data-testid="packaged-snippet"
+      >
+        <SnippetAddon>
+          <SnippetText aria-hidden>$</SnippetText>
+        </SnippetAddon>
+        <SnippetInput
+          aria-label="Packaged command"
+          styles={{ input: { fontWeight: 700 } }}
+        />
+        <SnippetAddon align="inline-end">
+          <SnippetCopyButton />
+        </SnippetAddon>
+      </Snippet>
       <Artifact data-testid="packaged-artifact" radius={20}>
         <ArtifactHeader>
           <div>

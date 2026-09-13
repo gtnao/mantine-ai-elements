@@ -558,6 +558,27 @@ export type {
   TextShimmerProps,
 } from './Shimmer/Shimmer';
 export { Shimmer } from './Shimmer/Shimmer';
+export {
+  Snippet,
+  type SnippetFactory,
+  type SnippetProps,
+} from './Snippet/Snippet';
+export {
+  SnippetCopyButton,
+  type SnippetCopyButtonFactory,
+  type SnippetCopyButtonProps,
+} from './Snippet/SnippetCopyButton';
+export {
+  SnippetAddon,
+  type SnippetAddonFactory,
+  type SnippetAddonProps,
+  SnippetInput,
+  type SnippetInputFactory,
+  type SnippetInputProps,
+  SnippetText,
+  type SnippetTextFactory,
+  type SnippetTextProps,
+} from './Snippet/SnippetParts';
 export type {
   SourceFactory,
   SourceProps,

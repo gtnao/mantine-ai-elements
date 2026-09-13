@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add Snippet with Mantine input composition, four addon positions, and guarded clipboard feedback.
+
 - Add Artifact panels with Mantine composition, customizable actions, and validated AI SDK report export examples.
 
 - Add ChainOfThought with accessible progress summaries, Mantine source badges and image frames, and an AI SDK tool/source/reply example.

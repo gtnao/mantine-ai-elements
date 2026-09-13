@@ -381,6 +381,25 @@ try {
   await expect(fallbackImage).not.toHaveAttribute('data-fallback');
   await expect(fallbackImage).toHaveAttribute('src', '/image-preview.svg');
 
+  const snippet = page.getByTestId('packaged-snippet');
+  const command = snippet.getByRole('textbox', { name: 'Packaged command' });
+  await expect(command).toHaveValue('pnpm add mantine-ai-elements');
+  await expect(command).toHaveAttribute('readonly');
+  await expect(command).toHaveCSS('font-weight', '700');
+  await snippet.getByText('$', { exact: true }).click();
+  await expect(command).toBeFocused();
+  await page.keyboard.press('Tab');
+  await expect(
+    snippet.getByRole('button', { name: 'Copy', exact: true }),
+  ).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(
+    snippet.getByRole('button', { name: 'Copied', exact: true }),
+  ).toBeVisible();
+  await expect
+    .poll(() => page.evaluate(() => navigator.clipboard.readText()))
+    .toBe('pnpm add mantine-ai-elements');
+
   const artifact = page.getByTestId('packaged-artifact');
   await expect(
     artifact.getByRole('heading', { name: 'Packaged artifact' }),
