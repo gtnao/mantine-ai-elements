@@ -91,10 +91,11 @@ try {
     if (message.type() === 'error') errors.push(message.text());
   });
   await page.goto(url);
-  const input = page.getByRole('textbox', { name: 'Message' });
+  const input = page.getByRole('textbox', { name: 'Message', exact: true });
   await expect(input).toBeVisible();
   const border = await page
     .locator('form')
+    .first()
     .evaluate((form) => getComputedStyle(form).borderTopStyle);
   assert.equal(border, 'solid', 'Published CSS was not applied');
   const initialHeight = await input.evaluate(
@@ -322,6 +323,97 @@ try {
   await images.getByRole('button', { name: 'Replace image source' }).click();
   await expect(fallbackImage).not.toHaveAttribute('data-fallback');
   await expect(fallbackImage).toHaveAttribute('src', '/image-preview.svg');
+
+  const prompt = page.getByTestId('prompt-attachments');
+  await prompt.scrollIntoViewIfNeeded();
+  const draft = prompt.getByRole('textbox', { name: 'Attachment draft' });
+  await prompt.getByRole('button', { name: 'Insert shared draft' }).click();
+  await expect(draft).toHaveValue('Shared draft');
+  const search = prompt.getByRole('combobox', { name: 'Find reference' });
+  await search.fill('manual');
+  await expect(prompt.getByRole('option', { name: 'Guide' })).toHaveCSS(
+    'border-radius',
+    '13px',
+  );
+  await search.press('Enter');
+  await expect(prompt.getByTestId('reference-count')).toHaveText('1');
+  await expect(draft).toHaveValue('Shared draft');
+  await search.fill('missing');
+  await expect(prompt.getByText('No reference', { exact: true })).toBeVisible();
+  await search.fill('');
+  await prompt.getByRole('combobox', { name: 'Attachment model' }).click();
+  await page.getByRole('option', { name: 'detailed', exact: true }).click();
+  await expect(
+    prompt.getByRole('combobox', { name: 'Attachment model' }),
+  ).toHaveValue('detailed');
+  await prompt.getByRole('button', { name: 'Add to prompt' }).click();
+  const chooser = page.waitForEvent('filechooser');
+  await page.getByRole('menuitem', { name: 'Add photos or files' }).click();
+  await (await chooser).setFiles({
+    name: 'readme.txt',
+    mimeType: 'text/plain',
+    buffer: Buffer.from('package attachment'),
+  });
+  await page.keyboard.press('Escape');
+  await expect(prompt.getByText('readme.txt', { exact: true })).toBeVisible();
+  await draft.fill('retry');
+  await draft.press('Enter');
+  await expect(prompt.getByTestId('attachment-error')).toHaveText(
+    'Retry requested',
+  );
+  await expect(draft).toHaveValue('retry');
+  await expect(prompt.getByText('readme.txt', { exact: true })).toBeVisible();
+  await draft.fill('');
+  await draft.press('Enter');
+  await expect(prompt.getByTestId('attachment-status')).toHaveText('streaming');
+  await draft.fill('Next attachment draft');
+  await prompt.getByRole('button', { name: 'Stop attachments' }).click();
+  await expect(prompt.getByTestId('attachment-status')).toHaveText('ready');
+  await expect(draft).toHaveValue('Next attachment draft');
+  await expect(prompt.getByText('readme.txt', { exact: true })).toHaveCount(0);
+  await expect(prompt.getByTestId('reference-count')).toHaveText('0');
+  const sentFiles = JSON.parse(
+    await prompt.getByTestId('sent-files').textContent(),
+  );
+  assert.equal(
+    sentFiles[0].url,
+    `data:text/plain;base64,${Buffer.from('package attachment').toString('base64')}`,
+  );
+  assert.equal(sentFiles[0].id, undefined);
+  await draft.evaluate((element) => {
+    const transfer = new DataTransfer();
+    transfer.items.add(
+      new File(['paste'], 'paste.txt', { type: 'text/plain' }),
+    );
+    element.dispatchEvent(
+      new ClipboardEvent('paste', {
+        clipboardData: transfer,
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
+  });
+  await expect(prompt.getByText('paste.txt', { exact: true })).toBeVisible();
+  await prompt.locator('form').evaluate((element) => {
+    const transfer = new DataTransfer();
+    transfer.items.add(new File(['drop'], 'drop.txt', { type: 'text/plain' }));
+    transfer.items.add(
+      new File(['excess'], 'excess.txt', { type: 'text/plain' }),
+    );
+    element.dispatchEvent(
+      new DragEvent('drop', {
+        dataTransfer: transfer,
+        bubbles: true,
+        cancelable: true,
+      }),
+    );
+  });
+  await expect(prompt.getByTestId('attachment-error')).toHaveText('max_files');
+  await expect(prompt.getByText('drop.txt', { exact: true })).toBeVisible();
+  await expect(prompt.getByText('excess.txt', { exact: true })).toHaveCount(0);
+  await draft.fill('');
+  await draft.press('Backspace');
+  await expect(prompt.getByText('drop.txt', { exact: true })).toHaveCount(0);
 
   await page.screenshot({
     path: join(directory, 'consumer.png'),

@@ -2,7 +2,7 @@
 
 Composable AI SDK components built with Mantine, inspired by [AI Elements](https://elements.ai-sdk.dev/).
 
-Build chat interfaces with Mantine components, theme overrides, and AI SDK hooks. `PromptInput` provides a composable text input, toolbar, and send/stop button. This is an independent project, not an official Mantine or Vercel package.
+Build chat interfaces with Mantine components, theme overrides, and AI SDK hooks. `PromptInput` provides composable text and file input, shared draft state, input tools, and send/stop controls. This is an independent project, not an official Mantine or Vercel package.
 
 ## Installation
 
@@ -69,7 +69,7 @@ Do not import both variants. Unlayered application CSS can override the layered 
 | `Message` | Role styling, streaming Markdown, actions, and alternative response branches |
 | `CodeBlock` | Lazy syntax highlighting, line numbers, copy feedback, and language selection |
 | `Conversation` | Message log with scroll following, history navigation, empty state, and Markdown export |
-| `PromptInput` | Form, payload creation, submission guards; `onSubmit` and optional `onSubmitError` |
+| `PromptInput` | Text/file form, validation, screenshot capture, shared Provider, reference search, and submission guards |
 | `PromptInput.Textarea` | Mantine Textarea props, autosize, Enter/Shift+Enter and IME handling |
 | `PromptInput.Body` | Input content region |
 | `PromptInput.Footer` | Toolbar and submit layout |
@@ -79,7 +79,7 @@ Do not import both variants. Unlayered application CSS can override the layered 
 Named exports (`PromptInputTextarea`, `PromptInputSubmit`, etc.) refer to the same implementations. Compound access should be used inside a client component in Next.js. Named exports can also be imported directly by server components when their props are serializable.
 
 - Enter submits; Shift+Enter inserts a new line; IME confirmation does not submit.
-- Blank text is ignored. The original text is preserved in the payload; `files` is currently always `[]`.
+- Blank text is ignored unless files are attached. The original text is preserved and `files` contains ready-to-send AI SDK file parts.
 - Non-controlled inputs reset immediately when submission begins, matching AI Elements' local-input approach. A draft typed during the pending callback is preserved. Failed callbacks do not restore the previous text.
 - With `value`/`onChange`, the application owns the text and its reset policy. Use this mode to retain text on failure.
 - A pending callback prevents duplicate submissions. `submitted` and `streaming` states prevent Enter from submitting again.
@@ -87,11 +87,11 @@ Named exports (`PromptInputTextarea`, `PromptInputSubmit`, etc.) refer to the sa
 - `onSubmitError` receives exceptions/rejections from your callback. Errors reported by AI SDK through `useChat().error` are handled by the application.
 - Textarea uses `name="message"` for the payload. Use one message textarea and one submit control per form. Avoid nesting forms.
 
-File selection in PromptInput, external-state providers, model selectors, and further AI Elements are not implemented yet. They can be added without replacing the compound API or the `{ text, files }` payload.
+See the [PromptInput guide](.storybook/content/prompt-input.md) for attachments, Provider state, reference search, input tools, and the Mantine Select mapping.
 
 ## Mantine customization
 
-The root exposes `root`, `body`, `footer`, and `tools` Styles API selectors. Textarea and Submit forward the underlying Mantine components' Styles API and refs.
+The root exposes `root`, `header`, `body`, `footer`, and `tools` Styles API selectors. Textarea and Submit forward the underlying Mantine components' Styles API and refs.
 
 ```tsx
 import { createTheme } from '@mantine/core';

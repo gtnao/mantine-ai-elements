@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Expand PromptInput with attachments, shared draft state, reference search, Mantine input tools, and screenshot capture.
+
 ## 0.2.0 — 2026-09-13
 
 - Add Image (AIImage alias) for AI SDK image data and URLs with Mantine customization and fallback handling.

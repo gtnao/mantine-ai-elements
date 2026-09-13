@@ -5,6 +5,7 @@ import CodeExample from './code';
 import ConversationDemo from './conversation';
 import ImageExample from './image';
 import MessageExample from './message';
+import PromptAttachments from './prompt-attachments';
 import ShimmerExample from './shimmer';
 
 export default function Page() {
@@ -18,6 +19,7 @@ export default function Page() {
       <ShimmerExample />
       <AttachmentExample />
       <ImageExample />
+      <PromptAttachments />
       {/* A direct server-component import verifies the published client boundary. */}
       <div hidden>
         <PromptInputSubmit disabled submitLabel="Server import" />
