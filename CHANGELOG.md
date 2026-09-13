@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add Conversation with scroll following, history navigation, Markdown download, and Mantine customization.
+
 - Require maintainer approval with 2FA through npm staged publishing.
 
 ## 0.1.0 — 2026-09-13

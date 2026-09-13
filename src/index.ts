@@ -1,6 +1,26 @@
 'use client';
 
 export {
+  Conversation,
+  ConversationContent,
+  type ConversationContentProps,
+  ConversationDownload,
+  type ConversationDownloadProps,
+  ConversationEmptyState,
+  type ConversationEmptyStateFactory,
+  type ConversationEmptyStateProps,
+  type ConversationFactory,
+  type ConversationProps,
+  ConversationScrollButton,
+  type ConversationScrollButtonProps,
+  type ConversationStylesNames,
+  messagesToMarkdown,
+  type StickToBottomContext,
+  type StickToBottomInstance,
+  useStickToBottom,
+  useStickToBottomContext,
+} from './Conversation/Conversation.js';
+export {
   PromptInput,
   PromptInputBody,
   type PromptInputFactory,

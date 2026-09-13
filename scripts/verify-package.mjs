@@ -129,6 +129,39 @@ try {
   await expect(
     page.getByRole('alert').filter({ hasText: 'Demo transport error' }),
   ).toBeVisible();
+  const viewport = page.locator('.history-viewport');
+  const distanceToBottom = () =>
+    viewport.evaluate(
+      (element) =>
+        element.scrollHeight - element.clientHeight - element.scrollTop,
+    );
+  await expect.poll(distanceToBottom).toBeLessThan(3);
+  await page.getByRole('button', { name: 'Append history' }).click();
+  await expect.poll(distanceToBottom).toBeLessThan(3);
+  await viewport.hover();
+  await page.mouse.wheel(0, -500);
+  const scrollButton = page.getByRole('button', { name: 'Scroll to bottom' });
+  await expect(scrollButton).toBeVisible();
+  const readingPosition = await viewport.evaluate(
+    (element) => element.scrollTop,
+  );
+  await page.getByRole('button', { name: 'Append history' }).click();
+  await expect.poll(distanceToBottom).toBeGreaterThan(300);
+  await expect
+    .poll(() => viewport.evaluate((element) => element.scrollTop))
+    .toBeCloseTo(readingPosition, 0);
+  await scrollButton.click();
+  await expect.poll(distanceToBottom).toBeLessThan(3);
+  const downloadPromise = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Download conversation' }).click();
+  const download = await downloadPromise;
+  assert.equal(download.suggestedFilename(), 'history.md');
+  const downloadPath = await download.path();
+  assert.ok(downloadPath);
+  assert.match(
+    await readFile(downloadPath, 'utf8'),
+    /\*\*Assistant:\*\* History message 32/,
+  );
   await page.screenshot({
     path: join(directory, 'consumer.png'),
     fullPage: true,

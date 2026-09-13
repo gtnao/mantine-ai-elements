@@ -2,7 +2,7 @@
 
 Composable AI SDK components built with Mantine, inspired by [AI Elements](https://elements.ai-sdk.dev/).
 
-Build chat inputs with Mantine components, theme overrides, and AI SDK hooks. `PromptInput` provides a composable text input, toolbar, and send/stop button. This is an independent project, not an official Mantine or Vercel package.
+Build chat interfaces with Mantine components, theme overrides, and AI SDK hooks. `PromptInput` provides a composable text input, toolbar, and send/stop button. This is an independent project, not an official Mantine or Vercel package.
 
 ## Installation
 
@@ -62,6 +62,7 @@ Do not import both variants. Unlayered application CSS can override the layered 
 
 | Component | Purpose |
 | --- | --- |
+| `Conversation` | Message log with scroll following, history navigation, empty state, and Markdown export |
 | `PromptInput` | Form, payload creation, submission guards; `onSubmit` and optional `onSubmitError` |
 | `PromptInput.Textarea` | Mantine Textarea props, autosize, Enter/Shift+Enter and IME handling |
 | `PromptInput.Body` | Input content region |
@@ -106,7 +107,7 @@ The theme keys for the input and submit button are `PromptInputTextarea` and `Pr
 
 ## Documentation
 
-Guides cover [getting started](.storybook/content/getting-started.md), [PromptInput](.storybook/content/prompt-input.md), and [Mantine customization](.storybook/content/customization.md).
+Guides cover [getting started](.storybook/content/getting-started.md), [PromptInput](.storybook/content/prompt-input.md), [Conversation](.storybook/content/conversation.md), and [Mantine customization](.storybook/content/customization.md).
 
 The GitHub Pages workflow publishes these guides with live examples to [the documentation site](https://gtnao.github.io/mantine-ai-elements/). It also provides [llms.txt](https://gtnao.github.io/mantine-ai-elements/llms.txt), individual Markdown pages, and a combined `llms-full.txt` from the same source.
 
@@ -120,4 +121,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for development and verification instruct
 
 ## License
 
-[Apache-2.0](LICENSE). PromptInput is adapted from [AI Elements](https://github.com/vercel/ai-elements); see [NOTICE](NOTICE) for attribution.
+[Apache-2.0](LICENSE). Components are adapted from [AI Elements](https://github.com/vercel/ai-elements); see [NOTICE](NOTICE) for attribution.
