@@ -346,6 +346,39 @@ try {
   await expect(
     prompt.getByRole('combobox', { name: 'Attachment model' }),
   ).toHaveValue('detailed');
+  const modelTrigger = prompt.getByRole('button', { name: 'Pick a model' });
+  await modelTrigger.click();
+  const modelDialog = page.getByRole('dialog', {
+    name: 'Choose attachment model',
+  });
+  const modelSearch = modelDialog.getByRole('combobox', {
+    name: 'Filter attachment models',
+  });
+  await expect(modelSearch).toBeFocused();
+  await modelSearch.fill('missing');
+  await expect(modelDialog.getByText('No matching models')).toBeVisible();
+  await modelSearch.fill('thorough');
+  await expect(modelDialog.getByRole('option')).toHaveCSS(
+    'padding-top',
+    '15px',
+  );
+  await expect
+    .poll(() =>
+      modelDialog
+        .getByRole('img', { name: 'local logo' })
+        .evaluate((node) => node.naturalWidth),
+    )
+    .toBe(24);
+  await modelSearch.press('Enter');
+  await expect(modelDialog).not.toBeVisible();
+  await expect(modelTrigger).toBeFocused();
+  await expect(
+    prompt.getByRole('combobox', { name: 'Attachment model' }),
+  ).toHaveValue('detailed');
+  await modelTrigger.click();
+  await page.keyboard.press('Escape');
+  await expect(modelDialog).not.toBeVisible();
+  await expect(modelTrigger).toBeFocused();
   await prompt.getByRole('button', { name: 'Add to prompt' }).click();
   const chooser = page.waitForEvent('filechooser');
   await page.getByRole('menuitem', { name: 'Add photos or files' }).click();

@@ -4,6 +4,7 @@ import { Button, Stack, Text } from '@mantine/core';
 import {
   Attachment,
   Attachments,
+  ModelSelector,
   PromptInput,
   PromptInputProvider,
   usePromptInputAttachments,
@@ -72,6 +73,7 @@ export default function PromptAttachments() {
   const [transport] = useState(createDemoTransport);
   const { messages, status, sendMessage, stop } = useChat({ transport });
   const [error, setError] = useState('');
+  const [pickerOpened, setPickerOpened] = useState(false);
   const [model, setModel] = useState<string | null>('fast');
   const failed = useRef(false);
   const parts = messages.flatMap((message) =>
@@ -114,6 +116,39 @@ export default function PromptAttachments() {
                   />
                 </PromptInput.ActionMenuContent>
               </PromptInput.ActionMenu>
+              <ModelSelector opened={pickerOpened} onChange={setPickerOpened}>
+                <ModelSelector.Trigger>Pick a model</ModelSelector.Trigger>
+                <ModelSelector.Content
+                  title="Choose attachment model"
+                  commandProps={{ styles: { item: { padding: 15 } } }}
+                >
+                  <ModelSelector.Input
+                    aria-label="Filter attachment models"
+                    data-autofocus
+                  />
+                  <ModelSelector.List>
+                    <ModelSelector.Empty>
+                      No matching models
+                    </ModelSelector.Empty>
+                    <ModelSelector.Group heading="Available models">
+                      <ModelSelector.Item
+                        value="detailed"
+                        keywords={['thorough']}
+                        onSelect={(value) => {
+                          setModel(value);
+                          setPickerOpened(false);
+                        }}
+                      >
+                        <ModelSelector.Logo
+                          provider="local"
+                          src="/image-preview.svg"
+                        />
+                        <ModelSelector.Name>Detailed model</ModelSelector.Name>
+                      </ModelSelector.Item>
+                    </ModelSelector.Group>
+                  </ModelSelector.List>
+                </ModelSelector.Content>
+              </ModelSelector>
               <PromptInput.Select
                 aria-label="Attachment model"
                 data={['fast', 'detailed']}

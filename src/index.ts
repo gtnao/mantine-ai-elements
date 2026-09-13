@@ -126,6 +126,33 @@ export {
   type MessageResponseFactory,
   type MessageResponseProps,
 } from './Message/MessageResponse.js';
+export type {
+  ModelSelectorContentProps,
+  ModelSelectorDialogProps,
+  ModelSelectorFactory,
+  ModelSelectorLogoGroupProps,
+  ModelSelectorLogoProps,
+  ModelSelectorNameProps,
+  ModelSelectorProps,
+  ModelSelectorShortcutProps,
+  ModelSelectorTriggerProps,
+} from './ModelSelector/ModelSelector';
+export {
+  ModelSelector,
+  ModelSelectorContent,
+  ModelSelectorDialog,
+  ModelSelectorEmpty,
+  ModelSelectorGroup,
+  ModelSelectorInput,
+  ModelSelectorItem,
+  ModelSelectorList,
+  ModelSelectorLogo,
+  ModelSelectorLogoGroup,
+  ModelSelectorName,
+  ModelSelectorSeparator,
+  ModelSelectorShortcut,
+  ModelSelectorTrigger,
+} from './ModelSelector/ModelSelector';
 export {
   PromptInput,
   PromptInputBody,
@@ -144,13 +171,19 @@ export {
 } from './PromptInput/PromptInput.js';
 export type {
   PromptInputCommandEmptyProps,
+  PromptInputCommandEmptyProps as ModelSelectorEmptyProps,
   PromptInputCommandFactory,
   PromptInputCommandGroupProps,
+  PromptInputCommandGroupProps as ModelSelectorGroupProps,
   PromptInputCommandInputProps,
+  PromptInputCommandInputProps as ModelSelectorInputProps,
   PromptInputCommandItemProps,
+  PromptInputCommandItemProps as ModelSelectorItemProps,
   PromptInputCommandListProps,
+  PromptInputCommandListProps as ModelSelectorListProps,
   PromptInputCommandProps,
   PromptInputCommandSeparatorProps,
+  PromptInputCommandSeparatorProps as ModelSelectorSeparatorProps,
   PromptInputCommandStylesNames,
 } from './PromptInput/PromptInputCommand';
 export {

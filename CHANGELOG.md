@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add ModelSelector with Mantine modal controls, command search, and customizable provider logos.
+
 - Expand PromptInput with attachments, shared draft state, reference search, Mantine input tools, and screenshot capture.
 
 ## 0.2.0 — 2026-09-13
