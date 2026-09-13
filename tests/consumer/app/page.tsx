@@ -28,6 +28,14 @@ import {
   OpenInT3,
   OpenInTrigger,
   OpenInv0,
+  Plan,
+  PlanAction,
+  PlanContent,
+  PlanDescription,
+  PlanFooter,
+  PlanHeader,
+  PlanTitle,
+  PlanTrigger,
   PromptInputSubmit,
   Reasoning,
   ReasoningContent,
@@ -55,6 +63,7 @@ import ContextExample from './context';
 import ConversationDemo from './conversation';
 import ImageExample from './image';
 import MessageExample from './message';
+import { PlanObjectExample } from './plan-object';
 import PromptAttachments from './prompt-attachments';
 import QuestionExample from './question';
 import { QueueChatExample } from './queue';
@@ -76,6 +85,26 @@ export default function Page() {
       <ConfirmationChat />
       <QuestionExample />
       <ContextExample />
+      <Plan data-testid="packaged-plan">
+        <PlanHeader>
+          <div>
+            <PlanTitle>Packaged plan</PlanTitle>
+            <PlanDescription>
+              A plan composed in a server component.
+            </PlanDescription>
+          </div>
+          <PlanTrigger />
+        </PlanHeader>
+        <PlanContent styles={{ body: { paddingInline: 23 } }}>
+          Plan steps
+        </PlanContent>
+        <PlanFooter>
+          <PlanAction>Persistent footer</PlanAction>
+        </PlanFooter>
+      </Plan>
+      <section data-testid="packaged-plan-object">
+        <PlanObjectExample />
+      </section>
       <Task
         data-testid="packaged-task"
         defaultOpened={false}

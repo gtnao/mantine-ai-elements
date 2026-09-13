@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add Plan with independent collapse and streaming states, Mantine card composition, shimmer text, and validated AI SDK plan selection examples.
+
 - Add Task with Mantine customization, native keyboard triggers, file references, and streamed structured-data examples using AI SDK useObject.
 
 - Add Queue with collapsible message/task lists, attachments, Mantine customization, and an AI SDK example that retains failed or stopped drafts.

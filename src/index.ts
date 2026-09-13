@@ -272,6 +272,34 @@ export {
   OpenInv0,
   type OpenInv0Props,
 } from './OpenIn/OpenIn';
+export type {
+  PlanActionFactory,
+  PlanActionProps,
+  PlanContentFactory,
+  PlanContentProps,
+  PlanDescriptionFactory,
+  PlanDescriptionProps,
+  PlanFactory,
+  PlanFooterFactory,
+  PlanFooterProps,
+  PlanHeaderFactory,
+  PlanHeaderProps,
+  PlanProps,
+  PlanTitleFactory,
+  PlanTitleProps,
+  PlanTriggerFactory,
+  PlanTriggerProps,
+} from './Plan/Plan';
+export {
+  Plan,
+  PlanAction,
+  PlanContent,
+  PlanDescription,
+  PlanFooter,
+  PlanHeader,
+  PlanTitle,
+  PlanTrigger,
+} from './Plan/Plan';
 export {
   PromptInput,
   PromptInputBody,

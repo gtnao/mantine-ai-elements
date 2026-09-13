@@ -1,7 +1,7 @@
 mantine-ai-elements
 
 PromptInput, Conversation, CodeBlock, Message, Shimmer, Suggestion, Attachments,
-Image, ModelSelector, Reasoning, Tool, Confirmation, Question, Sources, InlineCitation, Context, OpenIn, Checkpoint, Queue, and Task are adapted from AI Elements:
+Image, ModelSelector, Reasoning, Tool, Confirmation, Question, Sources, InlineCitation, Context, OpenIn, Checkpoint, Queue, Task, and Plan are adapted from AI Elements:
 https://github.com/vercel/ai-elements
 Commit: 6a9d5b1822ffb10bba4bd97175f01edd7d8651cd
 Copyright 2023 Vercel, Inc.

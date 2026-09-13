@@ -47,6 +47,18 @@ await writeFile(
       "from 'mantine-ai-elements'",
     ),
 );
+await cp(
+  join(root, 'src/stories/plan-stream.ts'),
+  join(directory, 'app/plan-stream.ts'),
+);
+await writeFile(
+  join(directory, 'app/plan-object.tsx'),
+  "'use client';\n" +
+    (await readFile(join(root, 'src/stories/plan-object.tsx'), 'utf8')).replace(
+      "from '../index'",
+      "from 'mantine-ai-elements'",
+    ),
+);
 run(['pack', '--out', join(directory, 'mantine-ai-elements.tgz')], root);
 run(['install', '--ignore-scripts'], directory);
 
@@ -347,6 +359,36 @@ try {
   await images.getByRole('button', { name: 'Replace image source' }).click();
   await expect(fallbackImage).not.toHaveAttribute('data-fallback');
   await expect(fallbackImage).toHaveAttribute('src', '/image-preview.svg');
+
+  const plan = page.getByTestId('packaged-plan');
+  await expect(
+    plan.getByRole('heading', { name: 'Packaged plan' }),
+  ).toBeVisible();
+  await expect(plan.getByText('Persistent footer')).toBeVisible();
+  await expect(plan.getByRole('region')).not.toBeVisible();
+  await plan.getByRole('button', { name: 'Toggle plan' }).focus();
+  await page.keyboard.press('Enter');
+  await expect(plan.getByRole('region')).toBeVisible();
+  await expect(plan.locator('.mantine-PlanContent-body')).toHaveCSS(
+    'padding-inline-start',
+    '23px',
+  );
+  const planObject = page.getByTestId('packaged-plan-object');
+  const selectPlan = planObject.getByRole('button', { name: 'Use this plan' });
+  await expect(selectPlan).toBeDisabled();
+  await planObject
+    .getByRole('button', { name: 'Generate plan', exact: true })
+    .click();
+  await expect(planObject.locator('.mantine-Shimmer-root')).toHaveCount(2);
+  await expect(planObject.getByRole('status')).toHaveText(
+    'Plan ready for review.',
+    { timeout: 15000 },
+  );
+  await expect(planObject.locator('.mantine-Shimmer-root')).toHaveCount(0);
+  await selectPlan.click();
+  await expect(planObject.getByRole('status')).toHaveText(
+    'Selected plan: Build an accessible chat interface',
+  );
 
   const task = page.getByTestId('packaged-task');
   const taskTrigger = task.getByRole('button', { name: 'Packaged task' });
