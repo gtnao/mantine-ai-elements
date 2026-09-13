@@ -1,0 +1,8 @@
+.root {
+  position: relative;
+  min-width: 0;
+}
+.content {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}

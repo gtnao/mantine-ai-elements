@@ -1,0 +1,7 @@
+import { Meta, Markdown, Canvas } from '@storybook/addon-docs/blocks';
+import content from './content/inline-citation.md?raw';
+import * as Examples from '../src/InlineCitation/InlineCitation.stories';
+
+<Meta title="Guides/InlineCitation" />
+<Markdown>{content}</Markdown>
+<Canvas of={Examples.Basic} />

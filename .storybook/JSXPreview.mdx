@@ -1,0 +1,10 @@
+import { Meta, Markdown, Canvas } from '@storybook/addon-docs/blocks';
+import content from './content/jsx-preview.md?raw';
+import * as Examples from '../src/JSXPreview/JSXPreview.stories';
+
+<Meta title="Guides/JSXPreview" />
+<Markdown>{content}</Markdown>
+<Canvas of={Examples.Basic} />
+<Canvas of={Examples.Themed} />
+<Canvas of={Examples.Interactive} />
+<Canvas of={Examples.WithUseChat} />

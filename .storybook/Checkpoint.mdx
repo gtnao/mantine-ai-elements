@@ -1,0 +1,7 @@
+import { Meta, Markdown, Canvas } from '@storybook/addon-docs/blocks';
+import content from './content/checkpoint.md?raw';
+import * as Examples from '../src/Checkpoint/Checkpoint.stories';
+
+<Meta title="Guides/Checkpoint" />
+<Markdown>{content}</Markdown>
+<Canvas of={Examples.Basic} />

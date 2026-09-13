@@ -1,0 +1,7 @@
+import { Meta, Markdown, Canvas } from '@storybook/addon-docs/blocks';
+import content from './content/model-selector.md?raw';
+import * as Examples from '../src/ModelSelector/ModelSelector.stories';
+
+<Meta title="Guides/ModelSelector" />
+<Markdown>{content}</Markdown>
+<Canvas of={Examples.Basic} />

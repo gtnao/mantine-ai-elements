@@ -1,5 +1,5 @@
 import { MantineProvider } from '@mantine/core';
-import { render, screen, waitFor } from '@testing-library/react';
+import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { CodeBlock } from './CodeBlock';
@@ -7,6 +7,35 @@ import { highlightCodeAsync } from './highlight';
 
 afterEach(() => vi.restoreAllMocks());
 describe('CodeBlock', () => {
+  it('does not mark replacement code as copied when an earlier clipboard write resolves', async () => {
+    const user = userEvent.setup();
+    const onCopy = vi.fn();
+    let complete: () => void = () => {};
+    const write = vi
+      .spyOn(navigator.clipboard, 'writeText')
+      .mockImplementationOnce(
+        () =>
+          new Promise<void>((resolve) => {
+            complete = resolve;
+          }),
+      );
+    const view = (code: string) => (
+      <MantineProvider>
+        <CodeBlock code={code} language="text">
+          <CodeBlock.CopyButton onCopy={onCopy} />
+        </CodeBlock>
+      </MantineProvider>
+    );
+    const { rerender } = render(view('old source'));
+    await user.click(screen.getByRole('button', { name: 'Copy code' }));
+    rerender(view('new source'));
+    await act(async () => complete());
+    expect(onCopy).toHaveBeenCalledOnce();
+    expect(screen.getByRole('button', { name: 'Copy code' })).toBeVisible();
+    await user.click(screen.getByRole('button', { name: 'Copy code' }));
+    expect(write).toHaveBeenLastCalledWith('new source');
+    expect(await screen.findByRole('button', { name: 'Copied' })).toBeVisible();
+  });
   it('preserves code, blank lines and trailing newline through real highlighting', async () => {
     const code = 'const greeting = "Hello";\n\nconsole.log(greeting);\n';
     const { container } = render(

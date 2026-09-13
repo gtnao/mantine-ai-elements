@@ -1,0 +1,7 @@
+import { Meta, Markdown, Canvas } from '@storybook/addon-docs/blocks';
+import content from './content/question.md?raw';
+import * as Examples from '../src/Question/Question.stories';
+
+<Meta title="Guides/Question" />
+<Markdown>{content}</Markdown>
+<Canvas of={Examples.Basic} />

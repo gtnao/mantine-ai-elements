@@ -1,16 +1,20 @@
 mantine-ai-elements
 
 PromptInput, Conversation, CodeBlock, Message, Shimmer, Suggestion, Attachments,
-and Image are adapted from AI Elements:
+Image, ModelSelector, Reasoning, Tool, Confirmation, Question, Sources, InlineCitation, Context, OpenIn, Checkpoint, Queue, Task, Plan, ChainOfThought, Artifact, Snippet, WebPreview, Sandbox, and JSXPreview are adapted from AI Elements:
 https://github.com/vercel/ai-elements
 Commit: 6a9d5b1822ffb10bba4bd97175f01edd7d8651cd
 Copyright 2023 Vercel, Inc.
 Licensed under the Apache License, Version 2.0 (see LICENSE).
 
-Modifications: Mantine UI and styling integration, text-only initial scope,
+Modifications: Mantine UI and styling integration, attachment and shared-draft ownership,
 compound exports, generation/submission guards, callback error reporting,
 keyboard event composition, accessible conversation actions, and scroll refs.
 
 MessageResponse also uses Streamdown (Apache-2.0) and its code, math, CJK,
 and Mermaid plugins. Parser and export behavior are adapted to Mantine controls.
 https://github.com/vercel/streamdown
+
+PromptInputCommand uses cmdk (MIT), Copyright (c) 2022 Paco Coursey,
+with Mantine input and styling adapters. cmdk is an external dependency.
+https://github.com/pacocoursey/cmdk

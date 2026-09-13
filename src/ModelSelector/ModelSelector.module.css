@@ -1,0 +1,22 @@
+.logo {
+  flex-shrink: 0;
+  object-fit: contain;
+}
+:where([data-mantine-color-scheme="dark"]) .logo[data-invert] {
+  filter: invert(1);
+}
+.logoGroup {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+.logoGroup > img {
+  box-sizing: content-box;
+  border-radius: 50%;
+  background: var(--mantine-color-body);
+  padding: 2px;
+  border: 1px solid var(--mantine-color-default-border);
+}
+.logoGroup > img + img {
+  margin-inline-start: -4px;
+}

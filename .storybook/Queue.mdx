@@ -1,0 +1,7 @@
+import { Meta, Markdown, Canvas } from '@storybook/addon-docs/blocks';
+import content from './content/queue.md?raw';
+import * as Examples from '../src/Queue/Queue.stories';
+
+<Meta title="Guides/Queue" />
+<Markdown>{content}</Markdown>
+<Canvas of={Examples.Basic} />

@@ -1,0 +1,7 @@
+import { Meta, Markdown, Canvas } from '@storybook/addon-docs/blocks';
+import content from './content/chain-of-thought.md?raw';
+import * as Examples from '../src/ChainOfThought/ChainOfThought.stories';
+
+<Meta title="Guides/ChainOfThought" />
+<Markdown>{content}</Markdown>
+<Canvas of={Examples.Basic} />
