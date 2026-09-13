@@ -27,6 +27,14 @@ await cp(
   join(root, 'src/stories/demo-transport.ts'),
   join(directory, 'app/demo-transport.ts'),
 );
+await writeFile(
+  join(directory, 'app/queue.tsx'),
+  "'use client';\n" +
+    (await readFile(join(root, 'src/stories/queue-chat.tsx'), 'utf8')).replace(
+      "from '../index'",
+      "from 'mantine-ai-elements'",
+    ),
+);
 run(['pack', '--out', join(directory, 'mantine-ai-elements.tgz')], root);
 run(['install', '--ignore-scripts'], directory);
 
@@ -327,6 +335,31 @@ try {
   await images.getByRole('button', { name: 'Replace image source' }).click();
   await expect(fallbackImage).not.toHaveAttribute('data-fallback');
   await expect(fallbackImage).toHaveAttribute('src', '/image-preview.svg');
+
+  const queue = page.getByTestId('packaged-queue-chat');
+  const queueDraft = queue.getByRole('textbox', { name: 'Queue draft' });
+  await queueDraft.fill('A packaged draft');
+  await queue.getByRole('button', { name: 'Add to queue' }).click();
+  await queue.getByRole('checkbox', { name: 'Fail next send' }).check();
+  const queuedSend = queue.getByRole('button', {
+    name: 'Send A packaged draft',
+    exact: true,
+  });
+  await queuedSend.focus();
+  await queuedSend.press('Enter');
+  await expect(queue.getByRole('alert')).toContainText(
+    'Simulated network failure',
+  );
+  await expect(
+    queue.getByRole('list', { name: 'Drafts' }).getByRole('listitem'),
+  ).toHaveCount(1);
+  await queuedSend.click();
+  await expect(queue.getByRole('status')).toHaveText(
+    'Reply completed. The draft was removed from the queue.',
+    { timeout: 20000 },
+  );
+  await expect(queue.locator('[data-role="user"]')).toHaveCount(1);
+  await expect(queue.getByText('No queued drafts.')).toBeVisible();
 
   const checkpoint = page.getByTestId('packaged-checkpoint');
   await expect(checkpoint).toHaveCSS('display', 'flex');

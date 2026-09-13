@@ -52,6 +52,7 @@ import ImageExample from './image';
 import MessageExample from './message';
 import PromptAttachments from './prompt-attachments';
 import QuestionExample from './question';
+import { QueueChatExample } from './queue';
 import ShimmerExample from './shimmer';
 
 export default function Page() {
@@ -69,6 +70,9 @@ export default function Page() {
       <ConfirmationChat />
       <QuestionExample />
       <ContextExample />
+      <section data-testid="packaged-queue-chat">
+        <QueueChatExample />
+      </section>
       <Checkpoint
         data-testid="packaged-checkpoint"
         styles={{ line: { opacity: 0.4 } }}

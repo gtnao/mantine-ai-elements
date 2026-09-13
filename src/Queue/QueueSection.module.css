@@ -1,0 +1,46 @@
+.root,
+.content,
+.body {
+  min-width: 0;
+}
+.trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-radius: var(--mantine-radius-default);
+  padding: var(--mantine-spacing-xs) var(--mantine-spacing-sm);
+  font-size: var(--mantine-font-size-sm);
+  font-weight: 500;
+  color: var(--mantine-color-text);
+  background: var(--mantine-color-default-hover);
+  text-align: start;
+}
+.trigger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.labelRoot {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mantine-spacing-xs);
+  min-width: 0;
+}
+.label {
+  overflow-wrap: anywhere;
+}
+.chevron {
+  flex-shrink: 0;
+  transition: transform 150ms ease;
+}
+.chevron[data-closed] {
+  transform: rotate(-90deg);
+}
+:global([dir="rtl"]) .chevron[data-closed] {
+  transform: rotate(90deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .chevron {
+    transition: none;
+  }
+}

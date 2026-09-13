@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add Queue with collapsible message/task lists, attachments, Mantine customization, and an AI SDK example that retains failed or stopped drafts.
+
 - Add Checkpoint with Mantine styling, focus tooltips, and an AI SDK chat history restoration example.
 
 - Add OpenIn menus with encoded provider links, custom targets/items, Mantine styling, and shared PromptInput draft examples.

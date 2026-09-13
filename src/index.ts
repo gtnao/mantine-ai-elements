@@ -396,6 +396,63 @@ export {
   QuestionSubmit,
 } from './Question/Question';
 export type {
+  QueueFactory,
+  QueueMessage,
+  QueueMessagePart,
+  QueueProps,
+  QueueTodo,
+} from './Queue/Queue';
+export { Queue } from './Queue/Queue';
+export type {
+  QueueItemActionFactory,
+  QueueItemActionProps,
+  QueueItemActionsFactory,
+  QueueItemActionsProps,
+  QueueItemAttachmentFactory,
+  QueueItemAttachmentProps,
+  QueueItemContentFactory,
+  QueueItemContentProps,
+  QueueItemDescriptionFactory,
+  QueueItemDescriptionProps,
+  QueueItemFactory,
+  QueueItemFileFactory,
+  QueueItemFileProps,
+  QueueItemImageFactory,
+  QueueItemImageProps,
+  QueueItemIndicatorFactory,
+  QueueItemIndicatorProps,
+  QueueItemProps,
+} from './Queue/QueueItems';
+export {
+  QueueItem,
+  QueueItemAction,
+  QueueItemActions,
+  QueueItemAttachment,
+  QueueItemContent,
+  QueueItemDescription,
+  QueueItemFile,
+  QueueItemImage,
+  QueueItemIndicator,
+} from './Queue/QueueItems';
+export type { QueueListFactory, QueueListProps } from './Queue/QueueList';
+export { QueueList } from './Queue/QueueList';
+export type {
+  QueueSectionContentFactory,
+  QueueSectionContentProps,
+  QueueSectionFactory,
+  QueueSectionLabelFactory,
+  QueueSectionLabelProps,
+  QueueSectionProps,
+  QueueSectionTriggerFactory,
+  QueueSectionTriggerProps,
+} from './Queue/QueueSection';
+export {
+  QueueSection,
+  QueueSectionContent,
+  QueueSectionLabel,
+  QueueSectionTrigger,
+} from './Queue/QueueSection';
+export type {
   ReasoningContentFactory,
   ReasoningContentProps,
   ReasoningContextValue,
