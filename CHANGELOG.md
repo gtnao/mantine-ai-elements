@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add Sources with controlled disclosure, source URL links, and Mantine styling.
+
 - Add Question with single/multiple selection, freeform input, controlled drafts, keyboard navigation, and retryable asynchronous submission.
 
 - Add Confirmation with Mantine alerts/actions, AI SDK approval responses, shared pending protection, and retryable errors.

@@ -3,6 +3,10 @@ import {
   Reasoning,
   ReasoningContent,
   ReasoningTrigger,
+  Source,
+  Sources,
+  SourcesContent,
+  SourcesTrigger,
   Tool,
   ToolContent,
   ToolHeader,
@@ -34,6 +38,18 @@ export default function Page() {
       <PromptAttachments />
       <ConfirmationChat />
       <QuestionExample />
+      <Sources
+        data-testid="sources"
+        styles={{ trigger: { color: 'rgb(10, 20, 30)' } }}
+      >
+        <SourcesTrigger count={1} />
+        <SourcesContent transitionDuration={0}>
+          <Source
+            href="https://example.com/reference"
+            title="Reference guide"
+          />
+        </SourcesContent>
+      </Sources>
       <Reasoning
         data-testid="reasoning"
         duration={3}

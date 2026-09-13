@@ -2,7 +2,11 @@ import type { ChatTransport, UIMessage, UIMessageChunk } from 'ai';
 
 /** Browser-only deterministic transport. No API key, server, or model required. */
 export function createDemoTransport(
-  options: { reasoning?: boolean; tool?: 'static' | 'dynamic' } = {},
+  options: {
+    reasoning?: boolean;
+    tool?: 'static' | 'dynamic';
+    sources?: boolean;
+  } = {},
 ): ChatTransport<UIMessage> {
   return {
     async sendMessages({ abortSignal, messages }) {
@@ -14,6 +18,22 @@ export function createDemoTransport(
           .join('') ?? '';
       const chunks: UIMessageChunk[] = [
         { type: 'start', messageId: crypto.randomUUID() },
+        ...(options.sources
+          ? ([
+              {
+                type: 'source-url',
+                sourceId: 'reference',
+                url: 'https://example.com/reference',
+                title: 'Reference guide',
+              },
+              {
+                type: 'source-url',
+                sourceId: 'details',
+                url: 'https://example.com/details',
+                title: 'Additional details',
+              },
+            ] as UIMessageChunk[])
+          : []),
         ...(options.reasoning
           ? ([
               { type: 'reasoning-start', id: 'reasoning' },

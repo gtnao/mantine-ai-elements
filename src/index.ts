@@ -321,6 +321,22 @@ export type {
 } from './Shimmer/Shimmer';
 export { Shimmer } from './Shimmer/Shimmer';
 export type {
+  SourceFactory,
+  SourceProps,
+  SourcesContentFactory,
+  SourcesContentProps,
+  SourcesFactory,
+  SourcesProps,
+  SourcesTriggerFactory,
+  SourcesTriggerProps,
+} from './Sources/Sources';
+export {
+  Source,
+  Sources,
+  SourcesContent,
+  SourcesTrigger,
+} from './Sources/Sources';
+export type {
   SuggestionFactory,
   SuggestionProps,
   SuggestionsFactory,

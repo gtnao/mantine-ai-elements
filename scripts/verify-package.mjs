@@ -328,6 +328,18 @@ try {
   await expect(fallbackImage).not.toHaveAttribute('data-fallback');
   await expect(fallbackImage).toHaveAttribute('src', '/image-preview.svg');
 
+  const sources = page.getByTestId('sources');
+  const sourcesTrigger = sources.getByRole('button', { name: 'Used 1 source' });
+  await sourcesTrigger.focus();
+  await sourcesTrigger.press('Enter');
+  await expect(sources.getByRole('link')).toHaveAttribute(
+    'href',
+    'https://example.com/reference',
+  );
+  await expect(sources.getByRole('link')).toHaveAttribute('rel', 'noreferrer');
+  await expect(sourcesTrigger).toHaveCSS('color', 'rgb(10, 20, 30)');
+  await sourcesTrigger.press('Space');
+  await expect(sources.getByRole('link')).toHaveCount(0);
   const question = page.getByTestId('question');
   await expect(question.getByRole('button', { name: 'Answer' })).toBeDisabled();
   await question.getByRole('radio', { name: 'Search', exact: true }).focus();
