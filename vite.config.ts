@@ -29,9 +29,10 @@ export default defineConfig({
     },
     rollupOptions: {
       external: (id) =>
-        Object.keys(manifest.peerDependencies).some(
-          (name) => id === name || id.startsWith(`${name}/`),
-        ),
+        Object.keys({
+          ...manifest.peerDependencies,
+          ...manifest.dependencies,
+        }).some((name) => id === name || id.startsWith(`${name}/`)),
       output: { banner: '"use client";' },
     },
   },

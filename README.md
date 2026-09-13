@@ -2,7 +2,7 @@
 
 Composable AI SDK components built with Mantine, inspired by [AI Elements](https://elements.ai-sdk.dev/).
 
-Build chat inputs with Mantine components, theme overrides, and AI SDK hooks. `PromptInput` provides a composable text input, toolbar, and send/stop button. This is an independent project, not an official Mantine or Vercel package.
+Build chat interfaces with Mantine components, theme overrides, and AI SDK hooks. `PromptInput` provides a composable text input, toolbar, and send/stop button. This is an independent project, not an official Mantine or Vercel package.
 
 ## Installation
 
@@ -62,6 +62,13 @@ Do not import both variants. Unlayered application CSS can override the layered 
 
 | Component | Purpose |
 | --- | --- |
+| `Image` / `AIImage` | AI SDK-generated images or URLs with Mantine styling and fallbacks |
+| `Attachments`, `Attachment` | File and source previews, layouts, removal, and hover details |
+| `Suggestion`, `Suggestions` | Scrollable prompt suggestions for draft entry or immediate sending |
+| `Shimmer` | Animated text with Mantine theme and reduced-motion support |
+| `Message` | Role styling, streaming Markdown, actions, and alternative response branches |
+| `CodeBlock` | Lazy syntax highlighting, line numbers, copy feedback, and language selection |
+| `Conversation` | Message log with scroll following, history navigation, empty state, and Markdown export |
 | `PromptInput` | Form, payload creation, submission guards; `onSubmit` and optional `onSubmitError` |
 | `PromptInput.Textarea` | Mantine Textarea props, autosize, Enter/Shift+Enter and IME handling |
 | `PromptInput.Body` | Input content region |
@@ -80,7 +87,7 @@ Named exports (`PromptInputTextarea`, `PromptInputSubmit`, etc.) refer to the sa
 - `onSubmitError` receives exceptions/rejections from your callback. Errors reported by AI SDK through `useChat().error` are handled by the application.
 - Textarea uses `name="message"` for the payload. Use one message textarea and one submit control per form. Avoid nesting forms.
 
-Attachments, external-state providers, model selectors, and other AI Elements are not implemented yet. They can be added without replacing the compound API or the `{ text, files }` payload.
+File selection in PromptInput, external-state providers, model selectors, and further AI Elements are not implemented yet. They can be added without replacing the compound API or the `{ text, files }` payload.
 
 ## Mantine customization
 
@@ -106,7 +113,7 @@ The theme keys for the input and submit button are `PromptInputTextarea` and `Pr
 
 ## Documentation
 
-Guides cover [getting started](.storybook/content/getting-started.md), [PromptInput](.storybook/content/prompt-input.md), and [Mantine customization](.storybook/content/customization.md).
+Guides cover [getting started](.storybook/content/getting-started.md), [PromptInput](.storybook/content/prompt-input.md), [Conversation](.storybook/content/conversation.md), [CodeBlock](.storybook/content/code-block.md), [Message](.storybook/content/message.md), [Shimmer](.storybook/content/shimmer.md), [Suggestions](.storybook/content/suggestion.md), [Attachments](.storybook/content/attachments.md), [Image](.storybook/content/image.md), and [Mantine customization](.storybook/content/customization.md).
 
 The GitHub Pages workflow publishes these guides with live examples to [the documentation site](https://gtnao.github.io/mantine-ai-elements/). It also provides [llms.txt](https://gtnao.github.io/mantine-ai-elements/llms.txt), individual Markdown pages, and a combined `llms-full.txt` from the same source.
 
@@ -120,4 +127,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for development and verification instruct
 
 ## License
 
-[Apache-2.0](LICENSE). PromptInput is adapted from [AI Elements](https://github.com/vercel/ai-elements); see [NOTICE](NOTICE) for attribution.
+[Apache-2.0](LICENSE). Components are adapted from [AI Elements](https://github.com/vercel/ai-elements); see [NOTICE](NOTICE) for attribution.

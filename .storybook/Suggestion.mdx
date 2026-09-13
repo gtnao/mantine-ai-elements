@@ -1,0 +1,7 @@
+import { Meta, Markdown, Canvas } from '@storybook/addon-docs/blocks';
+import content from './content/suggestion.md?raw';
+import * as Examples from '../src/Suggestion/Suggestion.stories';
+
+<Meta title="Guides/Suggestion" />
+<Markdown>{content}</Markdown>
+<Canvas of={Examples.WithAISDK} />

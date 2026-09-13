@@ -129,6 +129,200 @@ try {
   await expect(
     page.getByRole('alert').filter({ hasText: 'Demo transport error' }),
   ).toBeVisible();
+  const suggestionsViewport = page.locator('.suggestion-viewport');
+  await page
+    .getByRole('button', { name: 'Explain streaming', exact: true })
+    .focus();
+  await page.keyboard.press('Tab');
+  await page.keyboard.press('Tab');
+  const lastSuggestion = page.getByRole('button', {
+    name: 'Summarize this conversation',
+    exact: true,
+  });
+  await expect(lastSuggestion).toBeFocused();
+  await expect
+    .poll(() => suggestionsViewport.evaluate((node) => node.scrollLeft))
+    .toBeGreaterThan(0);
+  await page.keyboard.press('Enter');
+  await expect(page.getByTestId('user').last()).toHaveText(
+    'Summarize this conversation',
+  );
+  await expect(lastSuggestion).toBeDisabled();
+  await expect(page.getByTestId('status')).toHaveText('ready', {
+    timeout: 15000,
+  });
+  await expect(page.getByTestId('assistant').last()).toContainText(
+    'Summarize this conversation',
+  );
+
+  const viewport = page.locator('.history-viewport');
+  const distanceToBottom = () =>
+    viewport.evaluate(
+      (element) =>
+        element.scrollHeight - element.clientHeight - element.scrollTop,
+    );
+  await expect.poll(distanceToBottom).toBeLessThan(3);
+  await page.getByRole('button', { name: 'Append history' }).click();
+  await expect.poll(distanceToBottom).toBeLessThan(3);
+  await viewport.hover();
+  await page.mouse.wheel(0, -500);
+  const scrollButton = page.getByRole('button', { name: 'Scroll to bottom' });
+  await expect(scrollButton).toBeVisible();
+  const readingPosition = await viewport.evaluate(
+    (element) => element.scrollTop,
+  );
+  await page.getByRole('button', { name: 'Append history' }).click();
+  await expect.poll(distanceToBottom).toBeGreaterThan(300);
+  await expect
+    .poll(() => viewport.evaluate((element) => element.scrollTop))
+    .toBeCloseTo(readingPosition, 0);
+  await scrollButton.click();
+  await expect.poll(distanceToBottom).toBeLessThan(3);
+  const downloadPromise = page.waitForEvent('download');
+  await page.getByRole('button', { name: 'Download conversation' }).click();
+  const download = await downloadPromise;
+  assert.equal(download.suggestedFilename(), 'history.md');
+  const downloadPath = await download.path();
+  assert.ok(downloadPath);
+  assert.match(
+    await readFile(downloadPath, 'utf8'),
+    /\*\*Assistant:\*\* History message 32/,
+  );
+  const codeExample = page.getByTestId('code-example');
+  await expect(codeExample.locator('[data-highlighted]')).toBeVisible({
+    timeout: 15000,
+  });
+  await expect(codeExample.locator('code')).toHaveText(
+    'const greeting = "Hello";',
+  );
+  const token = codeExample.locator('.mantine-CodeBlock-token').first();
+  const lightTokenColor = await token.evaluate(
+    (element) => getComputedStyle(element).color,
+  );
+  await page.evaluate(() =>
+    document.documentElement.setAttribute('data-mantine-color-scheme', 'dark'),
+  );
+  await expect
+    .poll(() => token.evaluate((element) => getComputedStyle(element).color))
+    .not.toBe(lightTokenColor);
+  await page.evaluate(() =>
+    document.documentElement.setAttribute('data-mantine-color-scheme', 'light'),
+  );
+  await codeExample.getByRole('combobox', { name: 'Language' }).click();
+  await page.getByRole('option', { name: 'python', exact: true }).click();
+  await expect(codeExample.locator('code')).toHaveText('print("Hello")');
+  await expect(codeExample.locator('[data-highlighted]')).toBeVisible();
+  await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
+  await codeExample.getByRole('button', { name: 'Copy code' }).click();
+  await expect(
+    codeExample.getByRole('button', { name: 'Copied', exact: true }),
+  ).toBeVisible();
+  assert.equal(
+    await page.evaluate(() => navigator.clipboard.readText()),
+    'print("Hello")',
+  );
+  const shimmer = page.getByRole('heading', { name: 'Preparing an answer' });
+  await expect(shimmer).toHaveCSS('animation-duration', '3s');
+  await expect(shimmer).toHaveCSS('background-clip', 'text, text');
+  const firstPosition = await shimmer.evaluate(
+    (node) => getComputedStyle(node).backgroundPosition,
+  );
+  await expect
+    .poll(() =>
+      shimmer.evaluate((node) => getComputedStyle(node).backgroundPosition),
+    )
+    .not.toBe(firstPosition);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(shimmer).toHaveCSS('animation-name', 'none');
+  await expect(shimmer).toHaveCSS('background-image', 'none');
+  await page.emulateMedia({
+    reducedMotion: 'no-preference',
+    forcedColors: 'active',
+  });
+  await expect(shimmer).toHaveCSS('animation-name', 'none');
+  await page.emulateMedia({ forcedColors: 'none' });
+
+  const messageExample = page.getByTestId('message-example');
+  await expect(
+    messageExample.getByRole('heading', { name: 'Rendered answer' }),
+  ).toBeVisible();
+  await expect(messageExample.locator('.katex')).toBeVisible();
+  await expect(
+    messageExample.locator('[data-message-response="diagram"] svg'),
+  ).toBeVisible({ timeout: 30000 });
+  const table = messageExample.locator('[data-message-response="table"]');
+  await table.getByRole('button', { name: 'Copy table', exact: true }).click();
+  await page.getByRole('menuitem', { name: 'Copy table as CSV' }).click();
+  assert.match(
+    await page.evaluate(() => navigator.clipboard.readText()),
+    /Name,Value[\s\S]*Total,42/,
+  );
+  await table.getByRole('button', { name: 'View fullscreen' }).click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+  await messageExample
+    .getByRole('button', { name: 'Download diagram' })
+    .click();
+  const pngPromise = page.waitForEvent('download');
+  await page.getByRole('menuitem', { name: 'Download diagram as PNG' }).click();
+  const png = await pngPromise;
+  assert.equal(png.suggestedFilename(), 'diagram.png');
+  const pngPath = await png.path();
+  assert.ok(pngPath);
+  assert.equal((await readFile(pngPath)).subarray(1, 4).toString(), 'PNG');
+  await messageExample.getByRole('button', { name: 'Next branch' }).click();
+  await expect(
+    messageExample.getByText('An alternative answer.'),
+  ).toBeVisible();
+  await messageExample.getByRole('button', { name: 'Previous branch' }).click();
+  await expect(
+    messageExample.getByRole('heading', { name: 'Rendered answer' }),
+  ).toBeVisible();
+  const attachments = page.getByTestId('attachments-example');
+  const attachmentImage = attachments.getByRole('img', {
+    name: 'Preview image',
+  });
+  await expect
+    .poll(() => attachmentImage.evaluate((node) => node.naturalWidth))
+    .toBeGreaterThan(0);
+  const attachmentVideo = attachments.locator('video');
+  await expect
+    .poll(() => attachmentVideo.evaluate((node) => node.videoWidth))
+    .toBe(96);
+  await expect(attachmentVideo).toHaveJSProperty('muted', true);
+  await attachments
+    .getByRole('button', { name: 'Remove Preview image' })
+    .click();
+  await expect(attachmentImage).toHaveCount(0);
+  await attachments
+    .getByText('Reference document', { exact: true })
+    .locator('..')
+    .locator('..')
+    .focus();
+  await expect(
+    page.getByRole('dialog').filter({ hasText: 'Verified source details' }),
+  ).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+
+  const images = page.getByTestId('image-example');
+  await images.scrollIntoViewIfNeeded();
+  for (const name of ['Generated image', 'Image fallback', 'Next image']) {
+    await expect
+      .poll(() =>
+        images
+          .getByRole('img', { name, exact: true })
+          .evaluate((node) => node.naturalWidth),
+      )
+      .toBe(24);
+  }
+  const fallbackImage = images.getByRole('img', { name: 'Image fallback' });
+  await expect(fallbackImage).toHaveAttribute('data-fallback', 'true');
+  await images.getByRole('button', { name: 'Replace image source' }).click();
+  await expect(fallbackImage).not.toHaveAttribute('data-fallback');
+  await expect(fallbackImage).toHaveAttribute('src', '/image-preview.svg');
+
   await page.screenshot({
     path: join(directory, 'consumer.png'),
     fullPage: true,

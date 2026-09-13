@@ -1,0 +1,41 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mantine-spacing-xs);
+  width: 100%;
+  max-width: 95%;
+  min-width: 0;
+}
+.root[data-from="user"] {
+  margin-inline-start: auto;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mantine-spacing-xs);
+  width: fit-content;
+  max-width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-size: var(--mantine-font-size-sm);
+}
+.root[data-from="user"] .content {
+  margin-inline-start: auto;
+  padding: var(--mantine-spacing-sm) var(--mantine-spacing-md);
+  border-radius: var(--mantine-radius-md);
+  background: var(--mantine-color-gray-light);
+}
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--mantine-spacing-md);
+  margin-top: var(--mantine-spacing-md);
+  width: 100%;
+}

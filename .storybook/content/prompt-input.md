@@ -22,7 +22,7 @@ interface PromptInputMessage {
 }
 ```
 
-The payload matches AI Elements and can be passed to `sendMessage`. This version supports text only and always supplies `files: []`. Attachments, model selectors, and a shared input provider are not implemented.
+The payload matches AI Elements and can be passed to `sendMessage`. This version supports text only and always supplies `files: []`. File selection in PromptInput, model selectors, and a shared input provider are not implemented. Use [Attachments](./attachments.md) to display existing file and source parts.
 
 ## Submission and cancellation
 

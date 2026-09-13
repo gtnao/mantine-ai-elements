@@ -1,0 +1,22 @@
+.root {
+  display: grid;
+  gap: var(--mantine-spacing-xs);
+  width: 100%;
+  min-width: 0;
+}
+.panel {
+  min-width: 0;
+}
+.panel[hidden] {
+  display: none;
+}
+.selector {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.page {
+  color: var(--mantine-color-dimmed);
+  font-size: var(--mantine-font-size-xs);
+  font-variant-numeric: tabular-nums;
+}

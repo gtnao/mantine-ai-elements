@@ -24,3 +24,5 @@ globalThis.ResizeObserver = class {
 Object.defineProperty(document, 'fonts', {
   value: { addEventListener: vi.fn(), removeEventListener: vi.fn() },
 });
+// jsdom has no layout or scrollIntoView; browser consumer checks exercise scrolling.
+HTMLElement.prototype.scrollIntoView = vi.fn();
