@@ -1,6 +1,6 @@
 mantine-ai-elements
 
-PromptInput, Conversation, and CodeBlock are adapted from AI Elements:
+PromptInput, Conversation, CodeBlock, and Message are adapted from AI Elements:
 https://github.com/vercel/ai-elements
 Commit: 6a9d5b1822ffb10bba4bd97175f01edd7d8651cd
 Copyright 2023 Vercel, Inc.
@@ -9,3 +9,7 @@ Licensed under the Apache License, Version 2.0 (see LICENSE).
 Modifications: Mantine UI and styling integration, text-only initial scope,
 compound exports, generation/submission guards, callback error reporting,
 keyboard event composition, accessible conversation actions, and scroll refs.
+
+MessageResponse also uses Streamdown (Apache-2.0) and its code, math, CJK,
+and Mermaid plugins. Parser and export behavior are adapted to Mantine controls.
+https://github.com/vercel/streamdown

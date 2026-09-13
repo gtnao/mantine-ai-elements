@@ -2,6 +2,7 @@ import { PromptInputSubmit } from 'mantine-ai-elements';
 import Chat from './chat';
 import CodeExample from './code';
 import ConversationDemo from './conversation';
+import MessageExample from './message';
 
 export default function Page() {
   return (
@@ -10,6 +11,7 @@ export default function Page() {
       <Chat />
       <ConversationDemo />
       <CodeExample />
+      <MessageExample />
       {/* A direct server-component import verifies the published client boundary. */}
       <div hidden>
         <PromptInputSubmit disabled submitLabel="Server import" />

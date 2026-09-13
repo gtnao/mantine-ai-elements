@@ -27,7 +27,7 @@ Root Styles API selectors: `root`, `header`, `title`, `filename`, `actions`, `co
 
 ## Highlighting
 
-Bundled Shiki languages and aliases are supported. Unknown language names render as plain text. Light and dark token colors follow Mantine's color-scheme attribute; no Tailwind configuration or `dark` class is needed. Changing code or language invalidates the previous result immediately. `onHighlightError` reports a failed asynchronous load while raw text remains visible.
+Bundled Shiki languages and aliases are supported. Unknown language names render as plain text. Light and dark token colors follow Mantine's color-scheme attribute; no Tailwind configuration or `dark` class is needed. Changing code or language invalidates the previous result immediately. An optional `highlighter(code, language)` promise callback supplies custom tokenization (also used by MessageResponse to respect Streamdown plugins and themes). `onHighlightError` reports a failed asynchronous load while raw text remains visible.
 
 `highlightCodeAsync(code, language)` resolves to `{ tokens, fg, bg }` for custom renderers. `highlightCode(code, language, callback?, onError?)` returns a cached result synchronously or `null` while loading, matching the upstream helper's calling convention. The cache stores up to 100 snippets of at most 100,000 characters each. Identical concurrent requests share a promise; failed requests can be retried.
 

@@ -63,6 +63,10 @@ export interface CodeBlockProps extends CodeBlockContainerProps {
   code: string;
   language: CodeBlockLanguage;
   showLineNumbers?: boolean;
+  highlighter?: (
+    code: string,
+    language: CodeBlockLanguage,
+  ) => Promise<TokenizedCode>;
   onHighlightError?: (error: unknown) => void;
 }
 export type CodeBlockFactory = Factory<{
@@ -133,6 +137,7 @@ export const CodeBlock = factory<CodeBlockFactory>(({ ref, ..._props }) => {
     code,
     language,
     showLineNumbers,
+    highlighter,
     onHighlightError,
     children,
     ...props
@@ -144,6 +149,7 @@ export const CodeBlock = factory<CodeBlockFactory>(({ ref, ..._props }) => {
         <CodeBlockContent
           code={code}
           language={language}
+          highlighter={highlighter}
           showLineNumbers={showLineNumbers}
           onHighlightError={onHighlightError}
         />
@@ -205,6 +211,10 @@ export interface CodeBlockContentProps extends BoxProps, ElementProps<'div'> {
   code: string;
   language: CodeBlockLanguage;
   showLineNumbers?: boolean;
+  highlighter?: (
+    code: string,
+    language: CodeBlockLanguage,
+  ) => Promise<TokenizedCode>;
   onHighlightError?: (error: unknown) => void;
 }
 export const CodeBlockContent = factory<{
@@ -216,6 +226,7 @@ export const CodeBlockContent = factory<{
     code,
     language,
     showLineNumbers,
+    highlighter,
     onHighlightError,
     className,
     style,
@@ -232,14 +243,15 @@ export const CodeBlockContent = factory<{
       code: string;
       language: string;
       tokens: TokenizedCode;
+      highlighter: typeof highlighter;
     } | null>(null);
     const errorRef = useRef(onHighlightError);
     errorRef.current = onHighlightError;
     useEffect(() => {
       let active = true;
-      void highlightCodeAsync(code, language).then(
+      void (highlighter ?? highlightCodeAsync)(code, language).then(
         (tokens) => {
-          if (active) setResult({ code, language, tokens });
+          if (active) setResult({ code, language, tokens, highlighter });
         },
         (error) => {
           if (active) errorRef.current?.(error);
@@ -248,9 +260,11 @@ export const CodeBlockContent = factory<{
       return () => {
         active = false;
       };
-    }, [code, language]);
+    }, [code, language, highlighter]);
     const highlighted =
-      result?.code === code && result.language === language
+      result?.code === code &&
+      result.language === language &&
+      result.highlighter === highlighter
         ? result.tokens
         : null;
     const lines =

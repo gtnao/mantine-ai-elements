@@ -47,6 +47,43 @@ export {
   useStickToBottomContext,
 } from './Conversation/Conversation.js';
 export {
+  Message,
+  MessageAction,
+  type MessageActionProps,
+  MessageActions,
+  MessageContent,
+  type MessageFactory,
+  type MessageProps,
+  type MessageSectionProps,
+  type MessageSectionProps as MessageContentProps,
+  type MessageSectionProps as MessageActionsProps,
+  type MessageSectionProps as MessageToolbarProps,
+  type MessageStylesNames,
+  MessageToolbar,
+} from './Message/Message.js';
+export {
+  MessageBranch,
+  type MessageBranchButtonProps,
+  type MessageBranchButtonProps as MessageBranchPreviousProps,
+  type MessageBranchButtonProps as MessageBranchNextProps,
+  MessageBranchContent,
+  type MessageBranchContentProps,
+  type MessageBranchFactory,
+  MessageBranchNext,
+  MessageBranchPage,
+  type MessageBranchPageProps,
+  MessageBranchPrevious,
+  type MessageBranchProps,
+  MessageBranchSelector,
+  type MessageBranchSelectorProps,
+  type MessageBranchStylesNames,
+} from './Message/MessageBranch.js';
+export {
+  MessageResponse,
+  type MessageResponseFactory,
+  type MessageResponseProps,
+} from './Message/MessageResponse.js';
+export {
   PromptInput,
   PromptInputBody,
   type PromptInputFactory,

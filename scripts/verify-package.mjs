@@ -195,6 +195,43 @@ try {
     await page.evaluate(() => navigator.clipboard.readText()),
     'print("Hello")',
   );
+  const messageExample = page.getByTestId('message-example');
+  await expect(
+    messageExample.getByRole('heading', { name: 'Rendered answer' }),
+  ).toBeVisible();
+  await expect(messageExample.locator('.katex')).toBeVisible();
+  await expect(
+    messageExample.locator('[data-message-response="diagram"] svg'),
+  ).toBeVisible({ timeout: 30000 });
+  const table = messageExample.locator('[data-message-response="table"]');
+  await table.getByRole('button', { name: 'Copy table', exact: true }).click();
+  await page.getByRole('menuitem', { name: 'Copy table as CSV' }).click();
+  assert.match(
+    await page.evaluate(() => navigator.clipboard.readText()),
+    /Name,Value[\s\S]*Total,42/,
+  );
+  await table.getByRole('button', { name: 'View fullscreen' }).click();
+  await expect(page.getByRole('dialog')).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+  await messageExample
+    .getByRole('button', { name: 'Download diagram' })
+    .click();
+  const pngPromise = page.waitForEvent('download');
+  await page.getByRole('menuitem', { name: 'Download diagram as PNG' }).click();
+  const png = await pngPromise;
+  assert.equal(png.suggestedFilename(), 'diagram.png');
+  const pngPath = await png.path();
+  assert.ok(pngPath);
+  assert.equal((await readFile(pngPath)).subarray(1, 4).toString(), 'PNG');
+  await messageExample.getByRole('button', { name: 'Next branch' }).click();
+  await expect(
+    messageExample.getByText('An alternative answer.'),
+  ).toBeVisible();
+  await messageExample.getByRole('button', { name: 'Previous branch' }).click();
+  await expect(
+    messageExample.getByRole('heading', { name: 'Rendered answer' }),
+  ).toBeVisible();
   await page.screenshot({
     path: join(directory, 'consumer.png'),
     fullPage: true,
