@@ -62,6 +62,7 @@ Do not import both variants. Unlayered application CSS can override the layered 
 
 | Component | Purpose |
 | --- | --- |
+| `Suggestion`, `Suggestions` | Scrollable prompt suggestions for draft entry or immediate sending |
 | `Shimmer` | Animated text with Mantine theme and reduced-motion support |
 | `Message` | Role styling, streaming Markdown, actions, and alternative response branches |
 | `CodeBlock` | Lazy syntax highlighting, line numbers, copy feedback, and language selection |

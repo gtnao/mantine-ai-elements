@@ -129,6 +129,32 @@ try {
   await expect(
     page.getByRole('alert').filter({ hasText: 'Demo transport error' }),
   ).toBeVisible();
+  const suggestionsViewport = page.locator('.suggestion-viewport');
+  await page
+    .getByRole('button', { name: 'Explain streaming', exact: true })
+    .focus();
+  await page.keyboard.press('Tab');
+  await page.keyboard.press('Tab');
+  const lastSuggestion = page.getByRole('button', {
+    name: 'Summarize this conversation',
+    exact: true,
+  });
+  await expect(lastSuggestion).toBeFocused();
+  await expect
+    .poll(() => suggestionsViewport.evaluate((node) => node.scrollLeft))
+    .toBeGreaterThan(0);
+  await page.keyboard.press('Enter');
+  await expect(page.getByTestId('user').last()).toHaveText(
+    'Summarize this conversation',
+  );
+  await expect(lastSuggestion).toBeDisabled();
+  await expect(page.getByTestId('status')).toHaveText('ready', {
+    timeout: 15000,
+  });
+  await expect(page.getByTestId('assistant').last()).toContainText(
+    'Summarize this conversation',
+  );
+
   const viewport = page.locator('.history-viewport');
   const distanceToBottom = () =>
     viewport.evaluate(

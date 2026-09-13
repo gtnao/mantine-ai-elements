@@ -6,6 +6,8 @@ import {
   Message,
   PromptInput,
   type PromptInputMessage,
+  Suggestion,
+  Suggestions,
 } from 'mantine-ai-elements';
 import { useState } from 'react';
 import { createDemoTransport } from './demo-transport';
@@ -38,6 +40,22 @@ export default function Chat() {
         </Message>
       ))}
       {error && <Alert color="red">{error.message}</Alert>}
+      <Suggestions w={260} classNames={{ viewport: 'suggestion-viewport' }}>
+        {[
+          'Explain streaming',
+          'Compare alternatives',
+          'Summarize this conversation',
+        ].map((suggestion) => (
+          <Suggestion
+            key={suggestion}
+            suggestion={suggestion}
+            disabled={status === 'submitted' || status === 'streaming'}
+            onClick={(text) => {
+              void sendMessage({ text });
+            }}
+          />
+        ))}
+      </Suggestions>
       <PromptInput onSubmit={submit}>
         <PromptInput.Body>
           <PromptInput.Textarea

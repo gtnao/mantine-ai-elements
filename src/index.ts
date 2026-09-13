@@ -104,3 +104,10 @@ export type {
   TextShimmerProps,
 } from './Shimmer/Shimmer';
 export { Shimmer } from './Shimmer/Shimmer';
+export type {
+  SuggestionFactory,
+  SuggestionProps,
+  SuggestionsFactory,
+  SuggestionsProps,
+} from './Suggestion/Suggestion';
+export { Suggestion, Suggestions } from './Suggestion/Suggestion';
