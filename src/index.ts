@@ -238,6 +238,21 @@ export {
   type InlineCitationCarouselProps,
 } from './InlineCitation/InlineCitationCarousel';
 export {
+  JSXPreview,
+  JSXPreviewContent,
+  type JSXPreviewContentFactory,
+  type JSXPreviewContentProps,
+  type JSXPreviewContextValue,
+  JSXPreviewError,
+  type JSXPreviewErrorFactory,
+  type JSXPreviewErrorProps,
+  type JSXPreviewFactory,
+  type JSXPreviewProps,
+  type JSXPreviewRootProps,
+  useJSXPreview,
+} from './JSXPreview/JSXPreview';
+export type { JSXPreviewComponents } from './JSXPreview/parser-adapter';
+export {
   Message,
   MessageAction,
   type MessageActionProps,

@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add JSXPreview with injected Mantine components, an explicit trust gate, and streaming error recovery.
+
 - Add Sandbox with Mantine tabs, all AI SDK tool states, and streaming code/output examples.
 
 - Add WebPreview with Mantine navigation, configurable iframe isolation, console logs, and AI SDK generation examples.

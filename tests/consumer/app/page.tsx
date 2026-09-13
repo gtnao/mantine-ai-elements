@@ -31,6 +31,9 @@ import {
   InlineCitationQuote,
   InlineCitationSource,
   InlineCitationText,
+  JSXPreview,
+  JSXPreviewContent,
+  JSXPreviewError,
   OpenIn,
   OpenInChatGPT,
   OpenInClaude,
@@ -98,6 +101,7 @@ import ConfirmationChat from './confirmation';
 import ContextExample from './context';
 import ConversationDemo from './conversation';
 import ImageExample from './image';
+import { JSXPreviewChatExample } from './jsx-preview-chat';
 import MessageExample from './message';
 import { PlanObjectExample } from './plan-object';
 import PromptAttachments from './prompt-attachments';
@@ -123,6 +127,13 @@ export default function Page() {
       <ConfirmationChat />
       <QuestionExample />
       <ContextExample />
+      <JSXPreview trusted jsx="<p>Packaged JSX</p>" data-testid="packaged-jsx">
+        <JSXPreviewContent />
+        <JSXPreviewError />
+      </JSXPreview>
+      <section data-testid="packaged-jsx-chat">
+        <JSXPreviewChatExample />
+      </section>
       <Sandbox data-testid="packaged-sandbox">
         <SandboxHeader title="packaged.ts" state="output-available" />
         <SandboxContent>

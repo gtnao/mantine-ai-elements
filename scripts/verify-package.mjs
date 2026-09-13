@@ -101,6 +101,17 @@ await writeFile(
       await readFile(join(root, 'src/stories/sandbox-chat.tsx'), 'utf8')
     ).replace("from '../index'", "from 'mantine-ai-elements'"),
 );
+await cp(
+  join(root, 'src/stories/jsx-preview-transport.ts'),
+  join(directory, 'app/jsx-preview-transport.ts'),
+);
+await writeFile(
+  join(directory, 'app/jsx-preview-chat.tsx'),
+  "'use client';\n" +
+    (
+      await readFile(join(root, 'src/stories/jsx-preview-chat.tsx'), 'utf8')
+    ).replace("from '../index'", "from 'mantine-ai-elements'"),
+);
 run(['pack', '--out', join(directory, 'mantine-ai-elements.tgz')], root);
 run(['install', '--ignore-scripts'], directory);
 
@@ -401,6 +412,40 @@ try {
   await images.getByRole('button', { name: 'Replace image source' }).click();
   await expect(fallbackImage).not.toHaveAttribute('data-fallback');
   await expect(fallbackImage).toHaveAttribute('src', '/image-preview.svg');
+
+  await expect(
+    page.getByTestId('packaged-jsx').getByText('Packaged JSX'),
+  ).toBeVisible();
+  const jsxChat = page.getByTestId('packaged-jsx-chat');
+  await jsxChat
+    .getByRole('button', { name: 'Generate preview', exact: true })
+    .click();
+  await expect(jsxChat.getByRole('status')).toHaveText('Response complete.', {
+    timeout: 15000,
+  });
+  await jsxChat
+    .getByRole('button', { name: 'Preview count: 0', exact: true })
+    .click();
+  await expect(
+    jsxChat.getByRole('button', { name: 'Preview count: 1', exact: true }),
+  ).toBeVisible();
+  await jsxChat
+    .getByRole('button', { name: 'Invalid JSX', exact: true })
+    .click();
+  await expect(jsxChat.getByRole('status')).toHaveText('Response complete.', {
+    timeout: 15000,
+  });
+  await expect(jsxChat.getByRole('alert')).toContainText('Preview failed');
+  await jsxChat
+    .getByRole('button', { name: 'Generate preview', exact: true })
+    .click();
+  await expect(jsxChat.getByRole('status')).toHaveText('Response complete.', {
+    timeout: 15000,
+  });
+  await expect(jsxChat.getByRole('alert')).toHaveCount(0);
+  await expect(
+    jsxChat.getByRole('button', { name: 'Preview count: 0', exact: true }),
+  ).toBeVisible();
 
   const sandbox = page.getByTestId('packaged-sandbox');
   await expect(
