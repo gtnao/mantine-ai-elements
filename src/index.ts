@@ -98,3 +98,9 @@ export {
   type PromptInputTextareaProps,
   PromptInputTools,
 } from './PromptInput/PromptInput.js';
+export type {
+  ShimmerFactory,
+  ShimmerProps,
+  TextShimmerProps,
+} from './Shimmer/Shimmer';
+export { Shimmer } from './Shimmer/Shimmer';

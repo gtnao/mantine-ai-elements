@@ -195,6 +195,27 @@ try {
     await page.evaluate(() => navigator.clipboard.readText()),
     'print("Hello")',
   );
+  const shimmer = page.getByRole('heading', { name: 'Preparing an answer' });
+  await expect(shimmer).toHaveCSS('animation-duration', '3s');
+  await expect(shimmer).toHaveCSS('background-clip', 'text, text');
+  const firstPosition = await shimmer.evaluate(
+    (node) => getComputedStyle(node).backgroundPosition,
+  );
+  await expect
+    .poll(() =>
+      shimmer.evaluate((node) => getComputedStyle(node).backgroundPosition),
+    )
+    .not.toBe(firstPosition);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(shimmer).toHaveCSS('animation-name', 'none');
+  await expect(shimmer).toHaveCSS('background-image', 'none');
+  await page.emulateMedia({
+    reducedMotion: 'no-preference',
+    forcedColors: 'active',
+  });
+  await expect(shimmer).toHaveCSS('animation-name', 'none');
+  await page.emulateMedia({ forcedColors: 'none' });
+
   const messageExample = page.getByTestId('message-example');
   await expect(
     messageExample.getByRole('heading', { name: 'Rendered answer' }),

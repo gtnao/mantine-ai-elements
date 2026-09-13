@@ -62,6 +62,7 @@ Do not import both variants. Unlayered application CSS can override the layered 
 
 | Component | Purpose |
 | --- | --- |
+| `Shimmer` | Animated text with Mantine theme and reduced-motion support |
 | `Message` | Role styling, streaming Markdown, actions, and alternative response branches |
 | `CodeBlock` | Lazy syntax highlighting, line numbers, copy feedback, and language selection |
 | `Conversation` | Message log with scroll following, history navigation, empty state, and Markdown export |

@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add Shimmer with Mantine polymorphism, theme colors, and accessible motion preferences.
+
 - Add Message with streaming Markdown, Mantine response controls, and retained response branches.
 
 - Add CodeBlock with lazy Shiki highlighting, Mantine color schemes, line numbers, clipboard feedback, and a language selector.
