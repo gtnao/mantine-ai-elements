@@ -1,6 +1,6 @@
 {
   "name": "mantine-ai-elements",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Composable AI SDK components for Mantine",
   "type": "module",
   "license": "Apache-2.0",
