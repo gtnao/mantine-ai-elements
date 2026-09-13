@@ -328,6 +328,22 @@ try {
   await expect(fallbackImage).not.toHaveAttribute('data-fallback');
   await expect(fallbackImage).toHaveAttribute('src', '/image-preview.svg');
 
+  const citation = page.getByTestId('inline-citation');
+  await citation.getByRole('button').focus();
+  const citationDialog = page
+    .getByRole('dialog')
+    .filter({ hasText: 'Packaged source one' });
+  await expect(citationDialog.getByText('1/2', { exact: true })).toBeVisible();
+  await expect(
+    citationDialog.locator('.mantine-InlineCitationCarousel-header'),
+  ).toHaveCSS('padding', '19px');
+  await citationDialog
+    .getByRole('button', { name: 'Next', exact: true })
+    .click();
+  await expect(citationDialog.getByText('2/2', { exact: true })).toBeVisible();
+  await expect(citation.locator('div')).toHaveCount(0);
+  await citationDialog.press('Escape');
+  await expect(citationDialog).toHaveCount(0);
   const sources = page.getByTestId('sources');
   const sourcesTrigger = sources.getByRole('button', { name: 'Used 1 source' });
   await sourcesTrigger.focus();

@@ -113,6 +113,38 @@ export {
 export type { ImageFactory, ImageProps } from './Image/Image';
 export { AIImage, Image } from './Image/Image';
 export {
+  InlineCitation,
+  InlineCitationCard,
+  InlineCitationCardBody,
+  type InlineCitationCardBodyProps,
+  type InlineCitationCardProps,
+  InlineCitationCardTrigger,
+  type InlineCitationCardTriggerProps,
+  type InlineCitationProps,
+  InlineCitationQuote,
+  type InlineCitationQuoteProps,
+  InlineCitationSource,
+  type InlineCitationSourceProps,
+  InlineCitationText,
+  type InlineCitationTextProps,
+} from './InlineCitation/InlineCitation';
+export {
+  InlineCitationCarousel,
+  InlineCitationCarouselContent,
+  type InlineCitationCarouselContentProps,
+  InlineCitationCarouselHeader,
+  type InlineCitationCarouselHeaderProps,
+  InlineCitationCarouselIndex,
+  type InlineCitationCarouselIndexProps,
+  InlineCitationCarouselItem,
+  type InlineCitationCarouselItemProps,
+  InlineCitationCarouselNext,
+  type InlineCitationCarouselNextProps,
+  InlineCitationCarouselPrev,
+  type InlineCitationCarouselPrevProps,
+  type InlineCitationCarouselProps,
+} from './InlineCitation/InlineCitationCarousel';
+export {
   Message,
   MessageAction,
   type MessageActionProps,

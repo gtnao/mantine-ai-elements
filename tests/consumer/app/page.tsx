@@ -1,4 +1,18 @@
 import {
+  InlineCitation,
+  InlineCitationCard,
+  InlineCitationCardBody,
+  InlineCitationCardTrigger,
+  InlineCitationCarousel,
+  InlineCitationCarouselContent,
+  InlineCitationCarouselHeader,
+  InlineCitationCarouselIndex,
+  InlineCitationCarouselItem,
+  InlineCitationCarouselNext,
+  InlineCitationCarouselPrev,
+  InlineCitationQuote,
+  InlineCitationSource,
+  InlineCitationText,
   PromptInputSubmit,
   Reasoning,
   ReasoningContent,
@@ -38,6 +52,41 @@ export default function Page() {
       <PromptAttachments />
       <ConfirmationChat />
       <QuestionExample />
+      <p data-testid="inline-citation">
+        <InlineCitation>
+          <InlineCitationText>A packaged citation.</InlineCitationText>
+          <InlineCitationCard transitionProps={{ duration: 0 }}>
+            <InlineCitationCardTrigger
+              sources={['https://example.com/one', 'https://example.com/two']}
+            />
+            <InlineCitationCardBody>
+              <InlineCitationCarousel styles={{ header: { padding: 19 } }}>
+                <InlineCitationCarouselHeader>
+                  <InlineCitationCarouselPrev />
+                  <InlineCitationCarouselNext />
+                  <InlineCitationCarouselIndex />
+                </InlineCitationCarouselHeader>
+                <InlineCitationCarouselContent>
+                  <InlineCitationCarouselItem>
+                    <InlineCitationSource
+                      title="Packaged source one"
+                      url="https://example.com/one"
+                    >
+                      <InlineCitationQuote>Evidence one.</InlineCitationQuote>
+                    </InlineCitationSource>
+                  </InlineCitationCarouselItem>
+                  <InlineCitationCarouselItem>
+                    <InlineCitationSource
+                      title="Packaged source two"
+                      url="https://example.com/two"
+                    />
+                  </InlineCitationCarouselItem>
+                </InlineCitationCarouselContent>
+              </InlineCitationCarousel>
+            </InlineCitationCardBody>
+          </InlineCitationCard>
+        </InlineCitation>
+      </p>
       <Sources
         data-testid="sources"
         styles={{ trigger: { color: 'rgb(10, 20, 30)' } }}

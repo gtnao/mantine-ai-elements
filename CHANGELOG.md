@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add InlineCitation with accessible citation cards and an Embla source carousel.
+
 - Add Sources with controlled disclosure, source URL links, and Mantine styling.
 
 - Add Question with single/multiple selection, freeform input, controlled drafts, keyboard navigation, and retryable asynchronous submission.
