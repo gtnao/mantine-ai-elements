@@ -1,4 +1,5 @@
 import { PromptInputSubmit } from 'mantine-ai-elements';
+import AttachmentExample from './attachments';
 import Chat from './chat';
 import CodeExample from './code';
 import ConversationDemo from './conversation';
@@ -14,6 +15,7 @@ export default function Page() {
       <CodeExample />
       <MessageExample />
       <ShimmerExample />
+      <AttachmentExample />
       {/* A direct server-component import verifies the published client boundary. */}
       <div hidden>
         <PromptInputSubmit disabled submitLabel="Server import" />

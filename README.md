@@ -62,6 +62,7 @@ Do not import both variants. Unlayered application CSS can override the layered 
 
 | Component | Purpose |
 | --- | --- |
+| `Attachments`, `Attachment` | File and source previews, layouts, removal, and hover details |
 | `Suggestion`, `Suggestions` | Scrollable prompt suggestions for draft entry or immediate sending |
 | `Shimmer` | Animated text with Mantine theme and reduced-motion support |
 | `Message` | Role styling, streaming Markdown, actions, and alternative response branches |
@@ -85,7 +86,7 @@ Named exports (`PromptInputTextarea`, `PromptInputSubmit`, etc.) refer to the sa
 - `onSubmitError` receives exceptions/rejections from your callback. Errors reported by AI SDK through `useChat().error` are handled by the application.
 - Textarea uses `name="message"` for the payload. Use one message textarea and one submit control per form. Avoid nesting forms.
 
-Attachments, external-state providers, model selectors, and other AI Elements are not implemented yet. They can be added without replacing the compound API or the `{ text, files }` payload.
+File selection in PromptInput, external-state providers, model selectors, and further AI Elements are not implemented yet. They can be added without replacing the compound API or the `{ text, files }` payload.
 
 ## Mantine customization
 

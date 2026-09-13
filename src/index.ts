@@ -1,5 +1,46 @@
 'use client';
 
+export type {
+  AttachmentHoverCardContentProps,
+  AttachmentHoverCardFactory,
+  AttachmentHoverCardProps,
+  AttachmentHoverCardTriggerProps,
+} from './Attachments/AttachmentHoverCard';
+export {
+  AttachmentHoverCard,
+  AttachmentHoverCardContent,
+  AttachmentHoverCardTrigger,
+} from './Attachments/AttachmentHoverCard';
+export type {
+  AttachmentContextValue,
+  AttachmentEmptyProps,
+  AttachmentFactory,
+  AttachmentInfoProps,
+  AttachmentPreviewProps,
+  AttachmentProps,
+  AttachmentRemoveProps,
+  AttachmentsFactory,
+  AttachmentsProps,
+} from './Attachments/Attachments';
+export {
+  Attachment,
+  AttachmentEmpty,
+  AttachmentInfo,
+  AttachmentPreview,
+  AttachmentRemove,
+  Attachments,
+  useAttachmentContext,
+  useAttachmentsContext,
+} from './Attachments/Attachments';
+export type {
+  AttachmentData,
+  AttachmentMediaCategory,
+  AttachmentVariant,
+} from './Attachments/attachment-data';
+export {
+  getAttachmentLabel,
+  getMediaCategory,
+} from './Attachments/attachment-data';
 export {
   CodeBlock,
   CodeBlockActions,

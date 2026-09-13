@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add Attachments with AI SDK file/source data, media previews, removal, and keyboard-accessible hover details.
+
 - Add Suggestions and Suggestion with horizontal scrolling, Mantine customization, and AI SDK integration examples.
 
 - Add Shimmer with Mantine polymorphism, theme colors, and accessible motion preferences.

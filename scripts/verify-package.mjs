@@ -279,6 +279,33 @@ try {
   await expect(
     messageExample.getByRole('heading', { name: 'Rendered answer' }),
   ).toBeVisible();
+  const attachments = page.getByTestId('attachments-example');
+  const attachmentImage = attachments.getByRole('img', {
+    name: 'Preview image',
+  });
+  await expect
+    .poll(() => attachmentImage.evaluate((node) => node.naturalWidth))
+    .toBeGreaterThan(0);
+  const attachmentVideo = attachments.locator('video');
+  await expect
+    .poll(() => attachmentVideo.evaluate((node) => node.videoWidth))
+    .toBe(96);
+  await expect(attachmentVideo).toHaveJSProperty('muted', true);
+  await attachments
+    .getByRole('button', { name: 'Remove Preview image' })
+    .click();
+  await expect(attachmentImage).toHaveCount(0);
+  await attachments
+    .getByText('Reference document', { exact: true })
+    .locator('..')
+    .locator('..')
+    .focus();
+  await expect(
+    page.getByRole('dialog').filter({ hasText: 'Verified source details' }),
+  ).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+
   await page.screenshot({
     path: join(directory, 'consumer.png'),
     fullPage: true,
