@@ -1,0 +1,3 @@
+# pnpm settings only; this repository publishes one package.
+allowBuilds:
+  esbuild: true

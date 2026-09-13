@@ -1,0 +1,120 @@
+# Mantine AI Elements
+
+Composable AI SDK components built with Mantine, inspired by [AI Elements](https://elements.ai-sdk.dev/).
+
+Build chat inputs with Mantine components, theme overrides, and AI SDK hooks. `PromptInput` provides a composable text input, toolbar, and send/stop button. This is an independent project, not an official Mantine or Vercel package.
+
+## Installation
+
+This package is not published to npm yet. To try it, build a tarball from a local checkout:
+
+```sh
+pnpm install
+pnpm pack
+```
+
+Install the tarball in your application alongside its peer dependencies:
+
+```sh
+pnpm add /path/to/mantine-ai-elements-0.1.0.tgz @mantine/core@^9.6.1 @mantine/hooks@^9.6.1 react@^19.3.0 react-dom@^19.3.0 ai@^7.0.99 @ai-sdk/react@^4.0.102
+```
+
+Keep Mantine Core and Hooks on the same version. `@ai-sdk/react` is used by your application to provide `useChat`; the library itself only references AI SDK types. The package provides ESM, TypeScript declarations, and prebuilt CSS.
+
+## Usage
+
+Import styles once at the application entry point and use your existing `MantineProvider`:
+
+```tsx
+import '@mantine/core/styles.css';
+import 'mantine-ai-elements/styles.css';
+```
+
+```tsx
+'use client';
+
+import { useChat } from '@ai-sdk/react';
+import { PromptInput } from 'mantine-ai-elements';
+
+export function ChatInput() {
+  const { sendMessage, status, stop } = useChat();
+
+  return (
+    <PromptInput onSubmit={({ text, files }) => sendMessage({ text, files })}>
+      <PromptInput.Body>
+        <PromptInput.Textarea aria-label="Message" placeholder="Type a message…" />
+      </PromptInput.Body>
+      <PromptInput.Footer>
+        <PromptInput.Tools>{/* Add Mantine buttons or menus here. */}</PromptInput.Tools>
+        <PromptInput.Submit status={status} onStop={() => stop()} />
+      </PromptInput.Footer>
+    </PromptInput>
+  );
+}
+```
+
+Configure your application's AI SDK transport/backend as usual. The library does not choose a model, endpoint, authentication method, or error UI.
+
+For CSS layers, use both packages' `styles.layer.css` instead of `styles.css` and declare their order in your application CSS:
+
+```css
+@layer mantine, mantine-ai-elements;
+```
+
+Do not import both variants. Unlayered application CSS can override the layered component styles.
+
+## Components and behavior
+
+| Component | Purpose |
+| --- | --- |
+| `PromptInput` | Form, payload creation, submission guards; `onSubmit` and optional `onSubmitError` |
+| `PromptInput.Textarea` | Mantine Textarea props, autosize, Enter/Shift+Enter and IME handling |
+| `PromptInput.Body` | Input content region |
+| `PromptInput.Footer` | Toolbar and submit layout |
+| `PromptInput.Tools` | Custom actions using ordinary Mantine components |
+| `PromptInput.Submit` | `status`, `onStop`, `submitLabel`, `stopLabel`, and Mantine ActionIcon props |
+
+Named exports (`PromptInputTextarea`, `PromptInputSubmit`, etc.) refer to the same implementations. Compound access should be used inside a client component in Next.js. Named exports can also be imported directly by server components when their props are serializable.
+
+- Enter submits; Shift+Enter inserts a new line; IME confirmation does not submit.
+- Blank text is ignored. The original text is preserved in the payload; `files` is currently always `[]`.
+- Non-controlled inputs reset immediately when submission begins, matching AI Elements' local-input approach. A draft typed during the pending callback is preserved. Failed callbacks do not restore the previous text.
+- With `value`/`onChange`, the application owns the text and its reset policy. Use this mode to retain text on failure.
+- A pending callback prevents duplicate submissions. `submitted` and `streaming` states prevent Enter from submitting again.
+- In those states, the submit button stops generation when `onStop` is supplied; otherwise it is disabled. A loading indicator does not disable an available stop action.
+- `onSubmitError` receives exceptions/rejections from your callback. Errors reported by AI SDK through `useChat().error` are handled by the application.
+- Textarea uses `name="message"` for the payload. Use one message textarea and one submit control per form. Avoid nesting forms.
+
+Attachments, external-state providers, model selectors, and other AI Elements are not implemented yet. They can be added without replacing the compound API or the `{ text, files }` payload.
+
+## Mantine customization
+
+The root exposes `root`, `body`, `footer`, and `tools` Styles API selectors. Textarea and Submit forward the underlying Mantine components' Styles API and refs.
+
+```tsx
+import { createTheme } from '@mantine/core';
+import { PromptInput } from 'mantine-ai-elements';
+
+const theme = createTheme({
+  components: {
+    PromptInput: PromptInput.extend({
+      styles: { root: { borderRadius: 24 }, footer: { padding: 8 } },
+    }),
+    PromptInputSubmit: PromptInput.Submit.extend({
+      defaultProps: { color: 'grape', radius: 'xl' },
+    }),
+  },
+});
+```
+
+The theme keys for the input and submit button are `PromptInputTextarea` and `PromptInputSubmit`. Section styling is owned by the root's Styles API.
+
+## Contributing
+
+Run `pnpm install` and `pnpm dev` to explore the components in Storybook at http://localhost:6006. The examples include streaming, cancellation, and error handling without an API key.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for development and verification instructions.
+
+## License
+
+[Apache-2.0](LICENSE). PromptInput is adapted from [AI Elements](https://github.com/vercel/ai-elements); see [NOTICE](NOTICE) for attribution.

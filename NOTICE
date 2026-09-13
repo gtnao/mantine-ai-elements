@@ -1,0 +1,11 @@
+mantine-ai-elements
+
+PromptInput is adapted from AI Elements:
+https://github.com/vercel/ai-elements
+Commit: 6a9d5b1822ffb10bba4bd97175f01edd7d8651cd
+Copyright 2023 Vercel, Inc.
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Modifications: Mantine UI and styling integration, text-only initial scope,
+compound exports, generation/submission guards, callback error reporting,
+and keyboard event composition.

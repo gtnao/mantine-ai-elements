@@ -1,0 +1,30 @@
+.root {
+  border: 1px solid var(--mantine-color-default-border);
+  border-radius: var(--mantine-radius-default);
+  background: var(--mantine-color-body);
+  padding: var(--mantine-spacing-xs);
+}
+
+.root:focus-within {
+  border-color: var(--mantine-primary-color-filled);
+}
+
+.body {
+  min-width: 0;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mantine-spacing-xs);
+  margin-top: var(--mantine-spacing-xs);
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--mantine-spacing-xs);
+  min-width: 0;
+}
