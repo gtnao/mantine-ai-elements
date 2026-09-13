@@ -1,13 +1,14 @@
 import type { ChatTransport, UIMessage, UIMessageChunk } from 'ai';
 
 /** Browser-only deterministic transport. No API key, server, or model required. */
-export function createDemoTransport(
+export function createDemoTransport<METADATA = unknown>(
   options: {
     reasoning?: boolean;
     tool?: 'static' | 'dynamic';
     sources?: boolean;
+    metadata?: METADATA;
   } = {},
-): ChatTransport<UIMessage> {
+): ChatTransport<UIMessage<METADATA>> {
   return {
     async sendMessages({ abortSignal, messages }) {
       const last = messages.at(-1);
@@ -16,7 +17,7 @@ export function createDemoTransport(
           .filter((part) => part.type === 'text')
           .map((part) => part.text)
           .join('') ?? '';
-      const chunks: UIMessageChunk[] = [
+      const chunks: UIMessageChunk<METADATA>[] = [
         { type: 'start', messageId: crypto.randomUUID() },
         ...(options.sources
           ? ([
@@ -32,7 +33,7 @@ export function createDemoTransport(
                 url: 'https://example.com/details',
                 title: 'Additional details',
               },
-            ] as UIMessageChunk[])
+            ] as UIMessageChunk<METADATA>[])
           : []),
         ...(options.reasoning
           ? ([
@@ -45,7 +46,7 @@ export function createDemoTransport(
                 delta,
               })),
               { type: 'reasoning-end', id: 'reasoning' },
-            ] as UIMessageChunk[])
+            ] as UIMessageChunk<METADATA>[])
           : []),
         ...(options.tool
           ? ([
@@ -86,24 +87,28 @@ export function createDemoTransport(
                       dynamic: options.tool === 'dynamic',
                     },
                   ]),
-            ] as UIMessageChunk[])
+            ] as UIMessageChunk<METADATA>[])
           : []),
         { type: 'text-start', id: 'answer' },
         ...Array.from(
           `You said: "${text}". This reply streams through AI SDK useChat. Try stopping it while it generates.`,
         ).map(
-          (delta): UIMessageChunk => ({
+          (delta): UIMessageChunk<METADATA> => ({
             type: 'text-delta',
             id: 'answer',
             delta,
           }),
         ),
         { type: 'text-end', id: 'answer' },
-        { type: 'finish', finishReason: 'stop' },
+        {
+          type: 'finish',
+          finishReason: 'stop',
+          messageMetadata: options.metadata,
+        },
       ];
       let timer: ReturnType<typeof setTimeout> | undefined;
       let abort: (() => void) | undefined;
-      return new ReadableStream<UIMessageChunk>({
+      return new ReadableStream<UIMessageChunk<METADATA>>({
         start(controller) {
           let index = 0;
           abort = () => {

@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add Context with Mantine usage meters, AI SDK usage metadata examples, and lazy cost estimation that accounts for cache and reasoning subsets.
+
 - Add InlineCitation with accessible citation cards and an Embla source carousel.
 
 - Add Sources with controlled disclosure, source URL links, and Mantine styling.

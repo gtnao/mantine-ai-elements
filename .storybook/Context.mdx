@@ -1,0 +1,7 @@
+import { Meta, Markdown, Canvas } from '@storybook/addon-docs/blocks';
+import content from './content/context.md?raw';
+import * as Examples from '../src/Context/Context.stories';
+
+<Meta title="Guides/Context" />
+<Markdown>{content}</Markdown>
+<Canvas of={Examples.Basic} />

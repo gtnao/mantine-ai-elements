@@ -31,6 +31,7 @@ import AttachmentExample from './attachments';
 import Chat from './chat';
 import CodeExample from './code';
 import ConfirmationChat from './confirmation';
+import ContextExample from './context';
 import ConversationDemo from './conversation';
 import ImageExample from './image';
 import MessageExample from './message';
@@ -52,6 +53,7 @@ export default function Page() {
       <PromptAttachments />
       <ConfirmationChat />
       <QuestionExample />
+      <ContextExample />
       <p data-testid="inline-citation">
         <InlineCitation>
           <InlineCitationText>A packaged citation.</InlineCitationText>

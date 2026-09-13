@@ -328,6 +328,44 @@ try {
   await expect(fallbackImage).not.toHaveAttribute('data-fallback');
   await expect(fallbackImage).toHaveAttribute('src', '/image-preview.svg');
 
+  const contextExample = page.getByTestId('context-example');
+  await contextExample
+    .getByRole('button', { name: 'Report usage', exact: true })
+    .click();
+  await contextExample
+    .getByRole('button', { name: '46.9%', exact: true })
+    .focus();
+  const usageDialog = page
+    .getByRole('dialog')
+    .filter({ hasText: 'Estimated total' });
+  await expect(usageDialog.getByText('$0.042', { exact: true })).toBeVisible();
+  await expect(usageDialog.getByText('Cache').locator('..')).toContainText(
+    '3K',
+  );
+  await expect(usageDialog.locator('.mantine-Context-footer')).toHaveCSS(
+    'padding',
+    '21px',
+  );
+  await usageDialog.press('Escape');
+  await contextExample
+    .getByRole('button', { name: 'Server cost', exact: true })
+    .focus();
+  await expect(
+    page.getByRole('dialog').getByText('$1.25', { exact: true }),
+  ).toBeVisible();
+  await page.getByRole('dialog').press('Escape');
+  await contextExample
+    .getByRole('button', { name: 'Unknown model', exact: true })
+    .focus();
+  await expect(
+    page.getByRole('dialog').getByText('—', { exact: true }),
+  ).toBeVisible();
+  await page.getByRole('dialog').press('Escape');
+  await contextExample
+    .getByRole('button', { name: 'Bundled catalog', exact: true })
+    .focus();
+  await expect(page.getByRole('dialog').getByText(/^\$[0-9]/)).toBeVisible();
+  await page.getByRole('dialog').press('Escape');
   const citation = page.getByTestId('inline-citation');
   await citation.getByRole('button').focus();
   const citationDialog = page

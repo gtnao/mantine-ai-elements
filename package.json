@@ -100,6 +100,7 @@
     "katex": "0.16.47",
     "shiki": "3.22.0",
     "streamdown": "2.6.0",
+    "tokenlens": "1.3.1",
     "use-stick-to-bottom": "^1.1.6"
   }
 }
