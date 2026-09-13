@@ -12,6 +12,7 @@ import {
 import AttachmentExample from './attachments';
 import Chat from './chat';
 import CodeExample from './code';
+import ConfirmationChat from './confirmation';
 import ConversationDemo from './conversation';
 import ImageExample from './image';
 import MessageExample from './message';
@@ -30,6 +31,7 @@ export default function Page() {
       <AttachmentExample />
       <ImageExample />
       <PromptAttachments />
+      <ConfirmationChat />
       <Reasoning
         data-testid="reasoning"
         duration={3}

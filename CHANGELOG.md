@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add Confirmation with Mantine alerts/actions, AI SDK approval responses, shared pending protection, and retryable errors.
+
 - Add Tool with all seven AI SDK states, dynamic tool names, JSON inputs/results, and custom/error output.
 
 - Add Reasoning with streaming disclosure, measured duration, shared Markdown rendering, and Mantine customization.

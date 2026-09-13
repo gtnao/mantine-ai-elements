@@ -67,6 +67,29 @@ export {
   highlightCodeAsync,
   type TokenizedCode,
 } from './CodeBlock/highlight.js';
+export type {
+  ConfirmationAcceptedProps,
+  ConfirmationActionFactory,
+  ConfirmationActionProps,
+  ConfirmationActionsFactory,
+  ConfirmationActionsProps,
+  ConfirmationApproval,
+  ConfirmationFactory,
+  ConfirmationProps,
+  ConfirmationRejectedProps,
+  ConfirmationRequestProps,
+  ConfirmationTitleFactory,
+  ConfirmationTitleProps,
+} from './Confirmation/Confirmation';
+export {
+  Confirmation,
+  ConfirmationAccepted,
+  ConfirmationAction,
+  ConfirmationActions,
+  ConfirmationRejected,
+  ConfirmationRequest,
+  ConfirmationTitle,
+} from './Confirmation/Confirmation';
 export {
   Conversation,
   ConversationContent,

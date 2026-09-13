@@ -1,0 +1,7 @@
+import { Meta, Markdown, Canvas } from '@storybook/addon-docs/blocks';
+import content from './content/confirmation.md?raw';
+import * as Examples from '../src/Confirmation/Confirmation.stories';
+
+<Meta title="Guides/Confirmation" />
+<Markdown>{content}</Markdown>
+<Canvas of={Examples.Basic} />

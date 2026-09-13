@@ -20,6 +20,10 @@ function run(args, cwd) {
 console.log(`Consumer verification: ${directory}`);
 await cp(join(root, 'tests/consumer'), directory, { recursive: true });
 await cp(
+  join(root, 'src/stories/approval-transport.ts'),
+  join(directory, 'app/approval-transport.ts'),
+);
+await cp(
   join(root, 'src/stories/demo-transport.ts'),
   join(directory, 'app/demo-transport.ts'),
 );
@@ -324,6 +328,33 @@ try {
   await expect(fallbackImage).not.toHaveAttribute('data-fallback');
   await expect(fallbackImage).toHaveAttribute('src', '/image-preview.svg');
 
+  const confirmation = page.getByTestId('confirmation-chat');
+  await confirmation.getByRole('button', { name: 'Request approval' }).click();
+  await expect(
+    confirmation.getByRole('button', { name: 'Approve', exact: true }),
+  ).toBeEnabled();
+  await confirmation
+    .getByRole('button', { name: 'Approve', exact: true })
+    .click();
+  await expect(
+    confirmation.getByText('Approved', { exact: true }),
+  ).toBeVisible();
+  await expect(
+    confirmation.getByRole('button', { name: 'lookup Completed' }),
+  ).toBeVisible();
+  await expect(
+    confirmation.getByRole('button', { name: 'Request approval' }),
+  ).toBeEnabled();
+  await confirmation.getByRole('button', { name: 'Request approval' }).click();
+  await confirmation
+    .getByRole('button', { name: 'Reject', exact: true })
+    .click();
+  await expect(
+    confirmation.getByText('Rejected', { exact: true }),
+  ).toBeVisible();
+  await expect(
+    confirmation.getByRole('button', { name: 'lookup Denied' }),
+  ).toBeVisible();
   const tool = page.getByTestId('tool');
   const toolHeader = tool.getByRole('button', { name: 'lookup Completed' });
   await expect(toolHeader).toHaveAttribute('aria-expanded', 'true');
