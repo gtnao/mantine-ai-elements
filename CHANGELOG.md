@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add Sandbox with Mantine tabs, all AI SDK tool states, and streaming code/output examples.
+
 - Add WebPreview with Mantine navigation, configurable iframe isolation, console logs, and AI SDK generation examples.
 
 - Add Snippet with Mantine input composition, four addon positions, and guarded clipboard feedback.

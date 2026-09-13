@@ -55,6 +55,14 @@ import {
   Reasoning,
   ReasoningContent,
   ReasoningTrigger,
+  Sandbox,
+  SandboxContent,
+  SandboxHeader,
+  SandboxTabContent,
+  SandboxTabs,
+  SandboxTabsBar,
+  SandboxTabsList,
+  SandboxTabsTrigger,
   Snippet,
   SnippetAddon,
   SnippetCopyButton,
@@ -95,6 +103,7 @@ import { PlanObjectExample } from './plan-object';
 import PromptAttachments from './prompt-attachments';
 import QuestionExample from './question';
 import { QueueChatExample } from './queue';
+import { SandboxChatExample } from './sandbox-chat';
 import ShimmerExample from './shimmer';
 import { ObjectTasks } from './task-object';
 import { WebPreviewExample } from './web-preview-example';
@@ -114,6 +123,31 @@ export default function Page() {
       <ConfirmationChat />
       <QuestionExample />
       <ContextExample />
+      <Sandbox data-testid="packaged-sandbox">
+        <SandboxHeader title="packaged.ts" state="output-available" />
+        <SandboxContent>
+          <SandboxTabs defaultValue="code">
+            <SandboxTabsBar>
+              <SandboxTabsList aria-label="Packaged execution">
+                <SandboxTabsTrigger value="code">Code</SandboxTabsTrigger>
+                <SandboxTabsTrigger
+                  value="output"
+                  styles={{ tabLabel: { fontWeight: 700 } }}
+                >
+                  Output
+                </SandboxTabsTrigger>
+              </SandboxTabsList>
+            </SandboxTabsBar>
+            <SandboxTabContent value="code">Packaged source</SandboxTabContent>
+            <SandboxTabContent value="output">
+              Packaged result
+            </SandboxTabContent>
+          </SandboxTabs>
+        </SandboxContent>
+      </Sandbox>
+      <section data-testid="packaged-sandbox-chat">
+        <SandboxChatExample />
+      </section>
       <WebPreview
         data-testid="packaged-web-preview"
         h={360}

@@ -90,6 +90,17 @@ await writeFile(
       await readFile(join(root, 'src/stories/web-preview-example.tsx'), 'utf8')
     ).replace("from '../index'", "from 'mantine-ai-elements'"),
 );
+await cp(
+  join(root, 'src/stories/sandbox-transport.ts'),
+  join(directory, 'app/sandbox-transport.ts'),
+);
+await writeFile(
+  join(directory, 'app/sandbox-chat.tsx'),
+  "'use client';\n" +
+    (
+      await readFile(join(root, 'src/stories/sandbox-chat.tsx'), 'utf8')
+    ).replace("from '../index'", "from 'mantine-ai-elements'"),
+);
 run(['pack', '--out', join(directory, 'mantine-ai-elements.tgz')], root);
 run(['install', '--ignore-scripts'], directory);
 
@@ -390,6 +401,37 @@ try {
   await images.getByRole('button', { name: 'Replace image source' }).click();
   await expect(fallbackImage).not.toHaveAttribute('data-fallback');
   await expect(fallbackImage).toHaveAttribute('src', '/image-preview.svg');
+
+  const sandbox = page.getByTestId('packaged-sandbox');
+  await expect(
+    sandbox.getByRole('button', { name: 'packaged.ts Completed' }),
+  ).toBeVisible();
+  await sandbox.getByRole('tab', { name: 'Code', exact: true }).focus();
+  await page.keyboard.press('ArrowRight');
+  await expect(sandbox.getByRole('tabpanel')).toHaveText('Packaged result');
+  await expect(sandbox.getByText('Output', { exact: true })).toHaveCSS(
+    'font-weight',
+    '700',
+  );
+  const sandboxChat = page.getByTestId('packaged-sandbox-chat');
+  await sandboxChat
+    .getByRole('button', { name: 'Generate code', exact: true })
+    .click();
+  await expect(sandboxChat.getByRole('status')).toHaveText('Tool completed.', {
+    timeout: 20000,
+  });
+  await sandboxChat.getByRole('tab', { name: 'Output', exact: true }).click();
+  await expect(sandboxChat.getByRole('tabpanel')).toContainText('[2, 3, 5, 7]');
+  await sandboxChat
+    .getByRole('button', { name: 'Tool failure', exact: true })
+    .click();
+  await expect(sandboxChat.getByRole('status')).toHaveText('Tool failed.', {
+    timeout: 20000,
+  });
+  await sandboxChat.getByRole('tab', { name: 'Output', exact: true }).click();
+  await expect(sandboxChat.getByRole('alert')).toContainText(
+    'Example execution service failed',
+  );
 
   const webPreview = page.getByTestId('packaged-web-preview');
   await expect(

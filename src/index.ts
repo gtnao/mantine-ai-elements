@@ -552,6 +552,37 @@ export {
   ReasoningTrigger,
   useReasoning,
 } from './Reasoning/Reasoning';
+export {
+  Sandbox,
+  type SandboxFactory,
+  type SandboxProps,
+  type SandboxRootProps,
+} from './Sandbox/Sandbox';
+export {
+  SandboxContent,
+  type SandboxContentFactory,
+  type SandboxContentProps,
+  SandboxHeader,
+  type SandboxHeaderFactory,
+  type SandboxHeaderProps,
+} from './Sandbox/SandboxParts';
+export {
+  SandboxTabContent,
+  type SandboxTabContentFactory,
+  type SandboxTabContentProps,
+  SandboxTabs,
+  SandboxTabsBar,
+  type SandboxTabsBarFactory,
+  type SandboxTabsBarProps,
+  type SandboxTabsFactory,
+  SandboxTabsList,
+  type SandboxTabsListFactory,
+  type SandboxTabsListProps,
+  type SandboxTabsProps,
+  SandboxTabsTrigger,
+  type SandboxTabsTriggerFactory,
+  type SandboxTabsTriggerProps,
+} from './Sandbox/SandboxTabs';
 export type {
   ShimmerFactory,
   ShimmerProps,
@@ -645,7 +676,6 @@ export {
   ToolOutput,
   ToolStatusBadge,
 } from './Tool/Tool';
-
 export {
   WebPreview,
   type WebPreviewContextValue,
