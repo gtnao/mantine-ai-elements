@@ -1,4 +1,4 @@
-name: Publish
+name: Stage release
 
 on:
   release:
@@ -29,6 +29,8 @@ jobs:
           node-version: 24
           registry-url: https://registry.npmjs.org
           package-manager-cache: false
+      - name: Install npm with staged publishing support
+        run: npm install --global npm@11.15.0 --registry=https://registry.npmjs.org
       - name: Check release version
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
@@ -55,8 +57,12 @@ jobs:
         env:
           PACKAGE_TARBALL: ${{ runner.temp }}/mantine-ai-elements.tgz
         run: node scripts/publication-status.mjs
-      - name: Publish with npm trusted publishing
+      - name: Stage verified tarball for maintainer approval
         if: steps.publication.outputs.publish == 'true'
         env:
           PACKAGE_TARBALL: ${{ runner.temp }}/mantine-ai-elements.tgz
-        run: npm publish "$PACKAGE_TARBALL" --access public --registry=https://registry.npmjs.org
+        run: npm stage publish "$PACKAGE_TARBALL" --access public --registry=https://registry.npmjs.org
+      - name: Explain approval step
+        if: steps.publication.outputs.publish == 'true'
+        run: |
+          echo 'The verified package is staged, not publicly released. Review it in npmjs.com Staged Packages and approve with 2FA.' >> "$GITHUB_STEP_SUMMARY"

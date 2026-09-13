@@ -1,6 +1,6 @@
 # Releasing
 
-Stable releases are published to npm by `.github/workflows/publish.yml` when a GitHub Release is published. The release tag must be `v` followed by the version in `package.json`. Prereleases are not published by this workflow.
+Stable releases are staged for approval by `.github/workflows/publish.yml` when a GitHub Release is published. A maintainer must then approve the staged package on npm with 2FA before it becomes publicly available. The release tag must be `v` followed by the version in `package.json`. Prereleases are not published by this workflow.
 
 ## One-time setup
 
@@ -14,9 +14,9 @@ Stable releases are published to npm by `.github/workflows/publish.yml` when a G
 | Repository | `mantine-ai-elements` |
 | Workflow filename | `publish.yml` |
 | Environment | Leave empty |
-| Allowed action | Direct publication with `npm publish` |
+| Allowed actions | Staged publishing only; leave direct `npm publish` unchecked |
 
-The workflow uses GitHub-hosted runners, Node.js 24, npm's OIDC support, and `id-token: write`. No npm token is stored in GitHub. See [npm trusted publishing](https://docs.npmjs.com/trusted-publishers/).
+The workflow uses GitHub-hosted runners, Node.js 24, npm 11.15.0 (staged publishing requires 11.15.0 or later), npm's OIDC support, and `id-token: write`. No npm token is stored in GitHub. See [npm trusted publishing](https://docs.npmjs.com/trusted-publishers/).
 
 Once CI has run, make `Checks (Node 22)`, `Checks (Node 24)`, and `Package consumer` required checks for `main` in a GitHub ruleset. Maintain release permissions on the repository accordingly.
 
@@ -44,8 +44,13 @@ Configure the trusted publisher after the package exists, then create the corres
 1. Update `package.json` and `CHANGELOG.md`, document breaking changes and migration steps, and run the checks.
 2. Merge/push the release commit and wait for CI.
 3. Create a GitHub Release with tag `v<version>` targeting that commit, and include the changelog entry in the release notes.
-4. The publish workflow rechecks the code, documentation, and the packed library in a production Next.js app. It publishes the same verified tarball to npm.
-5. Confirm the npm version and GitHub Actions result. A failed workflow can be rerun without overwriting an existing version.
+4. The publish workflow rechecks the code, documentation, and the packed library in a production Next.js app. It submits the same verified tarball to npm staging. A successful workflow does not mean that the package is publicly available.
+5. On npmjs.com, open **Staged Packages**, review the package name, version, and provenance against the release commit, then click **Approve** and complete 2FA. You can also inspect it with `npm stage view <stage-id>` and approve it with `npm stage approve <stage-id> --registry=https://registry.npmjs.org` using npm 11.15.0 or later.
+6. Confirm the approved version is available with `npm view mantine-ai-elements version --registry=https://registry.npmjs.org`.
+
+Before rerunning a failed workflow, check **Staged Packages**: an upload may already have succeeded. A pending staged version reserves that version number, so another upload can fail. Review and approve the existing stage if it is correct; reject an incorrect stage before preparing a replacement. Never enable direct publishing to bypass this step. An already published identical tarball is skipped; different contents for a published version require a new version.
+
+See [npm staged publishing](https://docs.npmjs.com/staged-publishing/) for the review and approval process.
 
 ## Documentation
 
