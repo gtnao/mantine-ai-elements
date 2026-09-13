@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add CodeBlock with lazy Shiki highlighting, Mantine color schemes, line numbers, clipboard feedback, and a language selector.
+
 - Add Conversation with scroll following, history navigation, Markdown download, and Mantine customization.
 
 - Require maintainer approval with 2FA through npm staged publishing.

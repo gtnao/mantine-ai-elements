@@ -1,6 +1,6 @@
 mantine-ai-elements
 
-PromptInput and Conversation are adapted from AI Elements:
+PromptInput, Conversation, and CodeBlock are adapted from AI Elements:
 https://github.com/vercel/ai-elements
 Commit: 6a9d5b1822ffb10bba4bd97175f01edd7d8651cd
 Copyright 2023 Vercel, Inc.

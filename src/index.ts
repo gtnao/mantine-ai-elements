@@ -1,6 +1,32 @@
 'use client';
 
 export {
+  CodeBlock,
+  CodeBlockActions,
+  CodeBlockContainer,
+  type CodeBlockContainerProps,
+  CodeBlockContent,
+  type CodeBlockContentProps,
+  CodeBlockCopyButton,
+  type CodeBlockCopyButtonProps,
+  type CodeBlockFactory,
+  CodeBlockFilename,
+  type CodeBlockFilenameProps,
+  CodeBlockHeader,
+  CodeBlockLanguageSelector,
+  type CodeBlockLanguageSelectorProps,
+  type CodeBlockProps,
+  type CodeBlockSectionProps,
+  type CodeBlockStylesNames,
+  CodeBlockTitle,
+} from './CodeBlock/CodeBlock.js';
+export {
+  type CodeBlockLanguage,
+  highlightCode,
+  highlightCodeAsync,
+  type TokenizedCode,
+} from './CodeBlock/highlight.js';
+export {
   Conversation,
   ConversationContent,
   type ConversationContentProps,

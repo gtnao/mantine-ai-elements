@@ -162,6 +162,39 @@ try {
     await readFile(downloadPath, 'utf8'),
     /\*\*Assistant:\*\* History message 32/,
   );
+  const codeExample = page.getByTestId('code-example');
+  await expect(codeExample.locator('[data-highlighted]')).toBeVisible({
+    timeout: 15000,
+  });
+  await expect(codeExample.locator('code')).toHaveText(
+    'const greeting = "Hello";',
+  );
+  const token = codeExample.locator('.mantine-CodeBlock-token').first();
+  const lightTokenColor = await token.evaluate(
+    (element) => getComputedStyle(element).color,
+  );
+  await page.evaluate(() =>
+    document.documentElement.setAttribute('data-mantine-color-scheme', 'dark'),
+  );
+  await expect
+    .poll(() => token.evaluate((element) => getComputedStyle(element).color))
+    .not.toBe(lightTokenColor);
+  await page.evaluate(() =>
+    document.documentElement.setAttribute('data-mantine-color-scheme', 'light'),
+  );
+  await codeExample.getByRole('combobox', { name: 'Language' }).click();
+  await page.getByRole('option', { name: 'python', exact: true }).click();
+  await expect(codeExample.locator('code')).toHaveText('print("Hello")');
+  await expect(codeExample.locator('[data-highlighted]')).toBeVisible();
+  await page.context().grantPermissions(['clipboard-read', 'clipboard-write']);
+  await codeExample.getByRole('button', { name: 'Copy code' }).click();
+  await expect(
+    codeExample.getByRole('button', { name: 'Copied', exact: true }),
+  ).toBeVisible();
+  assert.equal(
+    await page.evaluate(() => navigator.clipboard.readText()),
+    'print("Hello")',
+  );
   await page.screenshot({
     path: join(directory, 'consumer.png'),
     fullPage: true,
