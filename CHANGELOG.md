@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Extend the integrated assistant example through sources, progress, and an exportable report.
+- Prevent late CodeBlock clipboard writes from marking replacement code as copied.
+
 - Add JSXPreview with injected Mantine components, an explicit trust gate, and streaming error recovery.
 
 - Add Sandbox with Mantine tabs, all AI SDK tool states, and streaming code/output examples.

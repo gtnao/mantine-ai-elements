@@ -30,9 +30,12 @@ export {
 } from './Artifact/ArtifactAction';
 export type {
   AttachmentHoverCardContentProps,
+  AttachmentHoverCardContentProps as PromptInputHoverCardContentProps,
   AttachmentHoverCardFactory,
   AttachmentHoverCardProps,
+  AttachmentHoverCardProps as PromptInputHoverCardProps,
   AttachmentHoverCardTriggerProps,
+  AttachmentHoverCardTriggerProps as PromptInputHoverCardTriggerProps,
 } from './Attachments/AttachmentHoverCard';
 export {
   AttachmentHoverCard,
@@ -381,6 +384,10 @@ export {
   type PromptInputMessage,
   type PromptInputProps,
   type PromptInputSectionProps,
+  type PromptInputSectionProps as PromptInputBodyProps,
+  type PromptInputSectionProps as PromptInputHeaderProps,
+  type PromptInputSectionProps as PromptInputFooterProps,
+  type PromptInputSectionProps as PromptInputToolsProps,
   type PromptInputStylesNames,
   PromptInputSubmit,
   type PromptInputSubmitProps,
@@ -428,6 +435,9 @@ export type {
   PromptInputSelectProps,
   PromptInputTabLabelProps,
   PromptInputTabProps,
+  PromptInputTabProps as PromptInputTabsListProps,
+  PromptInputTabProps as PromptInputTabBodyProps,
+  PromptInputTabProps as PromptInputTabItemProps,
 } from './PromptInput/PromptInputControls';
 export {
   PromptInputActionAddAttachments,

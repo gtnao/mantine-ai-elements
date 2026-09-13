@@ -112,6 +112,16 @@ await writeFile(
       await readFile(join(root, 'src/stories/jsx-preview-chat.tsx'), 'utf8')
     ).replace("from '../index'", "from 'mantine-ai-elements'"),
 );
+for (const name of ['assistant-workflow.tsx', 'workflow-report.tsx']) {
+  await writeFile(
+    join(directory, 'app', name),
+    "'use client';\n" +
+      (await readFile(join(root, 'src/stories', name), 'utf8')).replace(
+        "from '../index'",
+        "from 'mantine-ai-elements'",
+      ),
+  );
+}
 run(['pack', '--out', join(directory, 'mantine-ai-elements.tgz')], root);
 run(['install', '--ignore-scripts'], directory);
 
@@ -180,6 +190,9 @@ try {
     if (message.type() === 'error') errors.push(message.text());
   });
   await page.goto(url);
+  await expect(page.getByTestId('package-exports')).toHaveText(
+    /^\d+ runtime exports available$/,
+  );
   const input = page.getByRole('textbox', { name: 'Message', exact: true });
   await expect(input).toBeVisible();
   const border = await page
@@ -448,6 +461,47 @@ try {
   ).toBeVisible();
 
   const sandbox = page.getByTestId('packaged-sandbox');
+  const namedQueue = page.getByTestId('packaged-queue-named');
+  await expect(
+    namedQueue.getByText('Verify named exports', { exact: true }),
+  ).toBeVisible();
+  await expect(
+    namedQueue.getByRole('button', { name: 'Unavailable action', exact: true }),
+  ).toBeDisabled();
+  await expect(
+    namedQueue.getByRole('img', { name: 'Queue reference' }),
+  ).toHaveJSProperty('naturalWidth', 24);
+  await namedQueue.getByRole('button', { name: /Packaged tasks/ }).focus();
+  await page.keyboard.press('Enter');
+  await expect(
+    namedQueue.getByText('Verify named exports', { exact: true }),
+  ).not.toBeVisible();
+  const workflow = page.getByTestId('packaged-assistant-workflow');
+  await workflow
+    .getByRole('textbox', { name: 'Workflow message' })
+    .fill('Create a report');
+  await workflow
+    .getByRole('button', { name: 'Send message', exact: true })
+    .click();
+  await workflow.getByRole('button', { name: 'Approve', exact: true }).click();
+  await expect(
+    workflow.getByRole('button', { name: 'Copy report', exact: true }),
+  ).toBeDisabled();
+  await expect(
+    workflow.getByRole('button', { name: 'Copy report', exact: true }),
+  ).toBeEnabled({ timeout: 15000 });
+  await expect(
+    workflow.getByRole('region', { name: 'Report progress', exact: true }),
+  ).toContainText('Report ready');
+  await expect(
+    workflow.getByRole('link', { name: 'Package verification', exact: true }),
+  ).toHaveAttribute('href', 'https://example.com/team-notes/3');
+  await workflow
+    .getByRole('button', { name: 'Copy report', exact: true })
+    .click();
+  await expect
+    .poll(() => page.evaluate(() => navigator.clipboard.readText()))
+    .toContain('Verify the packed library');
   await expect(
     sandbox.getByRole('button', { name: 'packaged.ts Completed' }),
   ).toBeVisible();

@@ -7,7 +7,7 @@ import {
 
 /** Deterministic approval roundtrip. No tool executes outside this demo stream. */
 export function createApprovalTransport(
-  options: { reasoning?: boolean } = {},
+  options: { reasoning?: boolean; report?: boolean } = {},
 ): ChatTransport<UIMessage> {
   return {
     async sendMessages({ messages, abortSignal }) {
@@ -19,6 +19,13 @@ export function createApprovalTransport(
               .find((part) => part.state === 'approval-responded')
           : undefined;
       const messageId = response ? last?.id : crypto.randomUUID();
+      const report =
+        '# Team notes report\n\n- Keep the release checklist small and explicit.\n- Preserve composable Mantine APIs.\n- Verify the packed library in a consuming application.\n\nThis summary uses three fixed demo notes.';
+      const answer = response?.approval?.approved
+        ? options.report
+          ? report
+          : 'The approved demo lookup found three results.'
+        : 'The demo lookup was not executed.';
       const chunks: UIMessageChunk[] = response
         ? [
             { type: 'start', messageId },
@@ -30,13 +37,26 @@ export function createApprovalTransport(
                 }
               : { type: 'tool-output-denied', toolCallId: response.toolCallId },
             { type: 'text-start', id: 'answer' },
-            {
-              type: 'text-delta',
-              id: 'answer',
-              delta: response.approval?.approved
-                ? 'The approved demo lookup found three results.'
-                : 'The demo lookup was not executed.',
-            },
+            ...(options.report && response.approval?.approved
+              ? [
+                  'Release checklist',
+                  'Component design',
+                  'Package verification',
+                ].map((title, index) => ({
+                  type: 'source-url' as const,
+                  sourceId: `note-${index}`,
+                  url: `https://example.com/team-notes/${index + 1}`,
+                  title,
+                }))
+              : []),
+            ...Array.from(
+              { length: Math.ceil(answer.length / 40) },
+              (_, index) => ({
+                type: 'text-delta' as const,
+                id: 'answer',
+                delta: answer.slice(index * 40, index * 40 + 40),
+              }),
+            ),
             { type: 'text-end', id: 'answer' },
             { type: 'finish', finishReason: 'stop' },
           ]

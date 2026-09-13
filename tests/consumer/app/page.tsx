@@ -55,6 +55,21 @@ import {
   PlanTitle,
   PlanTrigger,
   PromptInputSubmit,
+  Queue,
+  QueueItem,
+  QueueItemAction,
+  QueueItemActions,
+  QueueItemAttachment,
+  QueueItemContent,
+  QueueItemDescription,
+  QueueItemFile,
+  QueueItemImage,
+  QueueItemIndicator,
+  QueueList,
+  QueueSection,
+  QueueSectionContent,
+  QueueSectionLabel,
+  QueueSectionTrigger,
   Reasoning,
   ReasoningContent,
   ReasoningTrigger,
@@ -93,6 +108,7 @@ import {
   WebPreviewUrl,
 } from 'mantine-ai-elements';
 import { ArtifactObjectExample } from './artifact-object';
+import { AssistantWorkflowExample } from './assistant-workflow';
 import AttachmentExample from './attachments';
 import { ChainOfThoughtChatExample } from './chain-of-thought-chat';
 import Chat from './chat';
@@ -103,6 +119,7 @@ import ConversationDemo from './conversation';
 import ImageExample from './image';
 import { JSXPreviewChatExample } from './jsx-preview-chat';
 import MessageExample from './message';
+import { PackageExports } from './package-exports';
 import { PlanObjectExample } from './plan-object';
 import PromptAttachments from './prompt-attachments';
 import QuestionExample from './question';
@@ -116,6 +133,7 @@ export default function Page() {
   return (
     <main style={{ maxWidth: 640, margin: '48px auto', padding: 16 }}>
       <h1>Mantine AI Elements</h1>
+      <PackageExports />
       <Chat />
       <ConversationDemo />
       <CodeExample />
@@ -127,6 +145,39 @@ export default function Page() {
       <ConfirmationChat />
       <QuestionExample />
       <ContextExample />
+      <Queue data-testid="packaged-queue-named">
+        <QueueSection>
+          <QueueSectionTrigger>
+            <QueueSectionLabel label="Packaged tasks" count={1} />
+          </QueueSectionTrigger>
+          <QueueSectionContent>
+            <QueueList>
+              <QueueItem>
+                <QueueItemIndicator completed />
+                <QueueItemContent>Verify named exports</QueueItemContent>
+                <QueueItemDescription>
+                  Rendered from a Server Component
+                </QueueItemDescription>
+                <QueueItemActions>
+                  <QueueItemAction aria-label="Unavailable action" disabled>
+                    ×
+                  </QueueItemAction>
+                </QueueItemActions>
+                <QueueItemAttachment>
+                  <QueueItemImage
+                    src="/image-preview.svg"
+                    alt="Queue reference"
+                  />
+                  <QueueItemFile>reference.md</QueueItemFile>
+                </QueueItemAttachment>
+              </QueueItem>
+            </QueueList>
+          </QueueSectionContent>
+        </QueueSection>
+      </Queue>
+      <section data-testid="packaged-assistant-workflow">
+        <AssistantWorkflowExample />
+      </section>
       <JSXPreview trusted jsx="<p>Packaged JSX</p>" data-testid="packaged-jsx">
         <JSXPreviewContent />
         <JSXPreviewError />
