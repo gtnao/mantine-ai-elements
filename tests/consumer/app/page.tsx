@@ -74,6 +74,12 @@ import {
   ToolHeader,
   ToolInput,
   ToolOutput,
+  WebPreview,
+  WebPreviewBody,
+  WebPreviewConsole,
+  WebPreviewNavigation,
+  WebPreviewNavigationButton,
+  WebPreviewUrl,
 } from 'mantine-ai-elements';
 import { ArtifactObjectExample } from './artifact-object';
 import AttachmentExample from './attachments';
@@ -91,6 +97,7 @@ import QuestionExample from './question';
 import { QueueChatExample } from './queue';
 import ShimmerExample from './shimmer';
 import { ObjectTasks } from './task-object';
+import { WebPreviewExample } from './web-preview-example';
 
 export default function Page() {
   return (
@@ -107,6 +114,27 @@ export default function Page() {
       <ConfirmationChat />
       <QuestionExample />
       <ContextExample />
+      <WebPreview
+        data-testid="packaged-web-preview"
+        h={360}
+        defaultConsoleOpened
+      >
+        <WebPreviewNavigation>
+          <WebPreviewUrl />
+          <WebPreviewNavigationButton tooltip="Unavailable navigation" disabled>
+            ←
+          </WebPreviewNavigationButton>
+        </WebPreviewNavigation>
+        <WebPreviewBody
+          title="Packaged preview"
+          srcDoc="<!doctype html><html lang='en'><title>Packaged</title><h1>Packaged frame</h1></html>"
+          styles={{ frame: { borderRadius: 12 } }}
+        />
+        <WebPreviewConsole emptyState="No captured events" />
+      </WebPreview>
+      <section data-testid="packaged-preview-example">
+        <WebPreviewExample generated />
+      </section>
       <Snippet
         code="pnpm add mantine-ai-elements"
         data-testid="packaged-snippet"

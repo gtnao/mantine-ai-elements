@@ -80,6 +80,16 @@ await writeFile(
       await readFile(join(root, 'src/stories/artifact-object.tsx'), 'utf8')
     ).replace("from '../index'", "from 'mantine-ai-elements'"),
 );
+for (const name of ['web-preview-document.ts', 'web-preview-stream.ts']) {
+  await cp(join(root, 'src/stories', name), join(directory, 'app', name));
+}
+await writeFile(
+  join(directory, 'app/web-preview-example.tsx'),
+  "'use client';\n" +
+    (
+      await readFile(join(root, 'src/stories/web-preview-example.tsx'), 'utf8')
+    ).replace("from '../index'", "from 'mantine-ai-elements'"),
+);
 run(['pack', '--out', join(directory, 'mantine-ai-elements.tgz')], root);
 run(['install', '--ignore-scripts'], directory);
 
@@ -380,6 +390,42 @@ try {
   await images.getByRole('button', { name: 'Replace image source' }).click();
   await expect(fallbackImage).not.toHaveAttribute('data-fallback');
   await expect(fallbackImage).toHaveAttribute('src', '/image-preview.svg');
+
+  const webPreview = page.getByTestId('packaged-web-preview');
+  await expect(
+    webPreview.frameLocator('iframe').getByRole('heading'),
+  ).toHaveText('Packaged frame');
+  await expect(webPreview.getByTitle('Packaged preview')).toHaveCSS(
+    'border-radius',
+    '12px',
+  );
+  await expect(
+    webPreview.getByRole('button', { name: 'Unavailable navigation' }),
+  ).toBeDisabled();
+  await expect(
+    webPreview.getByRole('region', { name: 'Console' }),
+  ).toContainText('No captured events');
+  const generatedPreview = page.getByTestId('packaged-preview-example');
+  await generatedPreview
+    .getByRole('button', { name: 'Generate preview', exact: true })
+    .click();
+  await expect(generatedPreview.getByRole('status')).toHaveText(
+    'Generated preview ready.',
+    { timeout: 20000 },
+  );
+  const previewFrame = generatedPreview.frameLocator('iframe');
+  await expect(previewFrame.getByRole('heading')).toHaveText(
+    'Generated interactive preview',
+  );
+  await expect(previewFrame.getByText('Parent DOM isolated')).toBeVisible();
+  await generatedPreview
+    .getByRole('button', { name: 'Console', exact: true })
+    .click();
+  await expect(generatedPreview.getByRole('region')).toContainText(
+    'Frame load event received.',
+  );
+  await previewFrame.getByRole('button', { name: 'Count: 0' }).click();
+  await expect(previewFrame.getByRole('button')).toHaveText('Count: 1');
 
   const snippet = page.getByTestId('packaged-snippet');
   const command = snippet.getByRole('textbox', { name: 'Packaged command' });
