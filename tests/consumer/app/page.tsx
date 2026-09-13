@@ -1,4 +1,7 @@
 import {
+  Checkpoint,
+  CheckpointIcon,
+  CheckpointTrigger,
   InlineCitation,
   InlineCitationCard,
   InlineCitationCardBody,
@@ -66,6 +69,15 @@ export default function Page() {
       <ConfirmationChat />
       <QuestionExample />
       <ContextExample />
+      <Checkpoint
+        data-testid="packaged-checkpoint"
+        styles={{ line: { opacity: 0.4 } }}
+      >
+        <CheckpointIcon size={24} />
+        <CheckpointTrigger tooltip="Restore the saved chat">
+          Packaged checkpoint
+        </CheckpointTrigger>
+      </Checkpoint>
       <OpenIn
         query="A packaged query & Unicode 日本語"
         styles={{ dropdown: { borderRadius: 17 } }}

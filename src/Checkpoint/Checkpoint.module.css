@@ -1,0 +1,27 @@
+.root {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 0;
+  color: var(--mantine-color-dimmed);
+}
+.line {
+  flex: 1;
+  min-width: 1rem;
+}
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: var(--checkpoint-icon-size);
+  height: var(--checkpoint-icon-size);
+}
+.trigger {
+  min-width: 0;
+  height: auto;
+  min-height: var(--button-height);
+}
+.label {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  padding-block: 0.25rem;
+}

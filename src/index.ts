@@ -41,6 +41,19 @@ export {
   getAttachmentLabel,
   getMediaCategory,
 } from './Attachments/attachment-data';
+export type {
+  CheckpointFactory,
+  CheckpointIconFactory,
+  CheckpointIconProps,
+  CheckpointProps,
+  CheckpointTriggerFactory,
+  CheckpointTriggerProps,
+} from './Checkpoint/Checkpoint';
+export {
+  Checkpoint,
+  CheckpointIcon,
+  CheckpointTrigger,
+} from './Checkpoint/Checkpoint';
 export {
   CodeBlock,
   CodeBlockActions,

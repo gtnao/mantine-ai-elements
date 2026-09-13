@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add Checkpoint with Mantine styling, focus tooltips, and an AI SDK chat history restoration example.
+
 - Add OpenIn menus with encoded provider links, custom targets/items, Mantine styling, and shared PromptInput draft examples.
 
 - Add Context with Mantine usage meters, AI SDK usage metadata examples, and lazy cost estimation that accounts for cache and reasoning subsets.

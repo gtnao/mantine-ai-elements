@@ -328,6 +328,23 @@ try {
   await expect(fallbackImage).not.toHaveAttribute('data-fallback');
   await expect(fallbackImage).toHaveAttribute('src', '/image-preview.svg');
 
+  const checkpoint = page.getByTestId('packaged-checkpoint');
+  await expect(checkpoint).toHaveCSS('display', 'flex');
+  await expect(checkpoint.getByRole('separator')).toHaveCSS('opacity', '0.4');
+  await expect(checkpoint.locator('svg')).toHaveCSS('width', '24px');
+  const checkpointTrigger = checkpoint.getByRole('button', {
+    name: 'Packaged checkpoint',
+  });
+  await expect(checkpointTrigger).toHaveAttribute('type', 'button');
+  await checkpointTrigger.scrollIntoViewIfNeeded();
+  await checkpointTrigger.focus();
+  await page.keyboard.press('Shift+Tab');
+  await page.keyboard.press('Tab');
+  await expect(checkpointTrigger).toBeFocused();
+  await expect(page.getByRole('tooltip')).toHaveText('Restore the saved chat');
+  await checkpointTrigger.blur();
+  await expect(page.getByRole('tooltip')).toHaveCount(0);
+
   const openInTrigger = page.getByRole('button', {
     name: 'Open packaged query',
   });
@@ -335,6 +352,8 @@ try {
   await openInTrigger.press('Enter');
   const openInMenu = page.getByRole('menu').filter({ hasText: 'Services' });
   await expect(openInMenu).toHaveCSS('border-radius', '17px');
+  await expect(openInMenu).toHaveCSS('opacity', '1');
+  await openInMenu.focus();
   await openInMenu.press('ArrowDown');
   await expect(
     openInMenu.getByRole('menuitem', { name: 'Open in Claude', exact: true }),
