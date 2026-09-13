@@ -42,6 +42,35 @@ export {
   getMediaCategory,
 } from './Attachments/attachment-data';
 export type {
+  ChainOfThoughtContentFactory,
+  ChainOfThoughtContentProps,
+  ChainOfThoughtFactory,
+  ChainOfThoughtHeaderFactory,
+  ChainOfThoughtHeaderProps,
+  ChainOfThoughtProps,
+} from './ChainOfThought/ChainOfThought';
+export {
+  ChainOfThought,
+  ChainOfThoughtContent,
+  ChainOfThoughtHeader,
+} from './ChainOfThought/ChainOfThought';
+export type {
+  ChainOfThoughtImageFactory,
+  ChainOfThoughtImageProps,
+  ChainOfThoughtSearchResultFactory,
+  ChainOfThoughtSearchResultProps,
+  ChainOfThoughtSearchResultsFactory,
+  ChainOfThoughtSearchResultsProps,
+  ChainOfThoughtStepFactory,
+  ChainOfThoughtStepProps,
+} from './ChainOfThought/ChainOfThoughtParts';
+export {
+  ChainOfThoughtImage,
+  ChainOfThoughtSearchResult,
+  ChainOfThoughtSearchResults,
+  ChainOfThoughtStep,
+} from './ChainOfThought/ChainOfThoughtParts';
+export type {
   CheckpointFactory,
   CheckpointIconFactory,
   CheckpointIconProps,

@@ -1,4 +1,11 @@
 import {
+  ChainOfThought,
+  ChainOfThoughtContent,
+  ChainOfThoughtHeader,
+  ChainOfThoughtImage,
+  ChainOfThoughtSearchResult,
+  ChainOfThoughtSearchResults,
+  ChainOfThoughtStep,
   Checkpoint,
   CheckpointIcon,
   CheckpointTrigger,
@@ -56,6 +63,7 @@ import {
   ToolOutput,
 } from 'mantine-ai-elements';
 import AttachmentExample from './attachments';
+import { ChainOfThoughtChatExample } from './chain-of-thought-chat';
 import Chat from './chat';
 import CodeExample from './code';
 import ConfirmationChat from './confirmation';
@@ -85,6 +93,28 @@ export default function Page() {
       <ConfirmationChat />
       <QuestionExample />
       <ContextExample />
+      <ChainOfThought data-testid="packaged-chain">
+        <ChainOfThoughtHeader>Packaged progress</ChainOfThoughtHeader>
+        <ChainOfThoughtContent>
+          <ChainOfThoughtStep label="Read references" status="active">
+            <ChainOfThoughtSearchResults>
+              <ChainOfThoughtSearchResult
+                component="a"
+                href="/reference"
+                styles={{ label: { fontWeight: 700 } }}
+              >
+                Packaged source
+              </ChainOfThoughtSearchResult>
+            </ChainOfThoughtSearchResults>
+            <ChainOfThoughtImage caption="Preview caption">
+              <span>Visual placeholder</span>
+            </ChainOfThoughtImage>
+          </ChainOfThoughtStep>
+        </ChainOfThoughtContent>
+      </ChainOfThought>
+      <section data-testid="packaged-chain-chat">
+        <ChainOfThoughtChatExample />
+      </section>
       <Plan data-testid="packaged-plan">
         <PlanHeader>
           <div>

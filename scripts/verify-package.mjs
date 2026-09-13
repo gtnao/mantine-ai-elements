@@ -59,6 +59,16 @@ await writeFile(
       "from 'mantine-ai-elements'",
     ),
 );
+await writeFile(
+  join(directory, 'app/chain-of-thought-chat.tsx'),
+  "'use client';\n" +
+    (
+      await readFile(
+        join(root, 'src/stories/chain-of-thought-chat.tsx'),
+        'utf8',
+      )
+    ).replace("from '../index'", "from 'mantine-ai-elements'"),
+);
 run(['pack', '--out', join(directory, 'mantine-ai-elements.tgz')], root);
 run(['install', '--ignore-scripts'], directory);
 
@@ -359,6 +369,44 @@ try {
   await images.getByRole('button', { name: 'Replace image source' }).click();
   await expect(fallbackImage).not.toHaveAttribute('data-fallback');
   await expect(fallbackImage).toHaveAttribute('src', '/image-preview.svg');
+
+  const progressPanel = page.getByTestId('packaged-chain');
+  await progressPanel
+    .getByRole('button', { name: 'Packaged progress' })
+    .focus();
+  await page.keyboard.press('Enter');
+  await expect(progressPanel.getByRole('region')).toBeVisible();
+  await expect(
+    progressPanel.getByRole('link', { name: 'Packaged source' }),
+  ).toHaveAttribute('href', '/reference');
+  await expect(
+    progressPanel.getByText('Packaged source', { exact: true }),
+  ).toHaveCSS('font-weight', '700');
+  await expect(progressPanel.getByText('Preview caption')).toBeVisible();
+  const progressChat = page.getByTestId('packaged-chain-chat');
+  await progressChat
+    .getByRole('button', { name: 'Run search', exact: true })
+    .click();
+  await expect(progressChat.getByRole('status')).toHaveText(
+    'Response finished.',
+    { timeout: 20000 },
+  );
+  await expect(progressChat.getByTestId('search-step')).toHaveAttribute(
+    'data-status',
+    'complete',
+  );
+  await expect(progressChat.getByTestId('reply-step')).toHaveAttribute(
+    'data-status',
+    'complete',
+  );
+  await progressChat.getByRole('button', { name: 'Request failure' }).click();
+  await expect(progressChat.getByRole('alert')).toContainText(
+    'Demo transport error',
+  );
+  await expect(progressChat.getByTestId('reply-step')).toHaveAttribute(
+    'data-status',
+    'pending',
+  );
 
   const plan = page.getByTestId('packaged-plan');
   await expect(

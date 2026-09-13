@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add ChainOfThought with accessible progress summaries, Mantine source badges and image frames, and an AI SDK tool/source/reply example.
+
 - Add Plan with independent collapse and streaming states, Mantine card composition, shimmer text, and validated AI SDK plan selection examples.
 
 - Add Task with Mantine customization, native keyboard triggers, file references, and streamed structured-data examples using AI SDK useObject.
