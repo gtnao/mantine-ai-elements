@@ -1,5 +1,33 @@
 'use client';
 
+export {
+  Artifact,
+  ArtifactActions,
+  type ArtifactActionsFactory,
+  type ArtifactActionsProps,
+  ArtifactContent,
+  type ArtifactContentFactory,
+  type ArtifactContentProps,
+  ArtifactDescription,
+  type ArtifactDescriptionFactory,
+  type ArtifactDescriptionProps,
+  type ArtifactFactory,
+  ArtifactHeader,
+  type ArtifactHeaderFactory,
+  type ArtifactHeaderProps,
+  type ArtifactProps,
+  ArtifactTitle,
+  type ArtifactTitleFactory,
+  type ArtifactTitleProps,
+} from './Artifact/Artifact';
+export {
+  ArtifactAction,
+  type ArtifactActionFactory,
+  type ArtifactActionProps,
+  ArtifactClose,
+  type ArtifactCloseFactory,
+  type ArtifactCloseProps,
+} from './Artifact/ArtifactAction';
 export type {
   AttachmentHoverCardContentProps,
   AttachmentHoverCardFactory,

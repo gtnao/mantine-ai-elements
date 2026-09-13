@@ -69,6 +69,17 @@ await writeFile(
       )
     ).replace("from '../index'", "from 'mantine-ai-elements'"),
 );
+await cp(
+  join(root, 'src/stories/artifact-stream.ts'),
+  join(directory, 'app/artifact-stream.ts'),
+);
+await writeFile(
+  join(directory, 'app/artifact-object.tsx'),
+  "'use client';\n" +
+    (
+      await readFile(join(root, 'src/stories/artifact-object.tsx'), 'utf8')
+    ).replace("from '../index'", "from 'mantine-ai-elements'"),
+);
 run(['pack', '--out', join(directory, 'mantine-ai-elements.tgz')], root);
 run(['install', '--ignore-scripts'], directory);
 
@@ -369,6 +380,46 @@ try {
   await images.getByRole('button', { name: 'Replace image source' }).click();
   await expect(fallbackImage).not.toHaveAttribute('data-fallback');
   await expect(fallbackImage).toHaveAttribute('src', '/image-preview.svg');
+
+  const artifact = page.getByTestId('packaged-artifact');
+  await expect(
+    artifact.getByRole('heading', { name: 'Packaged artifact' }),
+  ).toBeVisible();
+  await expect(
+    artifact.getByRole('link', { name: 'Artifact reference' }),
+  ).toHaveAttribute('href', '/reference');
+  await expect(artifact.locator('.mantine-ArtifactAction-icon')).toHaveCSS(
+    'font-weight',
+    '700',
+  );
+  await expect(
+    artifact.getByRole('button', { name: 'Close', exact: true }),
+  ).toBeDisabled();
+  await expect(artifact.getByRole('region')).toHaveText('Document content');
+  const artifactObject = page.getByTestId('packaged-artifact-object');
+  await artifactObject
+    .getByRole('button', { name: 'Generate report', exact: true })
+    .click();
+  await expect(artifactObject.getByRole('status')).toHaveText('Report ready.', {
+    timeout: 20000,
+  });
+  await expect(
+    artifactObject.getByRole('button', { name: 'Copy report' }),
+  ).toBeEnabled();
+  const artifactDownload = page.waitForEvent('download');
+  await artifactObject.getByRole('button', { name: 'Download report' }).click();
+  const reportDownload = await artifactDownload;
+  assert.equal(reportDownload.suggestedFilename(), 'chat-report.md');
+  assert.match(
+    await readFile(await reportDownload.path(), 'utf8'),
+    /# Chat interface implementation report/,
+  );
+  await artifactObject.getByRole('button', { name: 'Close report' }).click();
+  await expect(artifactObject.getByRole('region')).toHaveCount(0);
+  await artifactObject.getByRole('button', { name: 'Reopen report' }).click();
+  await expect(artifactObject.getByRole('region')).toContainText(
+    'Chat interface implementation report',
+  );
 
   const progressPanel = page.getByTestId('packaged-chain');
   await progressPanel

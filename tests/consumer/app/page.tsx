@@ -1,4 +1,12 @@
 import {
+  Artifact,
+  ArtifactAction,
+  ArtifactActions,
+  ArtifactClose,
+  ArtifactContent,
+  ArtifactDescription,
+  ArtifactHeader,
+  ArtifactTitle,
   ChainOfThought,
   ChainOfThoughtContent,
   ChainOfThoughtHeader,
@@ -62,6 +70,7 @@ import {
   ToolInput,
   ToolOutput,
 } from 'mantine-ai-elements';
+import { ArtifactObjectExample } from './artifact-object';
 import AttachmentExample from './attachments';
 import { ChainOfThoughtChatExample } from './chain-of-thought-chat';
 import Chat from './chat';
@@ -93,6 +102,31 @@ export default function Page() {
       <ConfirmationChat />
       <QuestionExample />
       <ContextExample />
+      <Artifact data-testid="packaged-artifact" radius={20}>
+        <ArtifactHeader>
+          <div>
+            <ArtifactTitle component="h2">Packaged artifact</ArtifactTitle>
+            <ArtifactDescription>Public component imports</ArtifactDescription>
+          </div>
+          <ArtifactActions>
+            <ArtifactAction
+              component="a"
+              href="/reference"
+              label="Artifact reference"
+              styles={{ icon: { fontWeight: 700 } }}
+            >
+              ↗
+            </ArtifactAction>
+            <ArtifactClose disabled />
+          </ArtifactActions>
+        </ArtifactHeader>
+        <ArtifactContent role="region" aria-label="Packaged document">
+          Document content
+        </ArtifactContent>
+      </Artifact>
+      <section data-testid="packaged-artifact-object">
+        <ArtifactObjectExample />
+      </section>
       <ChainOfThought data-testid="packaged-chain">
         <ChainOfThoughtHeader>Packaged progress</ChainOfThoughtHeader>
         <ChainOfThoughtContent>

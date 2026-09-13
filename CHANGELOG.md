@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add Artifact panels with Mantine composition, customizable actions, and validated AI SDK report export examples.
+
 - Add ChainOfThought with accessible progress summaries, Mantine source badges and image frames, and an AI SDK tool/source/reply example.
 
 - Add Plan with independent collapse and streaming states, Mantine card composition, shimmer text, and validated AI SDK plan selection examples.
