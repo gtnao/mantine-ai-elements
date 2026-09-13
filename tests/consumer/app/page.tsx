@@ -13,6 +13,18 @@ import {
   InlineCitationQuote,
   InlineCitationSource,
   InlineCitationText,
+  OpenIn,
+  OpenInChatGPT,
+  OpenInClaude,
+  OpenInContent,
+  OpenInCursor,
+  OpenInItem,
+  OpenInLabel,
+  OpenInScira,
+  OpenInSeparator,
+  OpenInT3,
+  OpenInTrigger,
+  OpenInv0,
   PromptInputSubmit,
   Reasoning,
   ReasoningContent,
@@ -54,6 +66,25 @@ export default function Page() {
       <ConfirmationChat />
       <QuestionExample />
       <ContextExample />
+      <OpenIn
+        query="A packaged query & Unicode 日本語"
+        styles={{ dropdown: { borderRadius: 17 } }}
+      >
+        <OpenInTrigger>Open packaged query</OpenInTrigger>
+        <OpenInContent>
+          <OpenInLabel>Services</OpenInLabel>
+          <OpenInChatGPT disabled />
+          <OpenInClaude />
+          <OpenInCursor />
+          <OpenInT3 />
+          <OpenInScira />
+          <OpenInv0 />
+          <OpenInSeparator />
+          <OpenInItem component="a" href="/custom-assistant">
+            Custom assistant
+          </OpenInItem>
+        </OpenInContent>
+      </OpenIn>
       <p data-testid="inline-citation">
         <InlineCitation>
           <InlineCitationText>A packaged citation.</InlineCitationText>

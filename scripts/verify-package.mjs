@@ -328,6 +328,28 @@ try {
   await expect(fallbackImage).not.toHaveAttribute('data-fallback');
   await expect(fallbackImage).toHaveAttribute('src', '/image-preview.svg');
 
+  const openInTrigger = page.getByRole('button', {
+    name: 'Open packaged query',
+  });
+  await openInTrigger.focus();
+  await openInTrigger.press('Enter');
+  const openInMenu = page.getByRole('menu').filter({ hasText: 'Services' });
+  await expect(openInMenu).toHaveCSS('border-radius', '17px');
+  await openInMenu.press('ArrowDown');
+  await expect(
+    openInMenu.getByRole('menuitem', { name: 'Open in Claude', exact: true }),
+  ).toBeFocused();
+  await expect(
+    openInMenu.getByRole('menuitem', { name: 'Open in ChatGPT', exact: true }),
+  ).not.toHaveAttribute('href');
+  const claudeHref = await openInMenu
+    .getByRole('menuitem', { name: 'Open in Claude', exact: true })
+    .getAttribute('href');
+  expect(new URL(claudeHref).searchParams.get('q')).toBe(
+    'A packaged query & Unicode 日本語',
+  );
+  await openInMenu.press('Escape');
+  await expect(openInTrigger).toBeFocused();
   const contextExample = page.getByTestId('context-example');
   await contextExample
     .getByRole('button', { name: 'Report usage', exact: true })

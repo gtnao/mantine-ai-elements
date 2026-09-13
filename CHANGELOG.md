@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add OpenIn menus with encoded provider links, custom targets/items, Mantine styling, and shared PromptInput draft examples.
+
 - Add Context with Mantine usage meters, AI SDK usage metadata examples, and lazy cost estimation that accounts for cache and reasoning subsets.
 
 - Add InlineCitation with accessible citation cards and an Embla source carousel.
