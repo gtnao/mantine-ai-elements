@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Add Reasoning with streaming disclosure, measured duration, shared Markdown rendering, and Mantine customization.
+- Correct generated LLM documentation to describe available PromptInput file support.
+
 - Add ModelSelector with Mantine modal controls, command search, and customizable provider logos.
 
 - Expand PromptInput with attachments, shared draft state, reference search, Mantine input tools, and screenshot capture.

@@ -324,6 +324,18 @@ try {
   await expect(fallbackImage).not.toHaveAttribute('data-fallback');
   await expect(fallbackImage).toHaveAttribute('src', '/image-preview.svg');
 
+  const reasoning = page.getByTestId('reasoning');
+  const reasoningTrigger = reasoning.getByRole('button', {
+    name: 'Thought for 3 seconds',
+  });
+  await expect(reasoningTrigger).toHaveAttribute('aria-expanded', 'false');
+  await reasoningTrigger.focus();
+  await reasoningTrigger.press('Enter');
+  await expect(reasoning.getByRole('region')).toBeVisible();
+  await expect(reasoning.locator('strong')).toHaveText('packaged');
+  await expect(reasoningTrigger).toHaveCSS('color', 'rgb(120, 20, 150)');
+  await reasoningTrigger.press('Space');
+  await expect(reasoning.getByRole('region')).toHaveCount(0);
   const prompt = page.getByTestId('prompt-attachments');
   await prompt.scrollIntoViewIfNeeded();
   const draft = prompt.getByRole('textbox', { name: 'Attachment draft' });

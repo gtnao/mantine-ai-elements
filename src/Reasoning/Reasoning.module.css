@@ -1,0 +1,33 @@
+.root {
+  margin-bottom: var(--mantine-spacing-md);
+}
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--mantine-spacing-xs);
+  width: 100%;
+  color: var(--mantine-color-dimmed);
+  font-size: var(--mantine-font-size-sm);
+}
+.trigger:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.trigger > svg {
+  flex-shrink: 0;
+}
+.content {
+  color: var(--mantine-color-dimmed);
+  font-size: var(--mantine-font-size-sm);
+}
+.chevron {
+  transition: transform 200ms ease;
+}
+.chevron[data-opened] {
+  transform: rotate(180deg);
+}
+@media (prefers-reduced-motion: reduce) {
+  .chevron {
+    transition: none;
+  }
+}

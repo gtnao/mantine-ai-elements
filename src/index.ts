@@ -247,6 +247,21 @@ export {
   useProviderAttachments,
 } from './PromptInput/prompt-input-state';
 export type {
+  ReasoningContentFactory,
+  ReasoningContentProps,
+  ReasoningContextValue,
+  ReasoningFactory,
+  ReasoningProps,
+  ReasoningTriggerFactory,
+  ReasoningTriggerProps,
+} from './Reasoning/Reasoning';
+export {
+  Reasoning,
+  ReasoningContent,
+  ReasoningTrigger,
+  useReasoning,
+} from './Reasoning/Reasoning';
+export type {
   ShimmerFactory,
   ShimmerProps,
   TextShimmerProps,

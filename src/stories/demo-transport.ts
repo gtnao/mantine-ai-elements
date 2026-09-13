@@ -1,7 +1,9 @@
 import type { ChatTransport, UIMessage, UIMessageChunk } from 'ai';
 
 /** Browser-only deterministic transport. No API key, server, or model required. */
-export function createDemoTransport(): ChatTransport<UIMessage> {
+export function createDemoTransport(
+  options: { reasoning?: boolean } = {},
+): ChatTransport<UIMessage> {
   return {
     async sendMessages({ abortSignal, messages }) {
       const last = messages.at(-1);
@@ -12,6 +14,19 @@ export function createDemoTransport(): ChatTransport<UIMessage> {
           .join('') ?? '';
       const chunks: UIMessageChunk[] = [
         { type: 'start', messageId: crypto.randomUUID() },
+        ...(options.reasoning
+          ? ([
+              { type: 'reasoning-start', id: 'reasoning' },
+              ...Array.from(
+                'I will **compare the requirements**, check the available information, and explain the result.',
+              ).map((delta) => ({
+                type: 'reasoning-delta',
+                id: 'reasoning',
+                delta,
+              })),
+              { type: 'reasoning-end', id: 'reasoning' },
+            ] as UIMessageChunk[])
+          : []),
         { type: 'text-start', id: 'answer' },
         ...Array.from(
           `You said: "${text}". This reply streams through AI SDK useChat. Try stopping it while it generates.`,
