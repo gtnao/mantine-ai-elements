@@ -6,7 +6,9 @@ import {
 } from 'ai';
 
 /** Deterministic approval roundtrip. No tool executes outside this demo stream. */
-export function createApprovalTransport(): ChatTransport<UIMessage> {
+export function createApprovalTransport(
+  options: { reasoning?: boolean } = {},
+): ChatTransport<UIMessage> {
   return {
     async sendMessages({ messages, abortSignal }) {
       const last = messages.at(-1);
@@ -40,6 +42,18 @@ export function createApprovalTransport(): ChatTransport<UIMessage> {
           ]
         : [
             { type: 'start', messageId },
+            ...(options.reasoning
+              ? ([
+                  { type: 'reasoning-start', id: 'reasoning' },
+                  {
+                    type: 'reasoning-delta',
+                    id: 'reasoning',
+                    delta:
+                      'I will check the shared notes after requesting permission.',
+                  },
+                  { type: 'reasoning-end', id: 'reasoning' },
+                ] as UIMessageChunk[])
+              : []),
             {
               type: 'tool-input-available',
               toolCallId: 'lookup',

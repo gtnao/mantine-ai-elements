@@ -17,6 +17,7 @@ import ConversationDemo from './conversation';
 import ImageExample from './image';
 import MessageExample from './message';
 import PromptAttachments from './prompt-attachments';
+import QuestionExample from './question';
 import ShimmerExample from './shimmer';
 
 export default function Page() {
@@ -32,6 +33,7 @@ export default function Page() {
       <ImageExample />
       <PromptAttachments />
       <ConfirmationChat />
+      <QuestionExample />
       <Reasoning
         data-testid="reasoning"
         duration={3}

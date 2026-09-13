@@ -328,6 +328,23 @@ try {
   await expect(fallbackImage).not.toHaveAttribute('data-fallback');
   await expect(fallbackImage).toHaveAttribute('src', '/image-preview.svg');
 
+  const question = page.getByTestId('question');
+  await expect(question.getByRole('button', { name: 'Answer' })).toBeDisabled();
+  await question.getByRole('radio', { name: 'Search', exact: true }).focus();
+  await page.keyboard.press('ArrowRight');
+  await expect(
+    question.getByRole('radio', { name: 'Export', exact: true }),
+  ).toHaveAttribute('aria-checked', 'true');
+  await question
+    .getByRole('textbox', { name: 'Details' })
+    .fill('  Keep tests  ');
+  await question.getByRole('button', { name: 'Answer' }).click();
+  await expect(question.getByRole('status')).toHaveText(
+    '{"selectedValues":["export"],"text":"Keep tests"}',
+  );
+  await expect(question.getByRole('textbox', { name: 'Details' })).toHaveValue(
+    '  Keep tests  ',
+  );
   const confirmation = page.getByTestId('confirmation-chat');
   await confirmation.getByRole('button', { name: 'Request approval' }).click();
   await expect(

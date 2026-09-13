@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add Question with single/multiple selection, freeform input, controlled drafts, keyboard navigation, and retryable asynchronous submission.
+
 - Add Confirmation with Mantine alerts/actions, AI SDK approval responses, shared pending protection, and retryable errors.
 
 - Add Tool with all seven AI SDK states, dynamic tool names, JSON inputs/results, and custom/error output.

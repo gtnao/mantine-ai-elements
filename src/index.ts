@@ -270,6 +270,36 @@ export {
   useProviderAttachments,
 } from './PromptInput/prompt-input-state';
 export type {
+  QuestionActionsFactory,
+  QuestionActionsProps,
+  QuestionDescriptionFactory,
+  QuestionDescriptionProps,
+  QuestionFactory,
+  QuestionInputFactory,
+  QuestionInputProps,
+  QuestionOptionFactory,
+  QuestionOptionProps,
+  QuestionOptionsFactory,
+  QuestionOptionsProps,
+  QuestionPromptFactory,
+  QuestionPromptProps,
+  QuestionProps,
+  QuestionResponse,
+  QuestionSubmitFactory,
+  QuestionSubmitProps,
+  QuestionValue,
+} from './Question/Question';
+export {
+  Question,
+  QuestionActions,
+  QuestionDescription,
+  QuestionInput,
+  QuestionOption,
+  QuestionOptions,
+  QuestionPrompt,
+  QuestionSubmit,
+} from './Question/Question';
+export type {
   ReasoningContentFactory,
   ReasoningContentProps,
   ReasoningContextValue,
