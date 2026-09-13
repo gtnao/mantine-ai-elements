@@ -8,7 +8,7 @@
   gap: var(--mantine-spacing-xs);
   font-size: var(--mantine-font-size-xs);
   font-weight: 500;
-  color: var(--mantine-primary-color-light-color);
+  color: var(--mantine-color-anchor);
 }
 .trigger:disabled {
   opacity: 0.5;
