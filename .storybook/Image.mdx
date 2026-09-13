@@ -1,0 +1,7 @@
+import { Meta, Markdown, Canvas } from '@storybook/addon-docs/blocks';
+import content from './content/image.md?raw';
+import * as Examples from '../src/Image/Image.stories';
+
+<Meta title="Guides/Image" />
+<Markdown>{content}</Markdown>
+<Canvas of={Examples.Basic} />

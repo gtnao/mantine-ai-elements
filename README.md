@@ -62,6 +62,7 @@ Do not import both variants. Unlayered application CSS can override the layered 
 
 | Component | Purpose |
 | --- | --- |
+| `Image` / `AIImage` | AI SDK-generated images or URLs with Mantine styling and fallbacks |
 | `Attachments`, `Attachment` | File and source previews, layouts, removal, and hover details |
 | `Suggestion`, `Suggestions` | Scrollable prompt suggestions for draft entry or immediate sending |
 | `Shimmer` | Animated text with Mantine theme and reduced-motion support |
@@ -112,7 +113,7 @@ The theme keys for the input and submit button are `PromptInputTextarea` and `Pr
 
 ## Documentation
 
-Guides cover [getting started](.storybook/content/getting-started.md), [PromptInput](.storybook/content/prompt-input.md), [Conversation](.storybook/content/conversation.md), [CodeBlock](.storybook/content/code-block.md), [Message](.storybook/content/message.md), and [Mantine customization](.storybook/content/customization.md).
+Guides cover [getting started](.storybook/content/getting-started.md), [PromptInput](.storybook/content/prompt-input.md), [Conversation](.storybook/content/conversation.md), [CodeBlock](.storybook/content/code-block.md), [Message](.storybook/content/message.md), [Shimmer](.storybook/content/shimmer.md), [Suggestions](.storybook/content/suggestion.md), [Attachments](.storybook/content/attachments.md), [Image](.storybook/content/image.md), and [Mantine customization](.storybook/content/customization.md).
 
 The GitHub Pages workflow publishes these guides with live examples to [the documentation site](https://gtnao.github.io/mantine-ai-elements/). It also provides [llms.txt](https://gtnao.github.io/mantine-ai-elements/llms.txt), individual Markdown pages, and a combined `llms-full.txt` from the same source.
 

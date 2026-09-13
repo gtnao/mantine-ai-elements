@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add Image (AIImage alias) for AI SDK image data and URLs with Mantine customization and fallback handling.
+
 - Add Attachments with AI SDK file/source data, media previews, removal, and keyboard-accessible hover details.
 
 - Add Suggestions and Suggestion with horizontal scrolling, Mantine customization, and AI SDK integration examples.

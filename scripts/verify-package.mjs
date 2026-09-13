@@ -306,6 +306,23 @@ try {
   await page.keyboard.press('Escape');
   await expect(page.getByRole('dialog')).toHaveCount(0);
 
+  const images = page.getByTestId('image-example');
+  await images.scrollIntoViewIfNeeded();
+  for (const name of ['Generated image', 'Image fallback', 'Next image']) {
+    await expect
+      .poll(() =>
+        images
+          .getByRole('img', { name, exact: true })
+          .evaluate((node) => node.naturalWidth),
+      )
+      .toBe(24);
+  }
+  const fallbackImage = images.getByRole('img', { name: 'Image fallback' });
+  await expect(fallbackImage).toHaveAttribute('data-fallback', 'true');
+  await images.getByRole('button', { name: 'Replace image source' }).click();
+  await expect(fallbackImage).not.toHaveAttribute('data-fallback');
+  await expect(fallbackImage).toHaveAttribute('src', '/image-preview.svg');
+
   await page.screenshot({
     path: join(directory, 'consumer.png'),
     fullPage: true,

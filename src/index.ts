@@ -87,6 +87,8 @@ export {
   useStickToBottom,
   useStickToBottomContext,
 } from './Conversation/Conversation.js';
+export type { ImageFactory, ImageProps } from './Image/Image';
+export { AIImage, Image } from './Image/Image';
 export {
   Message,
   MessageAction,
