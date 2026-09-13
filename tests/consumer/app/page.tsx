@@ -3,6 +3,11 @@ import {
   Reasoning,
   ReasoningContent,
   ReasoningTrigger,
+  Tool,
+  ToolContent,
+  ToolHeader,
+  ToolInput,
+  ToolOutput,
 } from 'mantine-ai-elements';
 import AttachmentExample from './attachments';
 import Chat from './chat';
@@ -35,6 +40,17 @@ export default function Page() {
           {'A **packaged** reasoning response.'}
         </ReasoningContent>
       </Reasoning>
+      <Tool data-testid="tool" defaultOpened styles={{ body: { padding: 21 } }}>
+        <ToolHeader
+          type="dynamic-tool"
+          toolName="lookup"
+          state="output-available"
+        />
+        <ToolContent transitionDuration={0}>
+          <ToolInput input={{ query: 'Mantine' }} />
+          <ToolOutput output={false} />
+        </ToolContent>
+      </Tool>
       {/* A direct server-component import verifies the published client boundary. */}
       <div hidden>
         <PromptInputSubmit disabled submitLabel="Server import" />

@@ -2,7 +2,7 @@ import type { ChatTransport, UIMessage, UIMessageChunk } from 'ai';
 
 /** Browser-only deterministic transport. No API key, server, or model required. */
 export function createDemoTransport(
-  options: { reasoning?: boolean } = {},
+  options: { reasoning?: boolean; tool?: 'static' | 'dynamic' } = {},
 ): ChatTransport<UIMessage> {
   return {
     async sendMessages({ abortSignal, messages }) {
@@ -25,6 +25,47 @@ export function createDemoTransport(
                 delta,
               })),
               { type: 'reasoning-end', id: 'reasoning' },
+            ] as UIMessageChunk[])
+          : []),
+        ...(options.tool
+          ? ([
+              {
+                type: 'tool-input-start',
+                toolCallId: 'lookup',
+                toolName: 'web-search',
+                dynamic: options.tool === 'dynamic',
+              },
+              ...Array.from(JSON.stringify({ query: text })).map(
+                (inputTextDelta) => ({
+                  type: 'tool-input-delta',
+                  toolCallId: 'lookup',
+                  inputTextDelta,
+                }),
+              ),
+              {
+                type: 'tool-input-available',
+                toolCallId: 'lookup',
+                toolName: 'web-search',
+                input: { query: text },
+                dynamic: options.tool === 'dynamic',
+              },
+              ...(text === '/tool-error'
+                ? [
+                    {
+                      type: 'tool-output-error',
+                      toolCallId: 'lookup',
+                      errorText: 'Search service is unavailable',
+                      dynamic: options.tool === 'dynamic',
+                    },
+                  ]
+                : [
+                    {
+                      type: 'tool-output-available',
+                      toolCallId: 'lookup',
+                      output: { matches: 0, cached: false },
+                      dynamic: options.tool === 'dynamic',
+                    },
+                  ]),
             ] as UIMessageChunk[])
           : []),
         { type: 'text-start', id: 'answer' },
@@ -68,7 +109,10 @@ export function createDemoTransport(
               return;
             }
             controller.enqueue(chunk);
-            timer = setTimeout(tick, 35);
+            timer = setTimeout(
+              tick,
+              chunk.type === 'tool-input-available' ? 800 : 35,
+            );
           };
           timer = setTimeout(tick, 500);
         },

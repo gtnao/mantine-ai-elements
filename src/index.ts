@@ -274,3 +274,27 @@ export type {
   SuggestionsProps,
 } from './Suggestion/Suggestion';
 export { Suggestion, Suggestions } from './Suggestion/Suggestion';
+export type {
+  ToolContentFactory,
+  ToolContentProps,
+  ToolFactory,
+  ToolHeaderFactory,
+  ToolHeaderProps,
+  ToolInputFactory,
+  ToolInputProps,
+  ToolOutputFactory,
+  ToolOutputProps,
+  ToolPart,
+  ToolProps,
+  ToolStatusBadgeFactory,
+  ToolStatusBadgeProps,
+} from './Tool/Tool';
+export {
+  getStatusBadge,
+  Tool,
+  ToolContent,
+  ToolHeader,
+  ToolInput,
+  ToolOutput,
+  ToolStatusBadge,
+} from './Tool/Tool';

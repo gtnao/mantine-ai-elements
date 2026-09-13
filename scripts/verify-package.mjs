@@ -324,6 +324,20 @@ try {
   await expect(fallbackImage).not.toHaveAttribute('data-fallback');
   await expect(fallbackImage).toHaveAttribute('src', '/image-preview.svg');
 
+  const tool = page.getByTestId('tool');
+  const toolHeader = tool.getByRole('button', { name: 'lookup Completed' });
+  await expect(toolHeader).toHaveAttribute('aria-expanded', 'true');
+  await expect(tool.getByRole('region').locator('code').last()).toHaveText(
+    'false',
+  );
+  await expect(
+    tool.getByRole('region').locator(':scope > div').first(),
+  ).toHaveCSS('padding', '21px');
+  await toolHeader.focus();
+  await toolHeader.press('Enter');
+  await expect(tool.getByRole('region')).toHaveCount(0);
+  await toolHeader.press('Space');
+  await expect(tool.getByRole('region')).toBeVisible();
   const reasoning = page.getByTestId('reasoning');
   const reasoningTrigger = reasoning.getByRole('button', {
     name: 'Thought for 3 seconds',

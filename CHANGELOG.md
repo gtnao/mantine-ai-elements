@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Add Tool with all seven AI SDK states, dynamic tool names, JSON inputs/results, and custom/error output.
+
 - Add Reasoning with streaming disclosure, measured duration, shared Markdown rendering, and Mantine customization.
 - Correct generated LLM documentation to describe available PromptInput file support.
 

@@ -69,6 +69,7 @@ Do not import both variants. Unlayered application CSS can override the layered 
 | `Message` | Role styling, streaming Markdown, actions, and alternative response branches |
 | `CodeBlock` | Lazy syntax highlighting, line numbers, copy feedback, and language selection |
 | `Conversation` | Message log with scroll following, history navigation, empty state, and Markdown export |
+| `Tool` | Static and dynamic AI SDK tool states, inputs, results, and errors |
 | `Reasoning` | Streaming reasoning disclosure with Markdown, elapsed time, and automatic folding |
 | `ModelSelector` | Searchable model dialog with keyboard navigation, provider logos, and application-owned selection |
 | `PromptInput` | Text/file form, validation, screenshot capture, shared Provider, reference search, and submission guards |
@@ -115,7 +116,7 @@ The theme keys for the input and submit button are `PromptInputTextarea` and `Pr
 
 ## Documentation
 
-Guides cover [getting started](.storybook/content/getting-started.md), [PromptInput](.storybook/content/prompt-input.md), [Conversation](.storybook/content/conversation.md), [CodeBlock](.storybook/content/code-block.md), [Message](.storybook/content/message.md), [Shimmer](.storybook/content/shimmer.md), [Suggestions](.storybook/content/suggestion.md), [Attachments](.storybook/content/attachments.md), [Image](.storybook/content/image.md), [ModelSelector](.storybook/content/model-selector.md), [Reasoning](.storybook/content/reasoning.md), and [Mantine customization](.storybook/content/customization.md).
+Guides cover [getting started](.storybook/content/getting-started.md), [PromptInput](.storybook/content/prompt-input.md), [Conversation](.storybook/content/conversation.md), [CodeBlock](.storybook/content/code-block.md), [Message](.storybook/content/message.md), [Shimmer](.storybook/content/shimmer.md), [Suggestions](.storybook/content/suggestion.md), [Attachments](.storybook/content/attachments.md), [Image](.storybook/content/image.md), [ModelSelector](.storybook/content/model-selector.md), [Reasoning](.storybook/content/reasoning.md), [Tool](.storybook/content/tool.md), and [Mantine customization](.storybook/content/customization.md).
 
 The GitHub Pages workflow publishes these guides with live examples to [the documentation site](https://gtnao.github.io/mantine-ai-elements/). It also provides [llms.txt](https://gtnao.github.io/mantine-ai-elements/llms.txt), individual Markdown pages, and a combined `llms-full.txt` from the same source.
 
