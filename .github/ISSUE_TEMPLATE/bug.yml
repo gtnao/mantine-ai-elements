@@ -1,0 +1,23 @@
+name: Bug report
+description: Report unexpected component behavior
+body:
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Link to a minimal reproduction or provide code and steps.
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: versions
+    attributes:
+      label: Environment
+      description: Include package, React, Mantine, AI SDK, framework, and browser versions.
+    validations:
+      required: true

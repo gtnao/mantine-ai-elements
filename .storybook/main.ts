@@ -5,7 +5,9 @@ const config: StorybookConfig = {
     name: '@storybook/react-vite',
     options: { builder: { viteConfigPath: '.storybook/vite.config.ts' } },
   },
-  stories: ['../src/**/*.stories.tsx'],
+  stories: ['./*.mdx', '../src/**/*.stories.tsx'],
+  addons: ['@storybook/addon-docs'],
+  staticDirs: ['../.docs-public'],
   core: { disableTelemetry: true },
 };
 export default config;

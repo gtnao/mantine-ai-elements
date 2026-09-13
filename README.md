@@ -6,18 +6,13 @@ Build chat inputs with Mantine components, theme overrides, and AI SDK hooks. `P
 
 ## Installation
 
-This package is not published to npm yet. To try it, build a tarball from a local checkout:
+The first npm release is being prepared. Once published, install the package and its peer dependencies:
 
 ```sh
-pnpm install
-pnpm pack
+pnpm add mantine-ai-elements @mantine/core@^9.6.1 @mantine/hooks@^9.6.1 react@^19.3.0 react-dom@^19.3.0 ai@^7.0.99 @ai-sdk/react@^4.0.102
 ```
 
-Install the tarball in your application alongside its peer dependencies:
-
-```sh
-pnpm add /path/to/mantine-ai-elements-0.1.0.tgz @mantine/core@^9.6.1 @mantine/hooks@^9.6.1 react@^19.3.0 react-dom@^19.3.0 ai@^7.0.99 @ai-sdk/react@^4.0.102
-```
+For testing a local checkout before publication, see [Contributing](https://github.com/gtnao/mantine-ai-elements/blob/main/CONTRIBUTING.md#testing-a-local-package).
 
 Keep Mantine Core and Hooks on the same version. `@ai-sdk/react` is used by your application to provide `useChat`; the library itself only references AI SDK types. The package provides ESM, TypeScript declarations, and prebuilt CSS.
 
@@ -108,6 +103,14 @@ const theme = createTheme({
 ```
 
 The theme keys for the input and submit button are `PromptInputTextarea` and `PromptInputSubmit`. Section styling is owned by the root's Styles API.
+
+## Documentation
+
+Guides cover [getting started](.storybook/content/getting-started.md), [PromptInput](.storybook/content/prompt-input.md), and [Mantine customization](.storybook/content/customization.md).
+
+The GitHub Pages workflow publishes these guides with live examples to [the documentation site](https://gtnao.github.io/mantine-ai-elements/). It also provides [llms.txt](https://gtnao.github.io/mantine-ai-elements/llms.txt), individual Markdown pages, and a combined `llms-full.txt` from the same source.
+
+See [CHANGELOG.md](CHANGELOG.md) for changes and [RELEASING.md](RELEASING.md) for the release process.
 
 ## Contributing
 

@@ -3,6 +3,17 @@ import { MantineProvider } from '@mantine/core';
 import type { Preview } from '@storybook/react-vite';
 
 const preview: Preview = {
+  parameters: {
+    options: {
+      storySort: {
+        order: [
+          'Guides',
+          ['Getting started', 'PromptInput', 'Customization'],
+          '*',
+        ],
+      },
+    },
+  },
   globalTypes: {
     colorScheme: {
       toolbar: { title: 'Theme', items: ['light', 'dark'] },

@@ -138,6 +138,13 @@ try {
     join(directory, 'result.json'),
     JSON.stringify({ passed: true, package: manifest.version }, null, 2),
   );
+  if (process.env.PACKAGE_OUTPUT) {
+    await cp(
+      join(directory, 'mantine-ai-elements.tgz'),
+      process.env.PACKAGE_OUTPUT,
+    );
+    console.log(`Verified tarball: ${process.env.PACKAGE_OUTPUT}`);
+  }
   console.log(
     `Package, Next.js, CSS, hydration, streaming, stop, and error checks passed. Artifacts: ${directory}`,
   );

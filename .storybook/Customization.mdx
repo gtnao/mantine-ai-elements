@@ -1,0 +1,9 @@
+import { Meta, Markdown, Canvas } from '@storybook/addon-docs/blocks';
+import content from './content/customization.md?raw';
+import * as Examples from '../src/PromptInput/PromptInput.stories';
+
+<Meta title="Guides/Customization" />
+
+<Markdown>{content}</Markdown>
+
+<Canvas of={Examples.ThemedAndControlled} />

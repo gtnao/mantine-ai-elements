@@ -1,0 +1,9 @@
+import { Meta, Markdown, Canvas } from '@storybook/addon-docs/blocks';
+import content from './content/getting-started.md?raw';
+import * as Examples from '../src/PromptInput/PromptInput.stories';
+
+<Meta title="Guides/Getting started" />
+
+<Markdown>{content.replace('./prompt-input.md', '?path=/docs/guides-promptinput--docs').replace('./customization.md', '?path=/docs/guides-customization--docs')}</Markdown>
+
+<Canvas of={Examples.WithAISDK} />

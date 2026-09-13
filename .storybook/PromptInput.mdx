@@ -1,0 +1,9 @@
+import { Meta, Markdown, Canvas } from '@storybook/addon-docs/blocks';
+import content from './content/prompt-input.md?raw';
+import * as Examples from '../src/PromptInput/PromptInput.stories';
+
+<Meta title="Guides/PromptInput" />
+
+<Markdown>{content}</Markdown>
+
+<Canvas of={Examples.Basic} />
