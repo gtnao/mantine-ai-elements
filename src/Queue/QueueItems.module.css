@@ -1,0 +1,85 @@
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-radius: var(--mantine-radius-default);
+  padding: 0.25rem var(--mantine-spacing-sm);
+  font-size: var(--mantine-font-size-sm);
+  min-width: 0;
+}
+.item:hover,
+.item:focus-within {
+  background: var(--mantine-color-default-hover);
+}
+.indicator {
+  display: inline-block;
+  width: 0.625rem;
+  height: 0.625rem;
+  flex-shrink: 0;
+  border: 1px solid var(--mantine-color-dimmed);
+  border-radius: 50%;
+}
+.indicator[data-completed] {
+  background: var(--mantine-color-dimmed);
+}
+.content {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.content[data-completed],
+.description[data-completed] {
+  text-decoration: line-through;
+}
+.description {
+  margin-inline-start: 1.5rem;
+  overflow-wrap: anywhere;
+}
+.actions {
+  flex-shrink: 0;
+}
+.attachment {
+  margin-top: 0.25rem;
+}
+.image {
+  flex-shrink: 0;
+  border: 1px solid var(--mantine-color-default-border);
+}
+.action {
+  transition: opacity 150ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .item .action {
+    opacity: 0;
+  }
+  .item:hover .action,
+  .item:focus-within .action {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .action {
+    transition: none;
+  }
+}
+.file {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 0;
+  border: 1px solid var(--mantine-color-default-border);
+  border-radius: var(--mantine-radius-sm);
+  background: var(--mantine-color-default-hover);
+  padding: 0.25rem 0.5rem;
+  font-size: var(--mantine-font-size-xs);
+}
+.fileIcon {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+.fileLabel {
+  max-width: 6.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

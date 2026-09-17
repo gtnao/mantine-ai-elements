@@ -1,0 +1,7 @@
+import { Meta, Markdown, Canvas } from '@storybook/addon-docs/blocks';
+import content from './content/reasoning.md?raw';
+import * as Examples from '../src/Reasoning/Reasoning.stories';
+
+<Meta title="Guides/Reasoning" />
+<Markdown>{content}</Markdown>
+<Canvas of={Examples.Basic} />

@@ -34,7 +34,7 @@ for (const name of files) {
   );
   sections.push(text);
 }
-const intro = `# Mantine AI Elements\n\n> Composable AI SDK components with Mantine styling.\n\nRepository main-branch documentation; package.json version: ${manifest.version}. Features may precede an npm release. PromptInput supports text submission. Attachments displays existing file and source parts; file selection in PromptInput is not yet supported.\n`;
+const intro = `# Mantine AI Elements\n\n> Composable AI SDK components with Mantine styling.\n\nRepository main-branch documentation; package.json version: ${manifest.version}. Features may precede an npm release. PromptInput supports text and file submission, paste/drop, and shared drafts. Attachments displays file and source parts.\n`;
 await writeFile(
   new URL('llms.txt', output),
   `${intro}\n## Documentation\n\n${links.join('\n')}\n\n## Optional\n\n- [Complete documentation](${new URL('llms-full.txt', base)}): All guides in one text file.\n`,

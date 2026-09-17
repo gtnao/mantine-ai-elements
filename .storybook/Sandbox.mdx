@@ -1,0 +1,7 @@
+import { Meta, Markdown, Canvas } from '@storybook/addon-docs/blocks';
+import content from './content/sandbox.md?raw';
+import * as Examples from '../src/Sandbox/Sandbox.stories';
+
+<Meta title="Guides/Sandbox" />
+<Markdown>{content}</Markdown>
+<Canvas of={Examples.Basic} />

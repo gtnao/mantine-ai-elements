@@ -1,0 +1,42 @@
+.dropdown {
+  max-width: calc(100vw - 2rem);
+  overflow: hidden;
+}
+.header,
+.body,
+.footer {
+  padding: var(--mantine-spacing-sm);
+}
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mantine-spacing-xs);
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.body:empty {
+  display: none;
+}
+.footer {
+  background: var(--mantine-color-default-hover);
+}
+.footer,
+.stats,
+.usage {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--mantine-spacing-sm);
+  font-size: var(--mantine-font-size-xs);
+}
+.label {
+  color: var(--mantine-color-dimmed);
+}
+.value {
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+  text-align: end;
+}

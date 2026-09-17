@@ -392,8 +392,10 @@ export const CodeBlockCopyButton = factory<{
             throw new Error('Clipboard API not available');
           await navigator.clipboard.writeText(code);
           if (mounted.current) {
-            setCopied(true);
-            timer.current = setTimeout(() => setCopied(false), timeout);
+            if (latestCode.current === code) {
+              setCopied(true);
+              timer.current = setTimeout(() => setCopied(false), timeout);
+            }
             onCopy?.();
           }
         } catch (error) {

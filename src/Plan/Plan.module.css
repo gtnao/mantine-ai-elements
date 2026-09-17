@@ -1,0 +1,33 @@
+.root {
+  min-width: 0;
+  overflow: hidden;
+}
+.header,
+.footer {
+  padding: var(--mantine-spacing-lg);
+  min-width: 0;
+}
+.header > * {
+  min-width: 0;
+}
+.action {
+  flex-shrink: 0;
+}
+.title,
+.description {
+  overflow-wrap: anywhere;
+}
+.description {
+  margin-top: var(--mantine-spacing-xs);
+}
+.content {
+  min-width: 0;
+}
+.body {
+  padding-inline: var(--mantine-spacing-lg);
+  padding-bottom: var(--mantine-spacing-lg);
+}
+
+.trigger {
+  flex-shrink: 0;
+}

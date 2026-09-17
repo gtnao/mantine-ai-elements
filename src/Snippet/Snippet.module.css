@@ -1,0 +1,60 @@
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  min-width: 0;
+  font-family: var(--mantine-font-family-monospace);
+  background: var(--mantine-color-body);
+
+  &:focus-within {
+    border-color: var(--mantine-primary-color-filled);
+  }
+
+  &:has([aria-invalid="true"]) {
+    border-color: var(--mantine-color-error);
+  }
+}
+
+.addon {
+  display: flex;
+  align-items: center;
+  gap: var(--mantine-spacing-xs);
+  flex-shrink: 0;
+  padding: 4px 8px;
+  cursor: text;
+
+  &[data-align="inline-start"] {
+    order: -1;
+  }
+  &[data-align="inline-end"] {
+    order: 1;
+  }
+  &[data-align="block-start"] {
+    order: -2;
+    flex-basis: 100%;
+  }
+  &[data-align="block-end"] {
+    order: 2;
+    flex-basis: 100%;
+  }
+}
+
+.text {
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+}
+
+.wrapper {
+  flex: 1;
+  min-width: 0;
+}
+
+.input {
+  font-family: inherit;
+  padding-inline: 8px;
+}
+
+.copy {
+  flex-shrink: 0;
+}

@@ -1,10 +1,41 @@
 'use client';
 
+export {
+  Artifact,
+  ArtifactActions,
+  type ArtifactActionsFactory,
+  type ArtifactActionsProps,
+  ArtifactContent,
+  type ArtifactContentFactory,
+  type ArtifactContentProps,
+  ArtifactDescription,
+  type ArtifactDescriptionFactory,
+  type ArtifactDescriptionProps,
+  type ArtifactFactory,
+  ArtifactHeader,
+  type ArtifactHeaderFactory,
+  type ArtifactHeaderProps,
+  type ArtifactProps,
+  ArtifactTitle,
+  type ArtifactTitleFactory,
+  type ArtifactTitleProps,
+} from './Artifact/Artifact';
+export {
+  ArtifactAction,
+  type ArtifactActionFactory,
+  type ArtifactActionProps,
+  ArtifactClose,
+  type ArtifactCloseFactory,
+  type ArtifactCloseProps,
+} from './Artifact/ArtifactAction';
 export type {
   AttachmentHoverCardContentProps,
+  AttachmentHoverCardContentProps as PromptInputHoverCardContentProps,
   AttachmentHoverCardFactory,
   AttachmentHoverCardProps,
+  AttachmentHoverCardProps as PromptInputHoverCardProps,
   AttachmentHoverCardTriggerProps,
+  AttachmentHoverCardTriggerProps as PromptInputHoverCardTriggerProps,
 } from './Attachments/AttachmentHoverCard';
 export {
   AttachmentHoverCard,
@@ -41,6 +72,48 @@ export {
   getAttachmentLabel,
   getMediaCategory,
 } from './Attachments/attachment-data';
+export type {
+  ChainOfThoughtContentFactory,
+  ChainOfThoughtContentProps,
+  ChainOfThoughtFactory,
+  ChainOfThoughtHeaderFactory,
+  ChainOfThoughtHeaderProps,
+  ChainOfThoughtProps,
+} from './ChainOfThought/ChainOfThought';
+export {
+  ChainOfThought,
+  ChainOfThoughtContent,
+  ChainOfThoughtHeader,
+} from './ChainOfThought/ChainOfThought';
+export type {
+  ChainOfThoughtImageFactory,
+  ChainOfThoughtImageProps,
+  ChainOfThoughtSearchResultFactory,
+  ChainOfThoughtSearchResultProps,
+  ChainOfThoughtSearchResultsFactory,
+  ChainOfThoughtSearchResultsProps,
+  ChainOfThoughtStepFactory,
+  ChainOfThoughtStepProps,
+} from './ChainOfThought/ChainOfThoughtParts';
+export {
+  ChainOfThoughtImage,
+  ChainOfThoughtSearchResult,
+  ChainOfThoughtSearchResults,
+  ChainOfThoughtStep,
+} from './ChainOfThought/ChainOfThoughtParts';
+export type {
+  CheckpointFactory,
+  CheckpointIconFactory,
+  CheckpointIconProps,
+  CheckpointProps,
+  CheckpointTriggerFactory,
+  CheckpointTriggerProps,
+} from './Checkpoint/Checkpoint';
+export {
+  Checkpoint,
+  CheckpointIcon,
+  CheckpointTrigger,
+} from './Checkpoint/Checkpoint';
 export {
   CodeBlock,
   CodeBlockActions,
@@ -67,6 +140,52 @@ export {
   highlightCodeAsync,
   type TokenizedCode,
 } from './CodeBlock/highlight.js';
+export type {
+  ConfirmationAcceptedProps,
+  ConfirmationActionFactory,
+  ConfirmationActionProps,
+  ConfirmationActionsFactory,
+  ConfirmationActionsProps,
+  ConfirmationApproval,
+  ConfirmationFactory,
+  ConfirmationProps,
+  ConfirmationRejectedProps,
+  ConfirmationRequestProps,
+  ConfirmationTitleFactory,
+  ConfirmationTitleProps,
+} from './Confirmation/Confirmation';
+export {
+  Confirmation,
+  ConfirmationAccepted,
+  ConfirmationAction,
+  ConfirmationActions,
+  ConfirmationRejected,
+  ConfirmationRequest,
+  ConfirmationTitle,
+} from './Confirmation/Confirmation';
+export {
+  Context,
+  ContextCacheUsage,
+  type ContextCacheUsageProps,
+  ContextContent,
+  ContextContentBody,
+  type ContextContentBodyProps,
+  ContextContentFooter,
+  type ContextContentFooterProps,
+  ContextContentHeader,
+  type ContextContentHeaderProps,
+  type ContextContentProps,
+  ContextInputUsage,
+  type ContextInputUsageProps,
+  ContextOutputUsage,
+  type ContextOutputUsageProps,
+  type ContextProps,
+  ContextReasoningUsage,
+  type ContextReasoningUsageProps,
+  ContextTrigger,
+  type ContextTriggerProps,
+} from './Context/Context';
+export type { ContextCosts, ContextProviders } from './Context/context-cost';
 export {
   Conversation,
   ConversationContent,
@@ -89,6 +208,53 @@ export {
 } from './Conversation/Conversation.js';
 export type { ImageFactory, ImageProps } from './Image/Image';
 export { AIImage, Image } from './Image/Image';
+export {
+  InlineCitation,
+  InlineCitationCard,
+  InlineCitationCardBody,
+  type InlineCitationCardBodyProps,
+  type InlineCitationCardProps,
+  InlineCitationCardTrigger,
+  type InlineCitationCardTriggerProps,
+  type InlineCitationProps,
+  InlineCitationQuote,
+  type InlineCitationQuoteProps,
+  InlineCitationSource,
+  type InlineCitationSourceProps,
+  InlineCitationText,
+  type InlineCitationTextProps,
+} from './InlineCitation/InlineCitation';
+export {
+  InlineCitationCarousel,
+  InlineCitationCarouselContent,
+  type InlineCitationCarouselContentProps,
+  InlineCitationCarouselHeader,
+  type InlineCitationCarouselHeaderProps,
+  InlineCitationCarouselIndex,
+  type InlineCitationCarouselIndexProps,
+  InlineCitationCarouselItem,
+  type InlineCitationCarouselItemProps,
+  InlineCitationCarouselNext,
+  type InlineCitationCarouselNextProps,
+  InlineCitationCarouselPrev,
+  type InlineCitationCarouselPrevProps,
+  type InlineCitationCarouselProps,
+} from './InlineCitation/InlineCitationCarousel';
+export {
+  JSXPreview,
+  JSXPreviewContent,
+  type JSXPreviewContentFactory,
+  type JSXPreviewContentProps,
+  type JSXPreviewContextValue,
+  JSXPreviewError,
+  type JSXPreviewErrorFactory,
+  type JSXPreviewErrorProps,
+  type JSXPreviewFactory,
+  type JSXPreviewProps,
+  type JSXPreviewRootProps,
+  useJSXPreview,
+} from './JSXPreview/JSXPreview';
+export type { JSXPreviewComponents } from './JSXPreview/parser-adapter';
 export {
   Message,
   MessageAction,
@@ -126,14 +292,102 @@ export {
   type MessageResponseFactory,
   type MessageResponseProps,
 } from './Message/MessageResponse.js';
+export type {
+  ModelSelectorContentProps,
+  ModelSelectorDialogProps,
+  ModelSelectorFactory,
+  ModelSelectorLogoGroupProps,
+  ModelSelectorLogoProps,
+  ModelSelectorNameProps,
+  ModelSelectorProps,
+  ModelSelectorShortcutProps,
+  ModelSelectorTriggerProps,
+} from './ModelSelector/ModelSelector';
+export {
+  ModelSelector,
+  ModelSelectorContent,
+  ModelSelectorDialog,
+  ModelSelectorEmpty,
+  ModelSelectorGroup,
+  ModelSelectorInput,
+  ModelSelectorItem,
+  ModelSelectorList,
+  ModelSelectorLogo,
+  ModelSelectorLogoGroup,
+  ModelSelectorName,
+  ModelSelectorSeparator,
+  ModelSelectorShortcut,
+  ModelSelectorTrigger,
+} from './ModelSelector/ModelSelector';
+export {
+  OpenIn,
+  OpenInChatGPT,
+  type OpenInChatGPTProps,
+  OpenInClaude,
+  type OpenInClaudeProps,
+  OpenInContent,
+  type OpenInContentProps,
+  OpenInCursor,
+  type OpenInCursorProps,
+  OpenInItem,
+  type OpenInItemProps,
+  OpenInLabel,
+  type OpenInLabelProps,
+  type OpenInProps,
+  OpenInScira,
+  type OpenInSciraProps,
+  OpenInSeparator,
+  type OpenInSeparatorProps,
+  OpenInT3,
+  type OpenInT3Props,
+  OpenInTarget,
+  type OpenInTargetProps,
+  OpenInTrigger,
+  type OpenInTriggerProps,
+  OpenInv0,
+  type OpenInv0Props,
+} from './OpenIn/OpenIn';
+export type {
+  PlanActionFactory,
+  PlanActionProps,
+  PlanContentFactory,
+  PlanContentProps,
+  PlanDescriptionFactory,
+  PlanDescriptionProps,
+  PlanFactory,
+  PlanFooterFactory,
+  PlanFooterProps,
+  PlanHeaderFactory,
+  PlanHeaderProps,
+  PlanProps,
+  PlanTitleFactory,
+  PlanTitleProps,
+  PlanTriggerFactory,
+  PlanTriggerProps,
+} from './Plan/Plan';
+export {
+  Plan,
+  PlanAction,
+  PlanContent,
+  PlanDescription,
+  PlanFooter,
+  PlanHeader,
+  PlanTitle,
+  PlanTrigger,
+} from './Plan/Plan';
 export {
   PromptInput,
   PromptInputBody,
   type PromptInputFactory,
   PromptInputFooter,
+  PromptInputHeader,
   type PromptInputMessage,
   type PromptInputProps,
   type PromptInputSectionProps,
+  type PromptInputSectionProps as PromptInputBodyProps,
+  type PromptInputSectionProps as PromptInputHeaderProps,
+  type PromptInputSectionProps as PromptInputFooterProps,
+  type PromptInputSectionProps as PromptInputToolsProps,
   type PromptInputStylesNames,
   PromptInputSubmit,
   type PromptInputSubmitProps,
@@ -142,11 +396,261 @@ export {
   PromptInputTools,
 } from './PromptInput/PromptInput.js';
 export type {
+  PromptInputCommandEmptyProps,
+  PromptInputCommandEmptyProps as ModelSelectorEmptyProps,
+  PromptInputCommandFactory,
+  PromptInputCommandGroupProps,
+  PromptInputCommandGroupProps as ModelSelectorGroupProps,
+  PromptInputCommandInputProps,
+  PromptInputCommandInputProps as ModelSelectorInputProps,
+  PromptInputCommandItemProps,
+  PromptInputCommandItemProps as ModelSelectorItemProps,
+  PromptInputCommandListProps,
+  PromptInputCommandListProps as ModelSelectorListProps,
+  PromptInputCommandProps,
+  PromptInputCommandSeparatorProps,
+  PromptInputCommandSeparatorProps as ModelSelectorSeparatorProps,
+  PromptInputCommandStylesNames,
+} from './PromptInput/PromptInputCommand';
+export {
+  PromptInputCommand,
+  PromptInputCommandEmpty,
+  PromptInputCommandGroup,
+  PromptInputCommandInput,
+  PromptInputCommandItem,
+  PromptInputCommandList,
+  PromptInputCommandSeparator,
+} from './PromptInput/PromptInputCommand';
+export type {
+  PromptInputActionAddAttachmentsProps,
+  PromptInputActionAddScreenshotProps,
+  PromptInputActionMenuContentProps,
+  PromptInputActionMenuItemProps,
+  PromptInputActionMenuProps,
+  PromptInputActionMenuTriggerProps,
+  PromptInputButtonFactory,
+  PromptInputButtonProps,
+  PromptInputButtonTooltip,
+  PromptInputSelectFactory,
+  PromptInputSelectProps,
+  PromptInputTabLabelProps,
+  PromptInputTabProps,
+  PromptInputTabProps as PromptInputTabsListProps,
+  PromptInputTabProps as PromptInputTabBodyProps,
+  PromptInputTabProps as PromptInputTabItemProps,
+} from './PromptInput/PromptInputControls';
+export {
+  PromptInputActionAddAttachments,
+  PromptInputActionAddScreenshot,
+  PromptInputActionMenu,
+  PromptInputActionMenuContent,
+  PromptInputActionMenuItem,
+  PromptInputActionMenuTrigger,
+  PromptInputButton,
+  PromptInputHoverCard,
+  PromptInputHoverCardContent,
+  PromptInputHoverCardTrigger,
+  PromptInputSelect,
+  PromptInputTab,
+  PromptInputTabBody,
+  PromptInputTabItem,
+  PromptInputTabLabel,
+  PromptInputTabsList,
+} from './PromptInput/PromptInputControls';
+export type {
+  AttachmentsContext,
+  PromptInputAttachment,
+  PromptInputAttachmentConstraints,
+  PromptInputAttachmentError,
+  PromptInputControllerProps,
+  PromptInputProviderProps,
+  ReferencedSourcesContext,
+  TextInputContext,
+} from './PromptInput/prompt-input-state';
+export {
+  LocalReferencedSourcesContext,
+  PromptInputProvider,
+  usePromptInputAttachments,
+  usePromptInputController,
+  usePromptInputReferencedSources,
+  useProviderAttachments,
+} from './PromptInput/prompt-input-state';
+export type {
+  QuestionActionsFactory,
+  QuestionActionsProps,
+  QuestionDescriptionFactory,
+  QuestionDescriptionProps,
+  QuestionFactory,
+  QuestionInputFactory,
+  QuestionInputProps,
+  QuestionOptionFactory,
+  QuestionOptionProps,
+  QuestionOptionsFactory,
+  QuestionOptionsProps,
+  QuestionPromptFactory,
+  QuestionPromptProps,
+  QuestionProps,
+  QuestionResponse,
+  QuestionSubmitFactory,
+  QuestionSubmitProps,
+  QuestionValue,
+} from './Question/Question';
+export {
+  Question,
+  QuestionActions,
+  QuestionDescription,
+  QuestionInput,
+  QuestionOption,
+  QuestionOptions,
+  QuestionPrompt,
+  QuestionSubmit,
+} from './Question/Question';
+export type {
+  QueueFactory,
+  QueueMessage,
+  QueueMessagePart,
+  QueueProps,
+  QueueTodo,
+} from './Queue/Queue';
+export { Queue } from './Queue/Queue';
+export type {
+  QueueItemActionFactory,
+  QueueItemActionProps,
+  QueueItemActionsFactory,
+  QueueItemActionsProps,
+  QueueItemAttachmentFactory,
+  QueueItemAttachmentProps,
+  QueueItemContentFactory,
+  QueueItemContentProps,
+  QueueItemDescriptionFactory,
+  QueueItemDescriptionProps,
+  QueueItemFactory,
+  QueueItemFileFactory,
+  QueueItemFileProps,
+  QueueItemImageFactory,
+  QueueItemImageProps,
+  QueueItemIndicatorFactory,
+  QueueItemIndicatorProps,
+  QueueItemProps,
+} from './Queue/QueueItems';
+export {
+  QueueItem,
+  QueueItemAction,
+  QueueItemActions,
+  QueueItemAttachment,
+  QueueItemContent,
+  QueueItemDescription,
+  QueueItemFile,
+  QueueItemImage,
+  QueueItemIndicator,
+} from './Queue/QueueItems';
+export type { QueueListFactory, QueueListProps } from './Queue/QueueList';
+export { QueueList } from './Queue/QueueList';
+export type {
+  QueueSectionContentFactory,
+  QueueSectionContentProps,
+  QueueSectionFactory,
+  QueueSectionLabelFactory,
+  QueueSectionLabelProps,
+  QueueSectionProps,
+  QueueSectionTriggerFactory,
+  QueueSectionTriggerProps,
+} from './Queue/QueueSection';
+export {
+  QueueSection,
+  QueueSectionContent,
+  QueueSectionLabel,
+  QueueSectionTrigger,
+} from './Queue/QueueSection';
+export type {
+  ReasoningContentFactory,
+  ReasoningContentProps,
+  ReasoningContextValue,
+  ReasoningFactory,
+  ReasoningProps,
+  ReasoningTriggerFactory,
+  ReasoningTriggerProps,
+} from './Reasoning/Reasoning';
+export {
+  Reasoning,
+  ReasoningContent,
+  ReasoningTrigger,
+  useReasoning,
+} from './Reasoning/Reasoning';
+export {
+  Sandbox,
+  type SandboxFactory,
+  type SandboxProps,
+  type SandboxRootProps,
+} from './Sandbox/Sandbox';
+export {
+  SandboxContent,
+  type SandboxContentFactory,
+  type SandboxContentProps,
+  SandboxHeader,
+  type SandboxHeaderFactory,
+  type SandboxHeaderProps,
+} from './Sandbox/SandboxParts';
+export {
+  SandboxTabContent,
+  type SandboxTabContentFactory,
+  type SandboxTabContentProps,
+  SandboxTabs,
+  SandboxTabsBar,
+  type SandboxTabsBarFactory,
+  type SandboxTabsBarProps,
+  type SandboxTabsFactory,
+  SandboxTabsList,
+  type SandboxTabsListFactory,
+  type SandboxTabsListProps,
+  type SandboxTabsProps,
+  SandboxTabsTrigger,
+  type SandboxTabsTriggerFactory,
+  type SandboxTabsTriggerProps,
+} from './Sandbox/SandboxTabs';
+export type {
   ShimmerFactory,
   ShimmerProps,
   TextShimmerProps,
 } from './Shimmer/Shimmer';
 export { Shimmer } from './Shimmer/Shimmer';
+export {
+  Snippet,
+  type SnippetFactory,
+  type SnippetProps,
+} from './Snippet/Snippet';
+export {
+  SnippetCopyButton,
+  type SnippetCopyButtonFactory,
+  type SnippetCopyButtonProps,
+} from './Snippet/SnippetCopyButton';
+export {
+  SnippetAddon,
+  type SnippetAddonFactory,
+  type SnippetAddonProps,
+  SnippetInput,
+  type SnippetInputFactory,
+  type SnippetInputProps,
+  SnippetText,
+  type SnippetTextFactory,
+  type SnippetTextProps,
+} from './Snippet/SnippetParts';
+export type {
+  SourceFactory,
+  SourceProps,
+  SourcesContentFactory,
+  SourcesContentProps,
+  SourcesFactory,
+  SourcesProps,
+  SourcesTriggerFactory,
+  SourcesTriggerProps,
+} from './Sources/Sources';
+export {
+  Source,
+  Sources,
+  SourcesContent,
+  SourcesTrigger,
+} from './Sources/Sources';
 export type {
   SuggestionFactory,
   SuggestionProps,
@@ -154,3 +658,78 @@ export type {
   SuggestionsProps,
 } from './Suggestion/Suggestion';
 export { Suggestion, Suggestions } from './Suggestion/Suggestion';
+export type {
+  TaskContentFactory,
+  TaskContentProps,
+  TaskFactory,
+  TaskItemFactory,
+  TaskItemFileFactory,
+  TaskItemFileProps,
+  TaskItemProps,
+  TaskProps,
+  TaskTriggerFactory,
+  TaskTriggerProps,
+} from './Task/Task';
+export {
+  Task,
+  TaskContent,
+  TaskItem,
+  TaskItemFile,
+  TaskTrigger,
+} from './Task/Task';
+export type {
+  ToolContentFactory,
+  ToolContentProps,
+  ToolFactory,
+  ToolHeaderFactory,
+  ToolHeaderProps,
+  ToolInputFactory,
+  ToolInputProps,
+  ToolOutputFactory,
+  ToolOutputProps,
+  ToolPart,
+  ToolProps,
+  ToolStatusBadgeFactory,
+  ToolStatusBadgeProps,
+} from './Tool/Tool';
+export {
+  getStatusBadge,
+  Tool,
+  ToolContent,
+  ToolHeader,
+  ToolInput,
+  ToolOutput,
+  ToolStatusBadge,
+} from './Tool/Tool';
+export {
+  WebPreview,
+  type WebPreviewContextValue,
+  type WebPreviewFactory,
+  type WebPreviewProps,
+} from './WebPreview/WebPreview';
+export {
+  WebPreviewBody,
+  type WebPreviewBodyFactory,
+  type WebPreviewBodyProps,
+} from './WebPreview/WebPreviewBody';
+export {
+  WebPreviewConsole,
+  type WebPreviewConsoleFactory,
+  type WebPreviewConsoleProps,
+  type WebPreviewLog,
+} from './WebPreview/WebPreviewConsole';
+export {
+  WebPreviewNavigation,
+  type WebPreviewNavigationFactory,
+  type WebPreviewNavigationProps,
+} from './WebPreview/WebPreviewNavigation';
+export {
+  WebPreviewNavigationButton,
+  type WebPreviewNavigationButtonFactory,
+  type WebPreviewNavigationButtonProps,
+} from './WebPreview/WebPreviewNavigationButton';
+export {
+  WebPreviewUrl,
+  type WebPreviewUrlFactory,
+  type WebPreviewUrlProps,
+} from './WebPreview/WebPreviewUrl';

@@ -1,0 +1,7 @@
+import { Meta, Markdown, Canvas } from '@storybook/addon-docs/blocks';
+import content from './content/open-in.md?raw';
+import * as Examples from '../src/OpenIn/OpenIn.stories';
+
+<Meta title="Guides/OpenIn" />
+<Markdown>{content}</Markdown>
+<Canvas of={Examples.Basic} />
