@@ -61,7 +61,7 @@
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "6.1.1",
     "ai": "7.0.99",
-    "jsdom": "^27.0.0",
+    "jsdom": "^30.0.1",
     "postcss-preset-mantine": "^1.18.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
