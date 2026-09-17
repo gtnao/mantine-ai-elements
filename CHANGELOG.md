@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.3.0 — 2026-09-17
+
 - Extend the integrated assistant example through sources, progress, and an exportable report.
 - Prevent late CodeBlock clipboard writes from marking replacement code as copied.
 
